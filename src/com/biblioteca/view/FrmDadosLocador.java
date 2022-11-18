@@ -146,7 +146,7 @@ public class FrmDadosLocador extends javax.swing.JFrame {
 
     private void jbLocadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLocadorActionPerformed
         this.dispose();
-        new FrmLocador(null, true).setVisible(true);
+      //  new FrmLocador(null, true).setVisible(true);
     }//GEN-LAST:event_jbLocadorActionPerformed
 
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed

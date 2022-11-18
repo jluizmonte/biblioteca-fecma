@@ -17,7 +17,7 @@ public class Teste {
 
         java.awt.EventQueue.invokeLater(() -> {
             //   new frmLogin().setVisible(true);
-            new FrmTelaPrincipal().setVisible(true);
+         new FrmTelaPrincipal().setVisible(true);
             //new FrmLocador().setVisible(true);
         });
     }

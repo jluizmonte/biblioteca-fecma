@@ -57,7 +57,6 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jtfLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtfLogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtfLogin.setText("INSIRA SEU LOGIN");
         jtfLogin.setBorder(null);
         jtfLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -67,7 +66,6 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jpSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jpSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jpSenha.setText("****");
         jpSenha.setBorder(null);
         jpSenha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -212,7 +210,7 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jlSairMouseExited
 
     private void jlSairMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSairMouseEntered
-        jlSair.setForeground(Color.blue);
+        jlSair.setForeground(Color.BLUE);
     }//GEN-LAST:event_jlSairMouseEntered
 
     private void jlSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSairMouseClicked

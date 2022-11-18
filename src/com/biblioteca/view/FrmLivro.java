@@ -6,7 +6,7 @@ import com.biblioteca.util.MetodosPadrao;
  *
  * @author Instrutores
  */
-public class FrmLivro extends javax.swing.JDialog {
+public class FrmLivro extends javax.swing.JInternalFrame {
 
     MetodosPadrao metodosPadrao = new MetodosPadrao();
 
@@ -16,10 +16,9 @@ public class FrmLivro extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public FrmLivro(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public FrmLivro() {
         initComponents();
-        setLocationRelativeTo(null);
+        //    setLocationRelativeTo(null);
         limparCampos();
     }
 
@@ -57,7 +56,8 @@ public class FrmLivro extends javax.swing.JDialog {
         jbSalvar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
+        setIconifiable(true);
 
         jPanel1.setBackground(new java.awt.Color(0, 83, 159));
 
@@ -281,7 +281,7 @@ public class FrmLivro extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-      limparCampos();
+        limparCampos();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jbVerLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerLivrosActionPerformed

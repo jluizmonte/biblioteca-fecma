@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class FrmTelaPrincipal extends javax.swing.JFrame {
     
     FrmLocador frmLocador = new FrmLocador();
-    FrmLocatario frmLocatario = new FrmLocatario(null, true);
+    FrmLocatario frmLocatario = new FrmLocatario();
 
     /**
      * Creates new form frmTela
@@ -290,7 +290,8 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiCOnsultaLocadorActionPerformed
 
     private void jmiNovoLocatarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNovoLocatarioActionPerformed
-        new FrmLocatario(null, true).setVisible(true);
+        desktopPane.add(frmLocatario);
+        frmLocatario.setVisible(true);
     }//GEN-LAST:event_jmiNovoLocatarioActionPerformed
 
     private void jmiNovoLocadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNovoLocadorActionPerformed

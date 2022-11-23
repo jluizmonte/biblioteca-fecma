@@ -2,7 +2,6 @@ package com.biblioteca.service;
 
 import com.biblioteca.controller.IEmprestimoLivro;
 import com.biblioteca.model.EmprestimoLivroModel;
-import com.biblioteca.model.EmprestimoModel;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +16,7 @@ public class EmprestimoLivroService implements IEmprestimoLivro {
     }
 
     @Override
-    public boolean salvarEmprestimosLivrosDAO(ArrayList<EmprestimoModel> plistaModelEmprestimosLivros) {
+    public boolean salvarEmprestimosLivrosDAO(ArrayList<EmprestimoLivroModel> plistaModelEmprestimosLivros) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -37,7 +36,7 @@ public class EmprestimoLivroService implements IEmprestimoLivro {
     }
 
     @Override
-    public EmprestimoModel getEmprestimosLivrosDAO(int pIdEmprestimoLivro) {
+    public EmprestimoLivroModel getEmprestimosLivrosDAO(int pIdEmprestimoLivro) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

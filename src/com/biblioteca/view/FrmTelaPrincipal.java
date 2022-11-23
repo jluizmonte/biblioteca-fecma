@@ -300,7 +300,6 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiNovoLocadorActionPerformed
 
     private void jmiNovoLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNovoLivroActionPerformed
-        //        new FrmLivro(this, true).setVisible(true);
         FrmLivro frmLivro = new FrmLivro();
         desktopPane.add(frmLivro);
         frmLivro.setVisible(true);

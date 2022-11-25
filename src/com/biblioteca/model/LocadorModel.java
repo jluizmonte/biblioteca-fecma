@@ -8,12 +8,13 @@ public class LocadorModel {
 
     private int idLocador;
     private String nomeLocador;
-    private int idadeLocador;
     private String logradouroLocador;
     private String bairroLocador;
     private String cidadeLocador;
     private String estadoLocador;
     private String cepLocador;
+    private String telefoneLocador;
+    private String emailLocador;
 
     public int getIdLocador() {
         return idLocador;
@@ -29,14 +30,6 @@ public class LocadorModel {
 
     public void setNomeLocador(String nomeLocador) {
         this.nomeLocador = nomeLocador;
-    }
-
-    public int getIdadeLocador() {
-        return idadeLocador;
-    }
-
-    public void setIdadeLocador(int idadeLocador) {
-        this.idadeLocador = idadeLocador;
     }
 
     public String getLogradouroLocador() {
@@ -77,6 +70,22 @@ public class LocadorModel {
 
     public void setCepLocador(String cepLocador) {
         this.cepLocador = cepLocador;
+    }
+
+    public String getTelefoneLocador() {
+        return telefoneLocador;
+    }
+
+    public void setTelefoneLocador(String telefoneLocador) {
+        this.telefoneLocador = telefoneLocador;
+    }
+
+    public String getEmailLocador() {
+        return emailLocador;
+    }
+
+    public void setEmailLocador(String emailLocador) {
+        this.emailLocador = emailLocador;
     }
 
 }

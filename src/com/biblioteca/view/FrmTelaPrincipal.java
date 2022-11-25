@@ -1,6 +1,6 @@
 package com.biblioteca.view;
 
-import com.biblioteca.model.SessaoUSuarioModel;
+import com.biblioteca.model.SessaoUsuarioModel;
 import java.awt.Frame;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -62,6 +62,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jmiCOnsultaLocador = new javax.swing.JMenuItem();
         jmiConsultaLocatario = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -256,6 +257,15 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Saída");
+
+        jMenuItem1.setText("Empréstimo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem1);
+
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Ferramentas");
@@ -282,11 +292,11 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiConsultaLocatarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsultaLocatarioActionPerformed
-        new FrmDadosLocatario().setVisible(true);
+        // new FrmDadosLocatario().setVisible(true);
     }//GEN-LAST:event_jmiConsultaLocatarioActionPerformed
 
     private void jmiCOnsultaLocadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCOnsultaLocadorActionPerformed
-        new FrmDadosLocador().setVisible(true);
+        //    new FrmDadosLocador().setVisible(true);
     }//GEN-LAST:event_jmiCOnsultaLocadorActionPerformed
 
     private void jmiNovoLocatarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNovoLocatarioActionPerformed
@@ -308,12 +318,18 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     private void jmiEncerrarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEncerrarSistemaActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jmiEncerrarSistemaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FrmEmprestimo frmEmprestimo = new FrmEmprestimo();
+        desktopPane.add(frmEmprestimo);
+        frmEmprestimo.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     private void setarValoresPadrao() {
-        jlInstituicao.setText(SessaoUSuarioModel.instituicao);
-        jlUsuarioLogado.setText(SessaoUSuarioModel.codigoUsuario + " - "
-                + SessaoUSuarioModel.nomeUsuario);
-        jlNivelUsuario.setText(SessaoUSuarioModel.nivelAcesso);
+        jlInstituicao.setText(SessaoUsuarioModel.instituicao);
+        jlUsuarioLogado.setText(SessaoUsuarioModel.codigoUsuario + " - "
+                + SessaoUsuarioModel.nomeUsuario);
+        jlNivelUsuario.setText(SessaoUsuarioModel.nivelAcesso);
     }
     
     private void setarData() {
@@ -343,6 +359,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator4;

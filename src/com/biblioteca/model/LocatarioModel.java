@@ -5,15 +5,18 @@ package com.biblioteca.model;
  * @author Instrutores
  */
 public class LocatarioModel {
+
     private int idLocatario;
     private String nomeLocatario;
-    private int idadeLocatario;
     private String logradouroLocatario;
+    private String numeroLocatario;
     private String bairroLocatario;
     private String cidadeLocatario;
     private String estadoLocatario;
     private String cepLocatario;
-    private String statusLocatario; 
+    private String telefoneLocatario;
+    private String emailLocatario;
+    private String statusLocatario;
 
     public int getIdLocatario() {
         return idLocatario;
@@ -31,20 +34,20 @@ public class LocatarioModel {
         this.nomeLocatario = nomeLocatario;
     }
 
-    public int getIdadeLocatario() {
-        return idadeLocatario;
-    }
-
-    public void setIdadeLocatario(int idadeLocatario) {
-        this.idadeLocatario = idadeLocatario;
-    }
-
     public String getLogradouroLocatario() {
         return logradouroLocatario;
     }
 
     public void setLogradouroLocatario(String logradouroLocatario) {
         this.logradouroLocatario = logradouroLocatario;
+    }
+
+    public String getNumeroLocatario() {
+        return numeroLocatario;
+    }
+
+    public void setNumeroLocatario(String numeroLocatario) {
+        this.numeroLocatario = numeroLocatario;
     }
 
     public String getBairroLocatario() {
@@ -79,6 +82,22 @@ public class LocatarioModel {
         this.cepLocatario = cepLocatario;
     }
 
+    public String getTelefoneLocatario() {
+        return telefoneLocatario;
+    }
+
+    public void setTelefoneLocatario(String telefoneLocatario) {
+        this.telefoneLocatario = telefoneLocatario;
+    }
+
+    public String getEmailLocatario() {
+        return emailLocatario;
+    }
+
+    public void setEmailLocatario(String emailLocatario) {
+        this.emailLocatario = emailLocatario;
+    }
+
     public String getStatusLocatario() {
         return statusLocatario;
     }
@@ -86,6 +105,5 @@ public class LocatarioModel {
     public void setStatusLocatario(String statusLocatario) {
         this.statusLocatario = statusLocatario;
     }
-    
-    
+
 }

@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @author Instrutores
  */
 public class FrmTelaPrincipal extends javax.swing.JFrame {
-    
+
     FrmLocador frmLocador = new FrmLocador();
     FrmLocatario frmLocatario = new FrmLocatario();
 
@@ -62,7 +62,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jmiCOnsultaLocador = new javax.swing.JMenuItem();
         jmiConsultaLocatario = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmiEmprestimo = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -257,14 +257,21 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Saída");
-
-        jMenuItem1.setText("Empréstimo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenu4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenu4ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem1);
+
+        jmiEmprestimo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        jmiEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/emprestar.png"))); // NOI18N
+        jmiEmprestimo.setText("Empréstimo");
+        jmiEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiEmprestimoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmiEmprestimo);
 
         jMenuBar1.add(jMenu4);
 
@@ -319,19 +326,22 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jmiEncerrarSistemaActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jmiEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEmprestimoActionPerformed
         FrmEmprestimo frmEmprestimo = new FrmEmprestimo();
         desktopPane.add(frmEmprestimo);
         frmEmprestimo.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-    
+    }//GEN-LAST:event_jmiEmprestimoActionPerformed
+
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu4ActionPerformed
+
     private void setarValoresPadrao() {
         jlInstituicao.setText(SessaoUsuarioModel.instituicao);
-        jlUsuarioLogado.setText(SessaoUsuarioModel.codigoUsuario + " - "
-                + SessaoUsuarioModel.nomeUsuario);
+        jlUsuarioLogado.setText(SessaoUsuarioModel.codigoUsuario + " - " + SessaoUsuarioModel.nomeUsuario);
         jlNivelUsuario.setText(SessaoUsuarioModel.nivelAcesso);
     }
-    
+
     private void setarData() {
         Thread clock = new Thread() {
             @Override
@@ -359,7 +369,6 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator4;
@@ -371,6 +380,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jlUsuarioLogado;
     private javax.swing.JMenuItem jmiCOnsultaLocador;
     private javax.swing.JMenuItem jmiConsultaLocatario;
+    private javax.swing.JMenuItem jmiEmprestimo;
     private javax.swing.JMenuItem jmiEncerrarSistema;
     private javax.swing.JMenuItem jmiNovoLivro;
     private javax.swing.JMenuItem jmiNovoLocador;

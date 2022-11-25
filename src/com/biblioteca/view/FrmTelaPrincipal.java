@@ -1,6 +1,6 @@
 package com.biblioteca.view;
 
-import com.biblioteca.model.SessaoUSuarioModel;
+import com.biblioteca.model.SessaoUsuarioModel;
 import java.awt.Frame;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @author Instrutores
  */
 public class FrmTelaPrincipal extends javax.swing.JFrame {
-    
+
     FrmLocador frmLocador = new FrmLocador();
     FrmLocatario frmLocatario = new FrmLocatario();
 
@@ -62,6 +62,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jmiCOnsultaLocador = new javax.swing.JMenuItem();
         jmiConsultaLocatario = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jmiEmprestimo = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -256,6 +257,22 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Saída");
+        jMenu4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu4ActionPerformed(evt);
+            }
+        });
+
+        jmiEmprestimo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        jmiEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/emprestar.png"))); // NOI18N
+        jmiEmprestimo.setText("Empréstimo");
+        jmiEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiEmprestimoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmiEmprestimo);
+
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Ferramentas");
@@ -282,11 +299,11 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiConsultaLocatarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsultaLocatarioActionPerformed
-        new FrmDadosLocatario().setVisible(true);
+        // new FrmDadosLocatario().setVisible(true);
     }//GEN-LAST:event_jmiConsultaLocatarioActionPerformed
 
     private void jmiCOnsultaLocadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCOnsultaLocadorActionPerformed
-        new FrmDadosLocador().setVisible(true);
+        //    new FrmDadosLocador().setVisible(true);
     }//GEN-LAST:event_jmiCOnsultaLocadorActionPerformed
 
     private void jmiNovoLocatarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNovoLocatarioActionPerformed
@@ -308,14 +325,23 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     private void jmiEncerrarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEncerrarSistemaActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jmiEncerrarSistemaActionPerformed
-    
+
+    private void jmiEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEmprestimoActionPerformed
+        FrmEmprestimo frmEmprestimo = new FrmEmprestimo();
+        desktopPane.add(frmEmprestimo);
+        frmEmprestimo.setVisible(true);
+    }//GEN-LAST:event_jmiEmprestimoActionPerformed
+
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu4ActionPerformed
+
     private void setarValoresPadrao() {
-        jlInstituicao.setText(SessaoUSuarioModel.instituicao);
-        jlUsuarioLogado.setText(SessaoUSuarioModel.codigoUsuario + " - "
-                + SessaoUSuarioModel.nomeUsuario);
-        jlNivelUsuario.setText(SessaoUSuarioModel.nivelAcesso);
+        jlInstituicao.setText(SessaoUsuarioModel.instituicao);
+        jlUsuarioLogado.setText(SessaoUsuarioModel.codigoUsuario + " - " + SessaoUsuarioModel.nomeUsuario);
+        jlNivelUsuario.setText(SessaoUsuarioModel.nivelAcesso);
     }
-    
+
     private void setarData() {
         Thread clock = new Thread() {
             @Override
@@ -354,6 +380,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jlUsuarioLogado;
     private javax.swing.JMenuItem jmiCOnsultaLocador;
     private javax.swing.JMenuItem jmiConsultaLocatario;
+    private javax.swing.JMenuItem jmiEmprestimo;
     private javax.swing.JMenuItem jmiEncerrarSistema;
     private javax.swing.JMenuItem jmiNovoLivro;
     private javax.swing.JMenuItem jmiNovoLocador;

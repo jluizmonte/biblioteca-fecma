@@ -1,5 +1,6 @@
-package com.biblioteca.service;
+package com.biblioteca.model.dao;
 
+import com.biblioteca.connection.ConnectionMySQL;
 import com.biblioteca.controller.IEmprestimo;
 import com.biblioteca.model.EmprestimoModel;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author Instrutores
  */
-public class EmprestimoService implements IEmprestimo {
+public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
 
     @Override
     public int salvarEmprestimoDAO(EmprestimoModel pEmprestimoModel) {

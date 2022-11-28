@@ -1,43 +1,44 @@
-package com.biblioteca.service;
+package com.biblioteca.model.dao;
 
-import com.biblioteca.controller.IEmprestimoLivro;
-import com.biblioteca.model.EmprestimoLivroModel;
+import com.biblioteca.connection.ConnectionMySQL;
+import com.biblioteca.controller.ILocatario;
+import com.biblioteca.model.LocatarioModel;
 import java.util.ArrayList;
 
 /**
  *
  * @author Instrutores
  */
-public class EmprestimoLivroService implements IEmprestimoLivro {
+public class LocatarioDao extends ConnectionMySQL implements ILocatario{
 
     @Override
-    public boolean salvarEmprestimosLivrosDAO(EmprestimoLivroModel pModelEmprestimosLivros) {
+    public boolean salvarLocatarioDAO(LocatarioModel pLocatarioModel) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean salvarEmprestimosLivrosDAO(ArrayList<EmprestimoLivroModel> plistaModelEmprestimosLivros) {
+    public LocatarioModel getLocatarioDAO(int pIdLocatario) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean excluirEmprestimosLivrosDAO(int pIdEmprestimoLivro) {
+    public LocatarioModel getLocatarioDAO(String pLocatarioModel) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean atualizarEmprestimosLivrosDAO(EmprestimoLivroModel pModelEmprestimosLivros) {
+    public ArrayList<LocatarioModel> getListaLocatarioDAO() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<EmprestimoLivroModel> getListaEmprestimosLivrosDAO() {
+    public boolean atualizarLocatarioDAO(LocatarioModel pLocatarioModel) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public EmprestimoLivroModel getEmprestimosLivrosDAO(int pIdEmprestimoLivro) {
+    public boolean excluirLocatarioDAO(int idLocatarioModel) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }

@@ -1,14 +1,15 @@
-package com.biblioteca.service;
+package com.biblioteca.model.dao;
 
 import com.biblioteca.controller.IEmprestimoLocatario;
 import com.biblioteca.model.EmprestimoLocatarioModel;
+import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 import java.util.ArrayList;
 
 /**
  *
  * @author Instrutores
  */
-public class EmprestimoLocatarioService implements IEmprestimoLocatario {
+public class EmprestimoLocatarioDao extends MysqlConnectionPoolDataSource implements IEmprestimoLocatario {
 
     @Override
     public ArrayList<EmprestimoLocatarioModel> getListaEmprestimosLocatarioDAO() {

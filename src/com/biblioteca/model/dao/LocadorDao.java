@@ -1,5 +1,6 @@
-package com.biblioteca.service;
+package com.biblioteca.model.dao;
 
+import com.biblioteca.connection.ConnectionMySQL;
 import com.biblioteca.controller.ILocador;
 import com.biblioteca.model.LocadorModel;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author Instrutores
  */
-public class LocadorService implements ILocador {
+public class LocadorDao extends ConnectionMySQL implements ILocador {
 
     @Override
     public boolean salvarLocadorDAO(LocadorModel pLocadorModel) {

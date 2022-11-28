@@ -1,52 +1,43 @@
-package com.biblioteca.service;
+package com.biblioteca.model.dao;
 
-import com.biblioteca.controller.ILivro;
-import com.biblioteca.model.LivroModel;
+import com.biblioteca.connection.ConnectionMySQL;
+import com.biblioteca.controller.IEmprestimoLivro;
+import com.biblioteca.model.EmprestimoLivroModel;
 import java.util.ArrayList;
 
 /**
  *
  * @author Instrutores
  */
-public class LivroService implements ILivro {
+public class EmprestimoLivroDao extends ConnectionMySQL implements IEmprestimoLivro {
 
     @Override
-    public boolean salvarLivroDAO(LivroModel pLivroModel) {
+    public boolean salvarEmprestimosLivrosDAO(EmprestimoLivroModel pModelEmprestimosLivros) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public LivroModel getLivroDAO(int pIdLivro) {
+    public boolean salvarEmprestimosLivrosDAO(ArrayList<EmprestimoLivroModel> plistaModelEmprestimosLivros) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public LivroModel getLivroDAO(String pLivroModel) {
+    public boolean excluirEmprestimosLivrosDAO(int pIdEmprestimoLivro) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<LivroModel> getListaLivroDAO() {
+    public boolean atualizarEmprestimosLivrosDAO(EmprestimoLivroModel pModelEmprestimosLivros) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean atualizarLivroDAO(LivroModel pLivroModel) {
+    public ArrayList<EmprestimoLivroModel> getListaEmprestimosLivrosDAO() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean excluirLivroDAO(int idLivroModel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean alterarEstoqueLivrosDAO(ArrayList<LivroModel> pListaLivroModel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public LivroModel getQuantidadeLivrosCadastrados() {
+    public EmprestimoLivroModel getEmprestimosLivrosDAO(int pIdEmprestimoLivro) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

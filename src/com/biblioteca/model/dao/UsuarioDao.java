@@ -1,23 +1,34 @@
-package com.biblioteca.service;
+package com.biblioteca.model.dao;
 
+import com.biblioteca.connection.ConnectionMySQL;
 import com.biblioteca.controller.IUsuario;
 import com.biblioteca.model.UsuarioModel;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Instrutores
  */
-public class UsuarioService implements IUsuario {
+public class UsuarioDao extends ConnectionMySQL implements IUsuario{
 
     @Override
     public boolean salvarUsuarioDAO(UsuarioModel pUsuarioModel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            this.conectar();
+          return this.executarInsertUpdateSQL("INSERT INTO tbl_usuario VALUES (nome_usuario, senha_usuario, login_usuario, nivel_usuario)");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar o usuário",
+                    "Atenção", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } finally {
+            this.fecharConexao();
+        }
     }
 
     @Override
     public UsuarioModel getUsuarioDAO(int pIdUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
     }
 
     @Override
@@ -50,4 +61,5 @@ public class UsuarioService implements IUsuario {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+   
 }

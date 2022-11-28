@@ -28,7 +28,8 @@ public class UsuarioDao extends ConnectionMySQL implements IUsuario{
 
     @Override
     public UsuarioModel getUsuarioDAO(int pIdUsuario) {
-    
+    UsuarioModel usuarioModel = new UsuarioModel();
+    return usuarioModel;
     }
 
     @Override

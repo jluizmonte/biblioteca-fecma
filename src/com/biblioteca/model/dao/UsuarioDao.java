@@ -16,7 +16,12 @@ public class UsuarioDao extends ConnectionMySQL implements IUsuario{
     public boolean salvarUsuarioDAO(UsuarioModel pUsuarioModel) {
         try {
             this.conectar();
-          return this.executarInsertUpdateSQL("INSERT INTO tbl_usuario VALUES (nome_usuario, senha_usuario, login_usuario, nivel_usuario)");
+          return this.executarInsertUpdateSQL(
+                  "INSERT INTO tbl_usuario "
+                          + "(nome_usuario, senha_usuario, login_usuario, nivel_usuario) "
+                          + "VALUES('"+pUsuarioModel.getNomeUsuario()+"','"+pUsuarioModel.getSenhaUsuario()+"','"
+                          +pUsuarioModel.getLoginUsuario()+"','"+pUsuarioModel.getNivelAcessoUsuario()+"')"
+          );
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar o usuário",
                     "Atenção", JOptionPane.ERROR_MESSAGE);

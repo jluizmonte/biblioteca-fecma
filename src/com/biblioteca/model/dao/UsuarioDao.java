@@ -78,7 +78,7 @@ public class UsuarioDao extends ConnectionMySQL implements IUsuario {
     }
 
     @Override
-    public ArrayList<UsuarioModel> getListaUsuarioDAO(){
+    public ArrayList<UsuarioModel> getListaUsuarioDAO() {
         ArrayList<UsuarioModel> listaUsuarioModel = new ArrayList<>();
         UsuarioModel usuarioModel = new UsuarioModel();
         try {
@@ -105,7 +105,20 @@ public class UsuarioDao extends ConnectionMySQL implements IUsuario {
 
     @Override
     public boolean atualizarUsuarioDAO(UsuarioModel pUsuarioModel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            this.conectar();
+            return this.executarInsertUpdateSQL("UPDATE tbl_usuario SET pk_id_usuario = '"
+                    + pUsuarioModel.getIdUsuario() + "'," + "nome_usuario = '" + pUsuarioModel.getNomeUsuario() + "',"
+                    + "login_usuario = '" + pUsuarioModel.getLoginUsuario() + "'," + "senha_usuario = '"
+                    + pUsuarioModel.getSenhaUsuario() + "," + "nivel_usuario = '" + pUsuarioModel.getNivelAcessoUsuario() + "'"
+                    + " WHERE pk_id_usuario = '" + pUsuarioModel.getIdUsuario() + "'" + ";");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar o usuário",
+                    "Atenção", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } finally {
+            this.fecharConexao();
+        }
     }
 
     @Override

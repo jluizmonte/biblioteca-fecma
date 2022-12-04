@@ -110,7 +110,8 @@ public class UsuarioDao extends ConnectionMySQL implements IUsuario {
             return this.executarInsertUpdateSQL("UPDATE tbl_usuario SET pk_id_usuario = '"
                     + pUsuarioModel.getIdUsuario() + "'," + "nome_usuario = '" + pUsuarioModel.getNomeUsuario() + "',"
                     + "login_usuario = '" + pUsuarioModel.getLoginUsuario() + "'," + "senha_usuario = '"
-                    + pUsuarioModel.getSenhaUsuario() + "," + "nivel_usuario = '" + pUsuarioModel.getNivelAcessoUsuario() + "'"
+                    + pUsuarioModel.getSenhaUsuario() + "," + "nivel_usuario = '"
+                    + pUsuarioModel.getNivelAcessoUsuario() + "'"
                     + " WHERE pk_id_usuario = '" + pUsuarioModel.getIdUsuario() + "'" + ";");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar o usuário",
@@ -123,12 +124,31 @@ public class UsuarioDao extends ConnectionMySQL implements IUsuario {
 
     @Override
     public boolean excluirUsuarioDAO(int pIdUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            this.conectar();
+            return this.executarInsertUpdateSQL("DELETE FROM tbl_usuario  WHERE pk_id_usuario = '" + pIdUsuario + "'" + ";");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir o usuário!", "Atenção", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } finally {
+            this.fecharConexao();
+        }
     }
 
     @Override
     public boolean getValidarUsuarioDAO(UsuarioModel pUsuarioModel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            this.conectar();
+            this.executarSQL("SELECT * FROM tbl_usuario WHERE"
+                    + " login_usuario = '" + pUsuarioModel.getLoginUsuario()
+                    + "' AND senha_usuario = '" + pUsuarioModel.getSenhaUsuario() + "'" + ";");
+
+            return getResultSet().next();
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            this.fecharConexao();
+        }
     }
 
     @Override

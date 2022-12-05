@@ -57,17 +57,15 @@ public interface IUsuario {
     public boolean excluirUsuarioDAO(int pIdUsuario);
 
     /**
-     * valida o usuario na teal de login
-     *
+     * 
      * @param pUsuarioModel
-     * @return
+     * @return 
      */
     public boolean getValidarUsuarioDAO(UsuarioModel pUsuarioModel);
 
     /**
-     * retorna a quantidade de usuarios cadastrados no sistema
-     *
-     * @return
+     * 
+     * @return 
      */
-    public UsuarioModel getQuantidadeUsuariosCadastrados();
+    public int getQuantidadeUsuariosCadastrados();
 }

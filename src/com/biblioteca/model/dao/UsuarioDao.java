@@ -143,8 +143,14 @@ public class UsuarioDao extends ConnectionMySQL implements IUsuario {
                     + " login_usuario = '" + pUsuarioModel.getLoginUsuario()
                     + "' AND senha_usuario = '" + pUsuarioModel.getSenhaUsuario() + "'" + ";");
 
-            return getResultSet().next();
+            if (this.getResultSet().next()) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao executar a validação do usuário",
+                    "Atenção", JOptionPane.ERROR_MESSAGE);
             return false;
         } finally {
             this.fecharConexao();
@@ -152,8 +158,19 @@ public class UsuarioDao extends ConnectionMySQL implements IUsuario {
     }
 
     @Override
-    public UsuarioModel getQuantidadeUsuariosCadastrados() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public int getQuantidadeUsuariosCadastrados() {
+        int valor = 0;
+        try {
+            this.conectar();
+            this.executarSQL("SELECT COUNT(*) FROM tbl_usuario;");
 
+            while (this.getResultSet().next()) {
+                valor = this.getResultSet().getInt(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.fecharConexao();
+        }
+        return valor;
+    }
 }

@@ -19,9 +19,11 @@ public class UsuarioService {
     public UsuarioModel getUsuarioDAO(int pIdUsuario) {
         return usuarioDao.getUsuarioDAO(pIdUsuario);
     }
+
     public UsuarioModel getUsuarioDAO(String pLogin) {
         return usuarioDao.getUsuarioDAO(pLogin);
     }
+
     public ArrayList<UsuarioModel> getListaUsuarioDAO() {
         return usuarioDao.getListaUsuarioDAO();
     }

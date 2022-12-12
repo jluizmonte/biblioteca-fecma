@@ -9,6 +9,7 @@ public class LocadorModel {
     private int idLocador;
     private String nomeLocador;
     private String logradouroLocador;
+    private String numeroLocador;
     private String bairroLocador;
     private String cidadeLocador;
     private String estadoLocador;
@@ -38,6 +39,14 @@ public class LocadorModel {
 
     public void setLogradouroLocador(String logradouroLocador) {
         this.logradouroLocador = logradouroLocador;
+    }
+
+    public String getNumeroLocador() {
+        return numeroLocador;
+    }
+
+    public void setNumeroLocador(String numeroLocador) {
+        this.numeroLocador = numeroLocador;
     }
 
     public String getBairroLocador() {

@@ -10,7 +10,8 @@ public class EmprestimoModel {
     private int idLocatario;
     private int idLocador;
     private int idLivro;
-    private String dataDevolução;
+    private String dataEmprestimo;
+    private String dataDevolucao;
     private String statusEmprestimo;
     private int quantidadeEmprestimo;
 
@@ -46,12 +47,20 @@ public class EmprestimoModel {
         this.idLivro = idLivro;
     }
 
-    public String getDataDevolução() {
-        return dataDevolução;
+    public String getDataEmprestimo() {
+        return dataEmprestimo;
     }
 
-    public void setDataDevolução(String dataDevolução) {
-        this.dataDevolução = dataDevolução;
+    public void setDataEmprestimo(String dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public String getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(String dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
     }
 
     public String getStatusEmprestimo() {

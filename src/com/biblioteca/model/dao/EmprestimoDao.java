@@ -72,7 +72,7 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
                 listaEmprestimoModel.add(emprestimoModel);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.toString();
         } finally {
             this.fecharConexao();
         }
@@ -93,7 +93,7 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
                     + "status_emprestimo = '" + pEmprestimoModel.getStatusEmprestimo() + "'" + " WHERE "
                     + "pk_id_emprestimo = '" + pEmprestimoModel.getIdEmprestimo() + "'" + ";");
         } catch (Exception e) {
-            e.printStackTrace();
+            e.toString();
             return false;
         } finally {
             this.fecharConexao();
@@ -106,7 +106,7 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
             this.conectar();
             return this.executarInsertUpdateSQL("DELETE FROM tbl_emprestimo  WHERE pk_id_emprestimo = '" + pIdEmprestimoModel + "'" + ";");
         } catch (Exception e) {
-            e.printStackTrace();
+            e.toString();
             return false;
         } finally {
             this.fecharConexao();
@@ -123,6 +123,7 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
                 emprestimoModel.setQuantidadeEmprestimo(this.getResultSet().getInt(1));
             }
         } catch (SQLException e) {
+            e.toString();
         } finally {
             this.fecharConexao();
         }
@@ -146,7 +147,7 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            e.toString();
             return false;
         } finally {
             this.fecharConexao();

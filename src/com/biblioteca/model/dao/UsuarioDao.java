@@ -163,7 +163,6 @@ public class UsuarioDao extends ConnectionMySQL implements IUsuario {
         try {
             this.conectar();
             this.executarSQL("SELECT COUNT(*) FROM tbl_usuario;");
-
             while (this.getResultSet().next()) {
                 valor = this.getResultSet().getInt(1);
             }

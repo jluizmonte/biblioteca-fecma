@@ -1,10 +1,11 @@
 package com.biblioteca.view;
 
 import com.biblioteca.model.SessaoUsuarioModel;
-import com.biblioteca.model.SessaoUsuarioModel;
+import com.biblioteca.service.LivroService;
 import java.awt.Frame;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,6 +15,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
 
     FrmLocador frmLocador = new FrmLocador();
     FrmLocatario frmLocatario = new FrmLocatario();
+    LivroService livroService = new LivroService();
 
     /**
      * Creates new form frmTela
@@ -25,6 +27,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setarData();
         setarValoresPadrao();
+        setarAcesso();
     }
 
     /**
@@ -49,7 +52,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jlLivro = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         desktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -60,7 +63,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jmiNovoLocador = new javax.swing.JMenuItem();
         jmiNovoLocatario = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jmiCOnsultaLocador = new javax.swing.JMenuItem();
+        jmiConsultaLocador = new javax.swing.JMenuItem();
         jmiConsultaLocatario = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jmiEmprestimo = new javax.swing.JMenuItem();
@@ -114,10 +117,10 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LIVROS");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("$livros");
+        jlLivro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jlLivro.setForeground(new java.awt.Color(255, 255, 255));
+        jlLivro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlLivro.setText("$livros");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -139,7 +142,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
             .addComponent(jlNivelUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jlLivro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator1)
         );
         jPanel10Layout.setVerticalGroup(
@@ -162,7 +165,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(jlLivro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -237,14 +240,14 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Consultar");
 
-        jmiCOnsultaLocador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/locador.png"))); // NOI18N
-        jmiCOnsultaLocador.setText("Locadores Disponíveis");
-        jmiCOnsultaLocador.addActionListener(new java.awt.event.ActionListener() {
+        jmiConsultaLocador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/locador.png"))); // NOI18N
+        jmiConsultaLocador.setText("Locadores Disponíveis");
+        jmiConsultaLocador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiCOnsultaLocadorActionPerformed(evt);
+                jmiConsultaLocadorActionPerformed(evt);
             }
         });
-        jMenu3.add(jmiCOnsultaLocador);
+        jMenu3.add(jmiConsultaLocador);
 
         jmiConsultaLocatario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/locatario.png"))); // NOI18N
         jmiConsultaLocatario.setText("Locatários Disponíveis");
@@ -303,9 +306,9 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         // new FrmDadosLocatario().setVisible(true);
     }//GEN-LAST:event_jmiConsultaLocatarioActionPerformed
 
-    private void jmiCOnsultaLocadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCOnsultaLocadorActionPerformed
+    private void jmiConsultaLocadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsultaLocadorActionPerformed
         //    new FrmDadosLocador().setVisible(true);
-    }//GEN-LAST:event_jmiCOnsultaLocadorActionPerformed
+    }//GEN-LAST:event_jmiConsultaLocadorActionPerformed
 
     private void jmiNovoLocatarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNovoLocatarioActionPerformed
         desktopPane.add(frmLocatario);
@@ -341,6 +344,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jlInstituicao.setText(SessaoUsuarioModel.instituicao);
         jlUsuarioLogado.setText(SessaoUsuarioModel.codigoUsuario + " - " + SessaoUsuarioModel.nomeUsuario);
         jlNivelUsuario.setText(SessaoUsuarioModel.nivelAcesso);
+        jlLivro.setText(String.valueOf(livroService.getQuantidadeLivrosCadastrados().getQtdeLivro()));
     }
 
     private void setarData() {
@@ -356,6 +360,20 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         };
         clock.start();
     }
+
+    private void setarAcesso() {
+        switch (SessaoUsuarioModel.nivelAcesso) {
+            case "LOCADOR":
+                JOptionPane.showMessageDialog(this, "LOCADOR ACESSOU O SISTEMA");
+                break;
+            case "ADMINISTRADOR":
+                JOptionPane.showMessageDialog(this, "ADM ACESSOU O SISTEMA");
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "OK");
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JLabel jLabel1;
@@ -363,7 +381,6 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -377,9 +394,10 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JLabel jlDataSistema;
     private javax.swing.JLabel jlInstituicao;
+    private javax.swing.JLabel jlLivro;
     private javax.swing.JLabel jlNivelUsuario;
     private javax.swing.JLabel jlUsuarioLogado;
-    private javax.swing.JMenuItem jmiCOnsultaLocador;
+    private javax.swing.JMenuItem jmiConsultaLocador;
     private javax.swing.JMenuItem jmiConsultaLocatario;
     private javax.swing.JMenuItem jmiEmprestimo;
     private javax.swing.JMenuItem jmiEncerrarSistema;

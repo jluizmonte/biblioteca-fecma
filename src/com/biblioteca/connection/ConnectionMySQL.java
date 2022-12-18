@@ -26,7 +26,6 @@ public class ConnectionMySQL {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://" + servidor + "/" + banco + "?autoReconnect=true&useSSL=false";
-
             this.setCon(DriverManager.getConnection(url, usuario, senha));
             this.status = true;
         } catch (ClassNotFoundException | SQLException e) {
@@ -47,7 +46,6 @@ public class ConnectionMySQL {
             this.setStatement(getCon().createStatement());
             // ResultSet rs = getStatement().executeQuery(pSQL);
             setResultSet(getStatement().executeQuery(pSQL));
-            JOptionPane.showMessageDialog(null, "OK");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERRO AO EXECUTAR A INSTRUÇÃO SQL\n ERRO AO CONECTAR AO BANCO DE DADOS", "ERRO", JOptionPane.ERROR_MESSAGE);
             System.out.println(e.toString());

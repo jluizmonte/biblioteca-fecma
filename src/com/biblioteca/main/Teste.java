@@ -1,5 +1,6 @@
 package com.biblioteca.main;
 
+import com.biblioteca.view.FrmLogin;
 import com.biblioteca.view.FrmTelaPrincipal;
 import java.sql.SQLException;
 
@@ -16,8 +17,8 @@ public class Teste {
     public static void main(String[] args) throws SQLException {
 
         java.awt.EventQueue.invokeLater(() -> {
-            //   new frmLogin().setVisible(true);
-         new FrmTelaPrincipal().setVisible(true);
+            new FrmLogin().setVisible(true);
+   //      new FrmTelaPrincipal().setVisible(true);
             //new FrmLocador().setVisible(true);
         });
     }

@@ -36,6 +36,10 @@ public class UsuarioService {
         return usuarioDao.excluirUsuarioDAO(pIdUsuario);
     }
 
+    public boolean getValidarUsuarioDAO(UsuarioModel pUsuarioModel) {
+        return usuarioDao.getValidarUsuarioDAO(pUsuarioModel);
+    }
+
     public int getQuantidadeUsuariosCadastrados() {
         return usuarioDao.getQuantidadeUsuariosCadastrados();
     }

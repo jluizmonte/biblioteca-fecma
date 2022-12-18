@@ -1,8 +1,13 @@
 package com.biblioteca.view;
 
+import com.biblioteca.model.SessaoUsuarioModel;
+import com.biblioteca.model.UsuarioModel;
+import com.biblioteca.service.UsuarioService;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -10,6 +15,10 @@ import java.awt.Point;
  */
 public class FrmLogin extends javax.swing.JFrame {
 
+    UsuarioService usuarioService = new UsuarioService();
+    UsuarioModel usuarioModel = new UsuarioModel();
+    ArrayList<UsuarioModel> listaUsuarioModel = new ArrayList<>();
+    SessaoUsuarioModel sessaoUsuarioModel = new SessaoUsuarioModel();
     int x, y;
 
     /**
@@ -32,14 +41,14 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jtfLogin = new javax.swing.JTextField();
-        jpSenha = new javax.swing.JPasswordField();
+        jtfSenha = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jlSair = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jbCancelar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbAcessar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,13 +72,23 @@ public class FrmLogin extends javax.swing.JFrame {
                 jtfLoginMouseClicked(evt);
             }
         });
+        jtfLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfLoginActionPerformed(evt);
+            }
+        });
 
-        jpSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jpSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jpSenha.setBorder(null);
-        jpSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtfSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtfSenha.setBorder(null);
+        jtfSenha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jpSenhaMouseClicked(evt);
+                jtfSenhaMouseClicked(evt);
+            }
+        });
+        jtfSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfSenhaActionPerformed(evt);
             }
         });
 
@@ -113,10 +132,15 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 153, 51));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("ACESSAR");
+        jbAcessar.setBackground(new java.awt.Color(0, 153, 51));
+        jbAcessar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jbAcessar.setForeground(new java.awt.Color(255, 255, 255));
+        jbAcessar.setText("ACESSAR");
+        jbAcessar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAcessarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,9 +156,9 @@ public class FrmLogin extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jbCancelar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2))
+                                .addComponent(jbAcessar))
                             .addComponent(jtfLogin)
-                            .addComponent(jpSenha)
+                            .addComponent(jtfSenha)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -164,11 +188,11 @@ public class FrmLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbCancelar)
-                            .addComponent(jButton2)))
+                            .addComponent(jbAcessar)))
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -201,9 +225,9 @@ public class FrmLogin extends javax.swing.JFrame {
         jtfLogin.setText("");
     }//GEN-LAST:event_jtfLoginMouseClicked
 
-    private void jpSenhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpSenhaMouseClicked
-        jpSenha.setText("");
-    }//GEN-LAST:event_jpSenhaMouseClicked
+    private void jtfSenhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfSenhaMouseClicked
+        jtfSenha.setText("");
+    }//GEN-LAST:event_jtfSenhaMouseClicked
 
     private void jlSairMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSairMouseExited
         jlSair.setForeground(Color.WHITE);
@@ -219,20 +243,69 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
         jtfLogin.setText("");
-        jpSenha.setText("");
+        jtfSenha.setText("");
         jtfLogin.requestFocus();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
+    private void jbAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAcessarActionPerformed
+        entrar();
+    }//GEN-LAST:event_jbAcessarActionPerformed
+
+    private void jtfLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfLoginActionPerformed
+        jtfSenha.requestFocus();
+    }//GEN-LAST:event_jtfLoginActionPerformed
+
+    private void jtfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSenhaActionPerformed
+        entrar();
+    }//GEN-LAST:event_jtfSenhaActionPerformed
+
+    public void entrar() {
+        usuarioModel.setLoginUsuario(jtfLogin.getText());
+        usuarioModel.setSenhaUsuario(String.valueOf(jtfSenha.getPassword()));
+
+        if (!usuarioModel.getSenhaUsuario().equals("") || !usuarioModel.getLoginUsuario().equals("")) {
+            if (usuarioService.getValidarUsuarioDAO(usuarioModel)) {
+                usuarioModel = usuarioService.getUsuarioDAO(jtfLogin.getText());
+                setSessionUser();
+                JOptionPane.showMessageDialog(this, "Bem-vindo de volta "
+                        + usuarioModel.getNomeUsuario() + "!", "Sucesso!", JOptionPane.WARNING_MESSAGE);
+                new FrmTelaPrincipal().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Usuário ou senha inválidos!\nRevise as credenciais e tente novamente",
+                        "Erro ao fazer login", JOptionPane.ERROR_MESSAGE);
+                limparCampos();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Nenhum dos campos podem ficar em branco", "Revise os dados",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public void limparCampos() {
+        jtfSenha.setText("");
+        jtfLogin.setText("");
+        jtfLogin.requestFocusInWindow();
+    }
+
+    private void setSessionUser() {
+        SessaoUsuarioModel.codigoUsuario = usuarioModel.getIdUsuario();
+        SessaoUsuarioModel.nomeUsuario = usuarioModel.getNomeUsuario();
+        SessaoUsuarioModel.loginUsuario = usuarioModel.getLoginUsuario();
+        SessaoUsuarioModel.nivelAcesso = usuarioModel.getNivelAcessoUsuario();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbAcessar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JLabel jlSair;
-    private javax.swing.JPasswordField jpSenha;
     private javax.swing.JTextField jtfLogin;
+    private javax.swing.JPasswordField jtfSenha;
     // End of variables declaration//GEN-END:variables
 }

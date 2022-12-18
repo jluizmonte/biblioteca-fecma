@@ -1,6 +1,7 @@
 package com.biblioteca.view;
 
 import com.biblioteca.model.SessaoUsuarioModel;
+import com.biblioteca.model.SessaoUsuarioModel;
 import com.biblioteca.model.UsuarioModel;
 import com.biblioteca.service.UsuarioService;
 import java.awt.Color;
@@ -18,7 +19,7 @@ public class FrmLogin extends javax.swing.JFrame {
     UsuarioService usuarioService = new UsuarioService();
     UsuarioModel usuarioModel = new UsuarioModel();
     ArrayList<UsuarioModel> listaUsuarioModel = new ArrayList<>();
-    SessaoUsuarioModel sessaoUsuarioModel = new SessaoUsuarioModel();
+    SessaoUsuarioModel sessaoUSuarioModel = new SessaoUsuarioModel();
     int x, y;
 
     /**

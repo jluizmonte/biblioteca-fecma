@@ -4,7 +4,7 @@ package com.biblioteca.model;
  *
  * @author Instrutores
  */
-public class SessaoUSuarioModel {
+public class SessaoUsuarioModel {
 
     public static int codigoUsuario=1;
     public static String nomeUsuario="Jhon Doe";

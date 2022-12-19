@@ -1,6 +1,12 @@
 package com.biblioteca.view;
 
+import com.biblioteca.model.LocadorModel;
+import com.biblioteca.service.LocadorService;
 import com.biblioteca.util.MetodosPadrao;
+import java.awt.HeadlessException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -9,6 +15,10 @@ import com.biblioteca.util.MetodosPadrao;
 public class FrmLocador extends javax.swing.JInternalFrame {
 
     MetodosPadrao metodosPadrao = new MetodosPadrao();
+    LocadorModel locadorModel = new LocadorModel();
+    LocadorService locadorService = new LocadorService();
+    ArrayList<LocadorModel> listaLocadorModel = new ArrayList<>();
+    String alterarSalvar;
 
     /**
      * Creates new form FrmLocador
@@ -16,8 +26,9 @@ public class FrmLocador extends javax.swing.JInternalFrame {
     public FrmLocador() {
         setResizable(false);
         initComponents();
-        //  setLocationRelativeTo(null);
-        // modificarTabela();
+        carregarLocador();
+        carregarLocadorPesquisa();
+        limparCampos();
     }
 
     /**
@@ -47,12 +58,12 @@ public class FrmLocador extends javax.swing.JInternalFrame {
         jtfBairro = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jtfCidade = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jtfEmail = new javax.swing.JTextField();
+        jtfTelefone = new javax.swing.JFormattedTextField();
         jbSalvar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jtfUf = new javax.swing.JTextField();
+        jtfCep = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtLocPesquisa = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -118,18 +129,23 @@ public class FrmLocador extends javax.swing.JInternalFrame {
 
         jtfCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTextField9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-####")));
+            jtfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jbSalvar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jbSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/salvar.png"))); // NOI18N
         jbSalvar.setText("Salvar");
+        jbSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalvarActionPerformed(evt);
+            }
+        });
 
         jbCancelar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/cancelar.png"))); // NOI18N
@@ -140,14 +156,14 @@ public class FrmLocador extends javax.swing.JInternalFrame {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfUf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         try {
-            jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###-###")));
+            jtfCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -159,14 +175,14 @@ public class FrmLocador extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jbCancelar)))
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbSalvar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -191,10 +207,10 @@ public class FrmLocador extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
-                                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfUf, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -228,8 +244,8 @@ public class FrmLocador extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
@@ -238,8 +254,8 @@ public class FrmLocador extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10)))
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbSalvar)
@@ -264,6 +280,11 @@ public class FrmLocador extends javax.swing.JInternalFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jtLocPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtLocPesquisaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jtLocPesquisa);
@@ -304,6 +325,11 @@ public class FrmLocador extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtLocador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtLocadorMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtLocador);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -334,19 +360,197 @@ public class FrmLocador extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        if (metodosPadrao.menuPergunta("Cadastro cancelado\n deseja fechar a janela?", "Fechar a janela?")) {
-            this.dispose();
-        } else {
-        }
-
+        jbSalvar.setText("Salvar");
+        limparCampos();
     }//GEN-LAST:event_jbCancelarActionPerformed
-    private void limparCampos() {
-        jtfNome.setText("");
 
+    private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
+        if (alterarSalvar.equals("salvar")) {
+            this.salvarLocador();
+            Object[] opcoes = {"Sim", "Não"};
+            Object resposta;
+            resposta = JOptionPane.showInputDialog(null, "Deseja salvar outro Locador?", "Salvar Novo?",
+                    JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
+            if (resposta.equals("Sim")) {
+                jtfNome.requestFocus();
+            }
+        } else if (alterarSalvar.equals("alterar")) {
+            this.alterarLocador();
+        }
+        carregarLocador();
+        carregarLocadorPesquisa();
+    }//GEN-LAST:event_jbSalvarActionPerformed
+
+    private void jtLocPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLocPesquisaMouseClicked
+        alterarSalvar = "alterar";
+        jtfNome.requestFocusInWindow();
+        int linha = jtLocPesquisa.getSelectedRow();
+        try {
+            String nomeLocador = (String) jtLocPesquisa.getValueAt(linha, 0);
+            locadorModel = locadorService.getLocadorDAO(nomeLocador);
+            jtfBairro.setText(locadorModel.getBairroLocador());
+            jtfCep.setText(locadorModel.getCepLocador());
+            jtfCidade.setText(locadorModel.getCidadeLocador());
+            jtfEmail.setText(locadorModel.getEmailLocador());
+            jtfNome.setText(locadorModel.getNomeLocador());
+            jtfNumero.setText(locadorModel.getNumeroLocador());
+            jtfRua.setText(locadorModel.getLogradouroLocador());
+            jtfTelefone.setText(locadorModel.getTelefoneLocador());
+            jtfUf.setText(locadorModel.getEstadoLocador());
+            this.alterarLocador();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Código invalido ou nenhum locador selecionado", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jtLocPesquisaMouseClicked
+
+    private void jtLocadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLocadorMouseClicked
+        int linha = jtLocPesquisa.getSelectedRow();
+        String nomeLocador = (String) jtLocPesquisa.getValueAt(linha, 0);
+        // menu de opções para o usuario confirmar a exclusão
+        Object[] opcoes = {"Sim", "Não"};
+        Object resposta;
+        resposta = JOptionPane.showInputDialog(null, "Deseja excluir o Locador?", "Excluir",
+                JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
+        if (resposta.equals("Sim")) {
+            /**
+             * exclui o livro do banco de dados e atualiza a tabela
+             */
+            locadorModel = locadorService.getLocadorDAO(nomeLocador);
+            int codigoLocador = locadorModel.getIdLocador();
+            try {
+                locadorService.excluirLocadorDAO(codigoLocador);
+                JOptionPane.showMessageDialog(this, "Locador excluido com sucesso!", "Atenção",
+                        JOptionPane.WARNING_MESSAGE);
+                carregarLocador();
+                carregarLocadorPesquisa();
+            } catch (HeadlessException e) {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir o locador!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jtLocadorMouseClicked
+
+    private void limparCampos() {
+        jtfBairro.setText("");
+        jtfCep.setText("");
+        jtfCidade.setText("");
+        jtfEmail.setText("");
+        jtfNome.setText("");
+        jtfNumero.setText("");
+        jtfRua.setText("");
+        jtfTelefone.setText("");
+        jtfUf.setText("UF");
+        jtfNome.requestFocus();
+        alterarSalvar = "salvar";
+    }
+
+    public void carregarLocadorPesquisa() {
+        /**
+         * Array que buscará no BD (atraves do Controller) os dados para serem
+         * exibidos na tabela
+         */
+        listaLocadorModel = locadorService.getListaLocadorDAO();
+        DefaultTableModel modelo = (DefaultTableModel) jtLocPesquisa.getModel();
+
+        // Setando a quantidade de linhas que a tabela para não haver duplicação de
+        // dados
+        modelo.setNumRows(0);
+
+        try {
+            // insere os produtos na tabela
+            int cont = listaLocadorModel.size();
+            for (int i = 0; i < cont; i++) {
+                modelo.addRow(new Object[]{
+                    listaLocadorModel.get(i).getNomeLocador(),
+                    listaLocadorModel.get(i).getLogradouroLocador(),
+                    listaLocadorModel.get(i).getTelefoneLocador()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao buscar locadores para preencher a tabela");
+        }
+    }
+
+    public void carregarLocador() {
+        /**
+         * Array que buscará no BD (atraves do Controller) os dados para serem
+         * exibidos na tabela
+         */
+        listaLocadorModel = locadorService.getListaLocadorDAO();
+        DefaultTableModel modelo = (DefaultTableModel) jtLocador.getModel();
+
+        // Setando a quantidade de linhas que a tabela para não haver duplicação de
+        // dados
+        modelo.setNumRows(0);
+        try {
+            // insere os produtos na tabela
+            int cont = listaLocadorModel.size();
+            for (int i = 0; i < cont; i++) {
+                modelo.addRow(
+                        new Object[]{
+                            listaLocadorModel.get(i).getNomeLocador(),
+                            listaLocadorModel.get(i).getLogradouroLocador(),
+                            listaLocadorModel.get(i).getNumeroLocador(),
+                            listaLocadorModel.get(i).getBairroLocador(),
+                            listaLocadorModel.get(i).getCidadeLocador(),
+                            listaLocadorModel.get(i).getEstadoLocador(),
+                            listaLocadorModel.get(i).getCepLocador(),
+                            listaLocadorModel.get(i).getTelefoneLocador(),
+                            listaLocadorModel.get(i).getEmailLocador()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao buscar locadores para preencher a tabela");
+        }
+    }
+
+    private void salvarLocador() {
+        locadorModel.setBairroLocador(jtfBairro.getText().toUpperCase());
+        locadorModel.setCepLocador(jtfCep.getText());
+        locadorModel.setCidadeLocador(jtfCidade.getText().toUpperCase());
+        locadorModel.setEmailLocador(jtfEmail.getText().toUpperCase());
+        locadorModel.setNomeLocador(jtfNome.getText().toUpperCase());
+        locadorModel.setNumeroLocador(jtfNumero.getText());
+        locadorModel.setLogradouroLocador(jtfRua.getText().toUpperCase());
+        locadorModel.setTelefoneLocador(jtfTelefone.getText());
+        locadorModel.setEstadoLocador(jtfUf.getText().toUpperCase());
+        try {
+            if (locadorService.salvarLocadorDAO(locadorModel)) {
+                JOptionPane.showMessageDialog(this, "Locador: " + locadorModel.getNomeLocador() + " cadastrado com sucesso!",
+                        "Atenção", JOptionPane.WARNING_MESSAGE);
+                limparCampos();
+                carregarLocador();
+                carregarLocadorPesquisa();
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar o locador\n" + e.toString(), "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void alterarLocador() {
+        locadorModel.setBairroLocador(jtfBairro.getText().toUpperCase());
+        locadorModel.setCepLocador(jtfCep.getText());
+        locadorModel.setCidadeLocador(jtfCidade.getText().toUpperCase());
+        locadorModel.setEmailLocador(jtfEmail.getText().toUpperCase());
+        locadorModel.setNomeLocador(jtfNome.getText().toUpperCase());
+        locadorModel.setNumeroLocador(jtfNumero.getText());
+        locadorModel.setLogradouroLocador(jtfRua.getText().toUpperCase());
+        locadorModel.setTelefoneLocador(jtfTelefone.getText());
+        locadorModel.setEstadoLocador(jtfUf.getText().toUpperCase());
+        try {
+            locadorService.atualizarLocadorDAO(locadorModel);
+            JOptionPane.showMessageDialog(this, "Locador alterado com sucesso!", "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+            jbSalvar.setText("Salvar");
+            carregarLocadorPesquisa();
+            carregarLocador();
+            limparCampos();
+            this.jbSalvar.setText("Salvar");
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao alterar o locador!", "Erro", JOptionPane.ERROR_MESSAGE);
+
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -363,16 +567,18 @@ public class FrmLocador extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbSalvar;
     private javax.swing.JTable jtLocPesquisa;
     private javax.swing.JTable jtLocador;
     private javax.swing.JTextField jtfBairro;
+    private javax.swing.JFormattedTextField jtfCep;
     private javax.swing.JTextField jtfCidade;
+    private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfRua;
+    private javax.swing.JFormattedTextField jtfTelefone;
+    private javax.swing.JTextField jtfUf;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,7 +2,6 @@ package com.biblioteca.view;
 
 import com.biblioteca.model.LocatarioModel;
 import com.biblioteca.service.LocatarioService;
-import com.biblioteca.util.MetodosPadrao;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -358,6 +357,11 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtLocatario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtLocatarioMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtLocatario);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -410,10 +414,56 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalvarActionPerformed
 
     private void jtLocPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLocPesquisaMouseClicked
-        JOptionPane.showMessageDialog(null, "TESTE");
+        alterarSalvar = "alterar";
+        jtfNome.requestFocusInWindow();
         int linha = jtLocPesquisa.getSelectedRow();
-        String aluno = (String) jtLocPesquisa.getValueAt(linha, 1);
+        try {
+            String nomeLocatario = (String) jtLocPesquisa.getValueAt(linha, 0);
+            locatarioModel = locatarioService.getLocatarioDAO(nomeLocatario);
+
+            jtfBairro.setText(locatarioModel.getBairroLocatario());
+            jtfCep.setText(locatarioModel.getCepLocatario());
+            jtfCidade.setText(locatarioModel.getCidadeLocatario());
+            jtfEmail.setText(locatarioModel.getEmailLocatario());
+            jtfNome.setText(locatarioModel.getNomeLocatario());
+            jtfNumero.setText(locatarioModel.getNumeroLocatario());
+            jtfRua.setText(locatarioModel.getLogradouroLocatario());
+            jtfTelefone.setText(locatarioModel.getTelefoneLocatario());
+            jtfUf.setText(locatarioModel.getEstadoLocatario());
+            jcbStatus.setSelectedItem(locatarioModel.getStatusLocatario());
+            this.alterarLocatario();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Código invalido ou nenhum locatário selecionado", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jtLocPesquisaMouseClicked
+
+    private void jtLocatarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLocatarioMouseClicked
+        int linha = jtLocPesquisa.getSelectedRow();
+        String nomeLocatario = (String) jtLocPesquisa.getValueAt(linha, 0);
+        // menu de opções para o usuario confirmar a exclusão
+        Object[] opcoes = {"Sim", "Não"};
+        Object resposta;
+        resposta = JOptionPane.showInputDialog(null, "Deseja excluir o Locatário?", "Excluir",
+                JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
+        if (resposta.equals("Sim")) {
+            /**
+             * exclui o livro do banco de dados e atualiza a tabela
+             */
+            locatarioModel = locatarioService.getLocatarioDAO(nomeLocatario);
+            int codigoLocatario = locatarioModel.getIdLocatario();
+            try {
+                locatarioService.excluirLocatarioDAO(codigoLocatario);
+                JOptionPane.showMessageDialog(this, "Locatário excluido com sucesso!", "Atenção",
+                        JOptionPane.WARNING_MESSAGE);
+                carregarLocatario();
+                carregarLocatarioPesquisa();
+            } catch (HeadlessException e) {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir o locatário!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jtLocatarioMouseClicked
     private void limparCampos() {
         jtfBairro.setText("");
         jtfCep.setText("");

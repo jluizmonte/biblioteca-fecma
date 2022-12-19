@@ -4,11 +4,56 @@
  */
 package com.biblioteca.view;
 
+import com.biblioteca.model.EmprestimoLivroModel;
+import com.biblioteca.model.EmprestimoLocatarioModel;
+import com.biblioteca.model.EmprestimoModel;
+import com.biblioteca.model.LivroModel;
+import com.biblioteca.model.LocadorModel;
+import com.biblioteca.model.LocatarioModel;
+import com.biblioteca.service.EmprestimoLivroService;
+import com.biblioteca.service.EmprestimoLocatarioService;
+import com.biblioteca.service.EmprestimoService;
+import com.biblioteca.service.LivroService;
+import com.biblioteca.service.LocadorService;
+import com.biblioteca.service.LocatarioService;
+import com.biblioteca.util.GetDateUtil;
+import java.util.ArrayList;
+
 /**
  *
  * @author José Luiz
  */
 public class FrmEmprestimo extends javax.swing.JInternalFrame {
+
+    LocatarioModel locatarioModel = new LocatarioModel();
+    LocatarioService locatarioService = new LocatarioService();
+    ArrayList<LocatarioModel> listaLocatarioModel = new ArrayList<>();
+
+    LocadorModel locadorModel = new LocadorModel();
+    LocadorService locadorService = new LocadorService();
+    ArrayList<LocadorModel> listaLocadorModel = new ArrayList<>();
+
+    LivroModel livroModel = new LivroModel();
+    LivroService livroService = new LivroService();
+    ArrayList<LivroModel> listaLivroModel = new ArrayList<>();
+
+    EmprestimoModel emprestimoModel = new EmprestimoModel();
+    EmprestimoService emprestimoService = new EmprestimoService();
+    ArrayList<EmprestimoModel> listaEmprestimoModel = new ArrayList<>();
+
+    EmprestimoLocatarioModel emprestimoLocatarioModel = new EmprestimoLocatarioModel();
+    EmprestimoLocatarioService emprestimoLocatarioService = new EmprestimoLocatarioService();
+    ArrayList<EmprestimoLocatarioModel> listaEmprestimoLocatarioModel = new ArrayList<>();
+
+    EmprestimoLivroModel emprestimoLivroModel = new EmprestimoLivroModel();
+    EmprestimoLivroService emprestimoLivroService = new EmprestimoLivroService();
+    ArrayList<EmprestimoLivroModel> listaEmprestimoLivroModel = new ArrayList<>();
+
+    EmprestimoLivroModel livrosEmprestimosLivrosModel = new EmprestimoLivroModel();
+    EmprestimoLivroService livrosEmprestimosLivrosService = new EmprestimoLivroService();
+    ArrayList<EmprestimoLivroModel> listaLivrosEmprestimosLivrosModel = new ArrayList<>();
+
+    GetDateUtil getDateUtil = new GetDateUtil();
 
     /**
      * Creates new form FrmEmprestimo

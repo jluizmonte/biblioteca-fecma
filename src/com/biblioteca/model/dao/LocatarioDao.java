@@ -27,8 +27,8 @@ public class LocatarioDao extends ConnectionMySQL implements ILocatario {
                     + "'" + pLocatarioModel.getEstadoLocatario() + "',"
                     + "'" + pLocatarioModel.getCepLocatario() + "',"
                     + "'" + pLocatarioModel.getTelefoneLocatario() + "',"
-                    + "'" + pLocatarioModel.getStatusLocatario() + "',"
-                    + "'" + pLocatarioModel.getEmailLocatario() + "'"
+                    + "'" + pLocatarioModel.getEmailLocatario() + "',"
+                    + "'" + pLocatarioModel.getStatusLocatario() + "'"
                     + ");");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar os dados!",

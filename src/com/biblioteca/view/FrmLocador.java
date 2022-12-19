@@ -12,9 +12,6 @@ public class FrmLocador extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form FrmLocador
-     *
-     * @param parent
-     * @param modal
      */
     public FrmLocador() {
         setResizable(false);
@@ -343,10 +340,10 @@ public class FrmLocador extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jbCancelarActionPerformed
-private void limparCampos(){
-    jtfNome.setText("");
-    
-}
+    private void limparCampos() {
+        jtfNome.setText("");
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;

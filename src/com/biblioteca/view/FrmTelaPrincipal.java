@@ -360,17 +360,24 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         };
         clock.start();
     }
-
     private void setarAcesso() {
         switch (SessaoUsuarioModel.nivelAcesso) {
-            case "LOCADOR":
-                JOptionPane.showMessageDialog(this, "LOCADOR ACESSOU O SISTEMA");
-                break;
             case "ADMINISTRADOR":
-                JOptionPane.showMessageDialog(this, "ADM ACESSOU O SISTEMA");
+                jmiConsultaLocador.setEnabled(true);
+                jmiConsultaLocatario.setEnabled(true);
+                jmiEmprestimo.setEnabled(true);
+                jmiNovoLivro.setEnabled(true);
+                jmiNovoLocador.setEnabled(true);
+                jmiNovoLocatario.setEnabled(true);
                 break;
             default:
-                JOptionPane.showMessageDialog(this, "OK");
+                jmiConsultaLocador.setEnabled(false);
+                jmiConsultaLocatario.setEnabled(false);
+                jmiEmprestimo.setEnabled(false);
+                jmiNovoLivro.setEnabled(false);
+                jmiNovoLocador.setEnabled(false);
+                jmiNovoLocatario.setEnabled(false);
+                break;
         }
     }
 

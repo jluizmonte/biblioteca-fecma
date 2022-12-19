@@ -1,6 +1,15 @@
 package com.biblioteca.view;
 
+import com.biblioteca.model.LocatarioModel;
+import com.biblioteca.service.LocatarioService;
 import com.biblioteca.util.MetodosPadrao;
+import java.awt.HeadlessException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -8,7 +17,10 @@ import com.biblioteca.util.MetodosPadrao;
  */
 public class FrmLocatario extends javax.swing.JInternalFrame {
 
-    MetodosPadrao metodosPadrao = new MetodosPadrao();
+    LocatarioService locatarioService = new LocatarioService();
+    LocatarioModel locatarioModel = new LocatarioModel();
+    ArrayList<LocatarioModel> listaLocatarioModel = new ArrayList<>();
+    String alterarSalvar;
 
     /**
      * Creates new form FrmLocador
@@ -17,8 +29,9 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
     public FrmLocatario() {
         setResizable(false);
         initComponents();
-        //  setLocationRelativeTo(null);
-        // modificarTabela();
+        carregarLocatario();
+        carregarLocatarioPesquisa();
+        limparCampos();
     }
 
     /**
@@ -42,25 +55,25 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        jtfRua = new javax.swing.JTextField();
+        jtfNome = new javax.swing.JTextField();
+        jtfNumero = new javax.swing.JTextField();
+        jtfBairro = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jtfCidade = new javax.swing.JTextField();
+        jtfCep = new javax.swing.JTextField();
+        jtfUf = new javax.swing.JTextField();
+        jtfEmail = new javax.swing.JTextField();
+        jtfTelefone = new javax.swing.JFormattedTextField();
         jbSalvar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbStatus = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtLocPesquisa = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jtLocatario = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -107,36 +120,41 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("E-MAIL:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfRua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfNumero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfBairro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("CIDADE:");
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfUf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTextField9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-####")));
+            jtfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jbSalvar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jbSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/salvar.png"))); // NOI18N
         jbSalvar.setText("Salvar");
+        jbSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalvarActionPerformed(evt);
+            }
+        });
 
         jbCancelar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/cancelar.png"))); // NOI18N
@@ -151,8 +169,8 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("STATUS");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ATIVO", "SUSPENSO", "BLOQUEADO" }));
+        jcbStatus.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ATIVO", "SUSPENSO", "BLOQUEADO" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -167,7 +185,7 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(14, 14, 14)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
                                         .addComponent(jLabel8)))
@@ -175,29 +193,29 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(2, 2, 2)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jtfUf, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel7))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
-                                    .addComponent(jFormattedTextField1)))
+                                    .addComponent(jtfTelefone)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(258, 258, 258)
                                         .addComponent(jLabel4))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jtfRua, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(47, 47, 47)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel5)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel11)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(2, 2, 2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -207,9 +225,9 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbSalvar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel10)
@@ -225,22 +243,22 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(6, 6, 6)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addComponent(jLabel5)
                 .addGap(6, 6, 6)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jLabel11)
                 .addGap(6, 6, 6)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -249,18 +267,18 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                         .addComponent(jLabel9)))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbSalvar)
@@ -294,6 +312,11 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtLocPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtLocPesquisaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtLocPesquisa);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -309,14 +332,14 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Novo Locatário", jPanel2);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jtLocatario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -335,7 +358,7 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jtLocatario);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -365,16 +388,176 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        if (metodosPadrao.menuPergunta("Cadastro cancelado\n deseja fechar a janela?", "Fechar a janela?")) {
-            this.dispose();
-        } else {
-        }
-
+        jbSalvar.setText("Salvar");
+        limparCampos();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
+    private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
+        if (alterarSalvar.equals("salvar")) {
+            this.salvarLocatario();
+            Object[] opcoes = {"Sim", "Não"};
+            Object resposta;
+            resposta = JOptionPane.showInputDialog(null, "Deseja salvar outro Locatário?", "Salvar Novo?",
+                    JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
+            if (resposta.equals("Sim")) {
+                jtfNome.requestFocus();
+            }
+        } else if (alterarSalvar.equals("alterar")) {
+            this.alterarLocatario();
+        }
+        carregarLocatario();
+        carregarLocatarioPesquisa();
+    }//GEN-LAST:event_jbSalvarActionPerformed
+
+    private void jtLocPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLocPesquisaMouseClicked
+        JOptionPane.showMessageDialog(null, "TESTE");
+        int linha = jtLocPesquisa.getSelectedRow();
+        String aluno = (String) jtLocPesquisa.getValueAt(linha, 1);
+    }//GEN-LAST:event_jtLocPesquisaMouseClicked
+    private void limparCampos() {
+        jtfBairro.setText("");
+        jtfCep.setText("");
+        jtfCidade.setText("");
+        jtfEmail.setText("");
+        jtfNome.setText("");
+        jtfNumero.setText("");
+        jtfRua.setText("");
+        jtfTelefone.setText("");
+        jtfUf.setText("PE");
+        jcbStatus.setSelectedItem("ATIVO");
+        jtfNome.requestFocus();
+        this.alterarSalvar = "salvar";
+    }
+
+    private void carregarLocatarioPesquisa() {
+        /**
+         * Array que buscará no BD (atraves do Controller) os dados para serem
+         * exibidos na tabela
+         */
+        listaLocatarioModel = locatarioService.getListaLocatarioDAO();
+        DefaultTableModel modelo = (DefaultTableModel) jtLocPesquisa.getModel();
+
+        // Setando a quantidade de linhas que a tabela para não haver duplicação de
+        // dados
+        modelo.setNumRows(0);
+
+        try {
+            // insere os produtos na tabela
+            int cont = listaLocatarioModel.size();
+            for (int i = 0; i < cont; i++) {
+                modelo.addRow(new Object[]{
+                    listaLocatarioModel.get(i).getIdLocatario(),
+                    listaLocatarioModel.get(i).getNomeLocatario(),
+                    listaLocatarioModel.get(i).getStatusLocatario()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao buscar locatários para preencher a tabela\n" + e.toString());
+        }
+    }
+
+    private void carregarLocatario() {
+        /**
+         * Array que buscará no BD (atraves do Controller) os dados para serem
+         * exibidos na tabela
+         */
+        listaLocatarioModel = locatarioService.getListaLocatarioDAO();
+        DefaultTableModel modelo = (DefaultTableModel) jtLocatario.getModel();
+
+        // Setando a quantidade de linhas que a tabela para não haver duplicação de
+        // dados
+        modelo.setNumRows(0);
+
+        try {
+            // insere os produtos na tabela
+            int cont = listaLocatarioModel.size();
+            for (int i = 0; i < cont; i++) {
+                modelo.addRow(new Object[]{
+                    listaLocatarioModel.get(i).getNomeLocatario(),
+                    listaLocatarioModel.get(i).getLogradouroLocatario(),
+                    listaLocatarioModel.get(i).getNumeroLocatario(),
+                    listaLocatarioModel.get(i).getBairroLocatario(),
+                    listaLocatarioModel.get(i).getCidadeLocatario(),
+                    listaLocatarioModel.get(i).getEstadoLocatario(),
+                    listaLocatarioModel.get(i).getCepLocatario(),
+                    listaLocatarioModel.get(i).getTelefoneLocatario(),
+                    listaLocatarioModel.get(i).getEmailLocatario(),
+                    listaLocatarioModel.get(i).getStatusLocatario()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao buscar locadores para preencher a tabela\n" + e.toString());
+        }
+    }
+
+    private void salvarLocatario() {
+        locatarioModel.setBairroLocatario(jtfBairro.getText().toUpperCase());
+        locatarioModel.setCepLocatario(jtfCep.getText());
+        locatarioModel.setCidadeLocatario(jtfCidade.getText().toUpperCase());
+        locatarioModel.setEmailLocatario(jtfEmail.getText().toUpperCase());
+        locatarioModel.setNomeLocatario(jtfNome.getText().toUpperCase());
+        locatarioModel.setNumeroLocatario(jtfNumero.getText());
+        locatarioModel.setLogradouroLocatario(jtfRua.getText().toUpperCase());
+        locatarioModel.setTelefoneLocatario(jtfTelefone.getText());
+        locatarioModel.setEstadoLocatario(jtfUf.getText().toUpperCase());
+        locatarioModel.setStatusLocatario(jcbStatus.getSelectedItem().toString());
+        try {
+            if (locatarioService.salvarLocatarioDAO(locatarioModel)) {
+                JOptionPane.showMessageDialog(this,
+                        "Locatário: " + locatarioModel.getNomeLocatario() + " cadastrado com sucesso!", "Atenção",
+                        JOptionPane.WARNING_MESSAGE);
+                limparCampos();
+                carregarLocatario();
+                carregarLocatarioPesquisa();
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar o locatário\n" + e.toString(), "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+
+    private void alterarLocatario() {
+        locatarioModel.setBairroLocatario(jtfBairro.getText().toUpperCase());
+        locatarioModel.setCepLocatario(jtfCep.getText());
+        locatarioModel.setCidadeLocatario(jtfCidade.getText().toUpperCase());
+        locatarioModel.setEmailLocatario(jtfEmail.getText().toUpperCase());
+        locatarioModel.setNomeLocatario(jtfNome.getText().toUpperCase());
+        locatarioModel.setNumeroLocatario(jtfNumero.getText());
+        locatarioModel.setLogradouroLocatario(jtfRua.getText().toUpperCase());
+        locatarioModel.setTelefoneLocatario(jtfTelefone.getText());
+        locatarioModel.setEstadoLocatario(jtfUf.getText().toUpperCase());
+        locatarioModel.setStatusLocatario(jcbStatus.getSelectedItem().toString());
+
+        try {
+            locatarioService.atualizarLocatarioDAO(locatarioModel);
+            JOptionPane.showMessageDialog(this, "Locatário alterado com sucesso!", "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+            jbSalvar.setText("Salvar");
+            carregarLocatarioPesquisa();
+            carregarLocatario();
+            limparCampos();
+            this.jbSalvar.setText("Salvar");
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao alterar o locatário!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void pesquisaLocatario() {
+        try {
+            DefaultTableModel modelo = (DefaultTableModel) this.jtLocPesquisa.getModel();
+            final TableRowSorter<TableModel> classificador = new TableRowSorter<>(modelo);
+            this.jtLocPesquisa.setRowSorter(classificador);
+            String texto = jtfNome.getText().toUpperCase();
+            classificador.setRowFilter(RowFilter.regexFilter(texto, 1));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao pesquisar o locatário!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    //    private void corLinhaTabela() {
+//        ColorirLinhaLocatario colorirLinhas = new ColorirLinhaLocatario(10);
+//        jtLocatario.getColumnModel().getColumn(10).setCellRenderer(colorirLinhas);
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -392,17 +575,19 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbSalvar;
+    private javax.swing.JComboBox<String> jcbStatus;
     private javax.swing.JTable jtLocPesquisa;
+    private javax.swing.JTable jtLocatario;
+    private javax.swing.JTextField jtfBairro;
+    private javax.swing.JTextField jtfCep;
+    private javax.swing.JTextField jtfCidade;
+    private javax.swing.JTextField jtfEmail;
+    private javax.swing.JTextField jtfNome;
+    private javax.swing.JTextField jtfNumero;
+    private javax.swing.JTextField jtfRua;
+    private javax.swing.JFormattedTextField jtfTelefone;
+    private javax.swing.JTextField jtfUf;
     // End of variables declaration//GEN-END:variables
 }

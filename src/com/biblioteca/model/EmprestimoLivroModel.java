@@ -11,9 +11,6 @@ public class EmprestimoLivroModel {
     private int idEmprestimo;
     private int quantidadeEmprestimo;
 
-    public void teste(){
-        
-    }
     public int getIdEmprestimoLivro() {
         return idEmprestimoLivro;
     }

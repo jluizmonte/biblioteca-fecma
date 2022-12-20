@@ -40,9 +40,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
     EmprestimoModel emprestimoModel = new EmprestimoModel();
     EmprestimoService emprestimoService = new EmprestimoService();
-    ArrayList<EmprestimoModel> listaEmprestimoModel = new ArrayList<>();
 
-    EmprestimoLocatarioModel emprestimoLocatarioModel = new EmprestimoLocatarioModel();
     EmprestimoLocatarioService emprestimoLocatarioService = new EmprestimoLocatarioService();
     ArrayList<EmprestimoLocatarioModel> listaEmprestimoLocatarioModel = new ArrayList<>();
 
@@ -50,7 +48,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     EmprestimoLivroService emprestimoLivroService = new EmprestimoLivroService();
     ArrayList<EmprestimoLivroModel> listaEmprestimoLivroModel = new ArrayList<>();
 
-    LivrosEmprestimosLivrosModel livrosEmprestimosLivrosModel = new LivrosEmprestimosLivrosModel();
     LivrosEmprestimosLivrosService livrosEmprestimosLivrosService = new LivrosEmprestimosLivrosService();
     ArrayList<LivrosEmprestimosLivrosModel> listaLivrosEmprestimosLivrosModel = new ArrayList<>();
 
@@ -60,7 +57,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
      * Creates new form FrmEmprestimo
      */
     public FrmEmprestimo() {
-          initComponents();
+        initComponents();
         jlCategoria.setText("ROMANCE");
         setarData();
         listarLocatarios();
@@ -545,7 +542,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         listarLivros();
         carregarEmprestimo();
         carregarLivroDevolucao();
-        listaEmprestimoModel = new ArrayList<>();
+        new ArrayList<>();
     }//GEN-LAST:event_jbEmprestarActionPerformed
 
     private void jlAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAdicionarMouseClicked
@@ -606,11 +603,9 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     private void setarData() {
         jtfDataEmprestimo.setText(getDateUtil.getDateTime());
         jtfDataDevolucao.setText(getDateUtil.getDateTimeMonth());
-
     }
 
     private void listarLocatarios() {
-
         try {
             listaLocatarioModel = locatarioService.getListaLocatarioDAO();
             jcbLocatario.removeAllItems();
@@ -624,7 +619,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     }
 
     private void listarLocadores() {
-
         try {
             listaLocadorModel = locadorService.getListaLocadorDAO();
             jcbLocador.removeAllItems();

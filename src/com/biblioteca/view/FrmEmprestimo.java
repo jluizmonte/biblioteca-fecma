@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package com.biblioteca.view;
 
 import com.biblioteca.model.EmprestimoLivroModel;
@@ -18,6 +14,8 @@ import com.biblioteca.service.LocadorService;
 import com.biblioteca.service.LocatarioService;
 import com.biblioteca.util.GetDateUtil;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -100,12 +98,12 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jbEmprestar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtListarEmprestimo = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jtDevolucao = new javax.swing.JTable();
+        jbDevolver = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -141,6 +139,15 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
         jcbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jcbTitulo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LIVRO" }));
+        jcbTitulo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                jcbTituloPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         jlQtde.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlQtde.setForeground(new java.awt.Color(255, 255, 255));
@@ -199,6 +206,11 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jlAdicionar.setForeground(new java.awt.Color(255, 255, 255));
         jlAdicionar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlAdicionar.setText("ADICIONAR");
+        jlAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlAdicionarMouseClicked(evt);
+            }
+        });
 
         jtAdicionarEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -234,12 +246,27 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/cancelar.png"))); // NOI18N
         jbCancelar.setText("CANCELAR");
+        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarActionPerformed(evt);
+            }
+        });
 
         jbRemoverItens.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/lixeira.png"))); // NOI18N
         jbRemoverItens.setText("REMOVER ITENS");
+        jbRemoverItens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbRemoverItensActionPerformed(evt);
+            }
+        });
 
         jbEmprestar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/emprestar.png"))); // NOI18N
         jbEmprestar.setText("EMRESTAR");
+        jbEmprestar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEmprestarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -364,7 +391,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
         jPanel2.setBackground(new java.awt.Color(28, 89, 124));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtListarEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -380,15 +407,20 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
+        jtListarEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtListarEmprestimoMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jtListarEmprestimo);
+        if (jtListarEmprestimo.getColumnModel().getColumnCount() > 0) {
+            jtListarEmprestimo.getColumnModel().getColumn(0).setResizable(false);
+            jtListarEmprestimo.getColumnModel().getColumn(1).setResizable(false);
+            jtListarEmprestimo.getColumnModel().getColumn(2).setResizable(false);
+            jtListarEmprestimo.getColumnModel().getColumn(3).setResizable(false);
+            jtListarEmprestimo.getColumnModel().getColumn(4).setResizable(false);
+            jtListarEmprestimo.getColumnModel().getColumn(5).setResizable(false);
+            jtListarEmprestimo.getColumnModel().getColumn(6).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -412,7 +444,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("SELECIONE O EMPRÉSTIMO NA TABELA E CLIQUE EM FAZER DEVOLUÇÃO");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jtDevolucao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -423,10 +455,15 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(jtDevolucao);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/devolver.png"))); // NOI18N
-        jButton1.setText("FAZER DEVOLUÇÃO");
+        jbDevolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/devolver.png"))); // NOI18N
+        jbDevolver.setText("FAZER DEVOLUÇÃO");
+        jbDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDevolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -444,7 +481,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                         .addGap(188, 188, 188))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jbDevolver)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -454,7 +491,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jbDevolver)
                 .addContainerGap())
         );
 
@@ -474,9 +511,400 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        corLinhaTabela();
+        setarData();
+        limparCampos();
+        listarLocatarios();
+        listarLocadores();
+        listarLivros();
+        carregarEmprestimo();
+        carregarLivroDevolucao();
+        habilitarDesabilitarCampos(false);
+        jbNovo.setEnabled(true);
+    }//GEN-LAST:event_jbCancelarActionPerformed
 
+    private void jbRemoverItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRemoverItensActionPerformed
+         int linha = jtEmprestimoLivro.getSelectedRow();
+        DefaultTableModel modelo = (DefaultTableModel) jtEmprestimoLivro.getModel();
+        modelo.removeRow(linha);
+    }//GEN-LAST:event_jbRemoverItensActionPerformed
+
+    private void jbEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEmprestarActionPerformed
+       liberarEmprestimo();
+        jbNovo.setEnabled(true);
+        habilitarDesabilitarCampos(false);
+        limparCampos();
+        listarLocatarios();
+        listarLocadores();
+        listarLivros();
+        carregarEmprestimo();
+        carregarLivroDevolucao();
+        listaEmprestimoModel = new ArrayList<>();
+    }//GEN-LAST:event_jbEmprestarActionPerformed
+
+    private void jlAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAdicionarMouseClicked
+       adicionarLivroTabela();
+    }//GEN-LAST:event_jlAdicionarMouseClicked
+
+    private void jbDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDevolverActionPerformed
+        rivate void jbDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {
+        Object[] opcoes = {"Sim", "Não"};
+        Object resposta;
+        resposta = JOptionPane.showInputDialog(null, "Registrar devolução do(s) livro(s)", "Registrar?",
+                JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
+        if (resposta.equals("Sim")) {
+            int linha = jtDevolucaoLivro.getSelectedRow();
+            int codigoEmprestimo = (int) jtDevolucaoLivro.getValueAt(linha, 0);
+
+            listaLivrosEmprestimosLivrosModel = livrosEmprestimosLivrosService
+                    .getListaLivrosVendasLivrosDAO(codigoEmprestimo);
+
+            emprestimoModel = emprestimoService.getEmprestimoDAO(codigoEmprestimo);
+            for (int i = 0; i < listaLivrosEmprestimosLivrosModel.size(); i++) {
+
+                livroModel = new LivroModel();
+                emprestimoLivroModel = new EmprestimoLivroModel();
+
+                livroModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
+                livroModel.setQuantidadeLivro(
+                        (listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getQuantidadeLivro()
+                        + listaLivrosEmprestimosLivrosModel.get(i).getEmprestimoLivroModel()
+                                .getQuantidadeEmprestimo()));
+
+                emprestimoModel.setStatus("INATIVO");
+                emprestimoModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
+                emprestimoModel.setDataDevolucao(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 4)));
+                emprestimoModel.setDataEmprestimo(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 3)));
+
+                livroModel.setQuantidadeLivro(1);
+                listaLivroModel.add(livroModel);
+            }
+
+            try {
+                livroService.alterarEstoqueLivroDAO(listaLivroModel);
+                emprestimoService.atualizarEmprestimoDAO(emprestimoModel);
+                JOptionPane.showMessageDialog(this, "Livro devolvido com sucesso!", "Atenção",
+                        JOptionPane.WARNING_MESSAGE);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Erro ao registrar a devolução", "Erro", JOptionPane.ERROR_MESSAGE);
+                LogModel.logClass = this.getClass().getName();
+                new LogCat().writeFile(String.valueOf(e));
+            }
+    }//GEN-LAST:event_jbDevolverActionPerformed
+
+    private void jtListarEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListarEmprestimoMouseClicked
+        // TODO add your handling code here: excluir
+    }//GEN-LAST:event_jtListarEmprestimoMouseClicked
+
+    private void jcbTituloPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jcbTituloPopupMenuWillBecomeInvisible
+        if (jcbTitulo.isVisible()) {
+            exibirQuantidadeLivro();
+        }
+    }//GEN-LAST:event_jcbTituloPopupMenuWillBecomeInvisible
+
+ private void listarLocatarios() {
+
+        try {
+            listaLocatarioModel = locatarioService.getListaLocatarioDAO();
+            jcbLocatario.removeAllItems();
+            int cont = listaLocatarioModel.size();
+            for (int i = 0; i < cont; i++) {
+                jcbLocatario.addItem(listaLocatarioModel.get(i).getNome());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar os locatários", "Erro", JOptionPane.ERROR);
+            LogModel.logClass = this.getClass().getName();
+            new LogCat().writeFile(String.valueOf(e));
+        }
+    }
+
+    private void listarLocadores() {
+
+        try {
+            listaLocadorModel = locadorService.getListaLocadorDAO();
+            jcbLocador.removeAllItems();
+            int cont = listaLocadorModel.size();
+            for (int i = 0; i < cont; i++) {
+                jcbLocador.addItem(listaLocadorModel.get(i).getNome());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar os locadores", "Erro", JOptionPane.ERROR);
+            LogModel.logClass = this.getClass().getName();
+            new LogCat().writeFile(String.valueOf(e));
+        }
+    }
+
+    private void listarLivros() {
+        try {
+            listaLivroModel = livroService.getListaLivroDAO();
+            jcbLivro.removeAllItems();
+            int cont = listaLivroModel.size();
+            for (int i = 0; i < cont; i++) {
+                if (listaLivroModel.get(i).getQuantidadeLivro() > 0) {
+                    if (listaLivroModel.get(i).getTipoLivro().equals("EMPRÉSTIMO")) {
+                        jcbLivro.addItem(listaLivroModel.get(i).getTitulo());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar os livros", "Erro", JOptionPane.ERROR);
+            LogModel.logClass = this.getClass().getName();
+            new LogCat().writeFile(String.valueOf(e));
+        }
+    }
+
+    private void preencherCampos() {
+        livroModel = livroService.getLivroDAO(jcbLivro.getSelectedItem().toString());
+        jlQuantidade.setText(String.valueOf(livroModel.getQuantidadeLivro()));
+        jtfAutor.setText(String.valueOf(livroModel.getAutor()));
+        jlCategoria.setText(String.valueOf(livroModel.getCategoria()));
+    }
+
+    private void carregarEmprestimo() {
+        /**
+         * Array que buscará no BD (atraves do Controller) os dados para serem
+         * exibidos na tabela
+         */
+        DefaultTableModel modelo = (DefaultTableModel) jtEmprestimo.getModel();
+        listaEmprestimoLocatarioModel = emprestimoLocatarioService.getListaEmprestimosLocatarioDAO();
+        // Setando a quantidade de linhas que a tabela para não haver duplicação de
+        // dados
+        modelo.setNumRows(0);
+
+        try {
+            // insere os produtos na tabela
+            int cont = listaEmprestimoLocatarioModel.size();
+            for (int i = 0; i < cont; i++) {
+                modelo.addRow(
+                        new Object[]{listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getIdEmprestimo(),
+                            listaEmprestimoLocatarioModel.get(i).getLivroModel().getTitulo(),
+                            listaEmprestimoLocatarioModel.get(i).getLocadorModel().getNome(),
+                            listaEmprestimoLocatarioModel.get(i).getLocatarioModel().getNome(),
+                            listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataEmprestimo(),
+                            listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataDevolucao(),
+                            listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getStatus()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao buscar livros para preencher a tabela\n" + e.toString());
+            LogModel.logClass = this.getClass().getName();
+            new LogCat().writeFile(String.valueOf(e));
+        }
+    }
+
+    private void exibirQuantidadeLivro() {
+        jlQuantidade.setEnabled(true);
+        jlCategoria.setEnabled(true);
+        jtfAutor.setEnabled(true);
+
+        livroModel = livroService.getLivroDAO(jcbLivro.getSelectedItem().toString());
+
+        jlQuantidade.setText(String.valueOf(livroModel.getQuantidadeLivro()));
+        jlCategoria.setText(livroModel.getCategoria());
+        jtfAutor.setText(livroModel.getAutor());
+
+    }
+
+    private void setarData() {
+        jtfDataEmprestimo.setText(getDateUtil.getDateTime());
+        jtfDataDevolucao.setText(getDateUtil.getDateTimeMonth());
+
+    }
+
+    private void habilitarDesabilitarCampos(boolean condicao) {
+        jtfAutor.setEnabled(condicao);
+        jtfDataDevolucao.setEnabled(condicao);
+        jtfDataEmprestimo.setEnabled(condicao);
+        jcbLivro.setEnabled(condicao);
+        jcbLocador.setEnabled(condicao);
+        jcbLocatario.setEnabled(condicao);
+        jbEmprestar.setEnabled(condicao);
+        jlCategoria.setEnabled(condicao);
+        jlQuantidade.setEnabled(condicao);
+        jbAdicionar.setEnabled(condicao);
+        jbCancelar.setEnabled(condicao);
+        jbEmprestar.setEnabled(condicao);
+    }
+
+    private void limparCampos() {
+        jtfAutor1.setText("");
+        jtfAutor2.setText("");
+        jlCategoria.setText("ROMANCE");
+        jlQtde.setText("0");
+        DefaultTableModel modelo = (DefaultTableModel) jtEmprestimoLivro.getModel();
+        modelo.setNumRows(0);
+    }
+
+    private void adicionarLivroTabela() {
+        @SuppressWarnings("unused")
+        int codigoLivro, codigoLocador, codigoLocatario, codigoEmprestimo, quantidade = 0;
+
+        // pegar o id do locador
+        locadorModel = locadorService.getLocadorDAO(jcbLocador.getSelectedItem().toString());
+        codigoLocador = locadorModel.getIdLocador();
+
+        // pegar o id do locatario
+        locatarioModel = locatarioService.getLocatarioDAO(jcbLocatario.getSelectedItem().toString());
+        codigoLocatario = locatarioModel.getIdLocatario();
+
+        // pegar o id do livro
+        livroModel = livroService.getLivroDAO(jcbLivro.getSelectedItem().toString());
+        codigoLivro = livroModel.getIdLivro();
+
+        if (jlQuantidade.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Você deve inserir a quantidade de livros!", "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            livroModel = livroService.getLivroDAO(codigoLivro);
+            locadorModel = locadorService.getLocadorDAO(codigoLocador);
+            locatarioModel = locatarioService.getLocatarioDAO(codigoLocatario);
+
+            quantidade = livroModel.getQuantidadeLivro();
+            if (quantidade > 1) {
+                quantidade = Integer.parseInt((JOptionPane.showInputDialog(this,
+                        "Quantas unidades emprestar deste livro?", "Quantidade", JOptionPane.QUESTION_MESSAGE)));
+            } else {
+                quantidade = Integer.parseInt(jlQuantidade.getText());
+            }
+            String dataDevolucao = jtfDataDevolucao.getText();
+            String dataEmprestimo = jtfDataEmprestimo.getText();
+
+            // adiciona uma linha na tabela
+            DefaultTableModel modelo = (DefaultTableModel) jtEmprestimoLivro.getModel();
+            int cont = 0;
+            for (int i = 0; i < cont; i++) {
+                modelo.setNumRows(0);
+            }
+            modelo.addRow(new Object[]{livroModel.getIdLivro(), livroModel.getTitulo(), locadorModel.getNome(),
+                locatarioModel.getNome(), dataEmprestimo, dataDevolucao, quantidade});
+        }
+    }
+
+    private void carregarLivroDevolucao() {
+        DefaultTableModel modelo = (DefaultTableModel) jtDevolucaoLivro.getModel();
+        // Setando a quantidade de linhas que a tabela para não haver duplicação de
+        // dados
+        modelo.setNumRows(0);
+        try {
+            // insere os produtos na tabela
+            int cont = listaEmprestimoLocatarioModel.size();
+            for (int i = 0; i < cont; i++) {
+                if (listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getStatus().equals("ATIVO")) {
+                    modelo.addRow(
+                            new Object[]{listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getIdEmprestimo(),
+                                listaEmprestimoLocatarioModel.get(i).getLivroModel().getTitulo(),
+                                listaEmprestimoLocatarioModel.get(i).getLocatarioModel().getNome(),
+                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataEmprestimo(),
+                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataDevolucao()});
+                }
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao buscar livros para preencher a tabela\n" + e.toString());
+            LogModel.logClass = this.getClass().getName();
+            new LogCat().writeFile(String.valueOf(e));
+        }
+    }
+
+    /**
+     * verifica o status antes de liberar para ele o emprestimo de um
+     * determinado livro.
+     */
+    public void liberarEmprestimo() {
+        String statusLocatario = "";
+        locatarioModel = locatarioService.getLocatarioDAO(jcbLocatario.getSelectedItem().toString());
+        statusLocatario = locatarioModel.getStatus();
+        if (statusLocatario.equals("SUSPENSO") || statusLocatario.equals("BLOQUEADO")) {
+            JOptionPane.showMessageDialog(this,
+                    "O locatário está com o cadastro " + statusLocatario + ".\n"
+                    + "Procure o responsável pela livraria para mais informações.\n"
+                    + "O empréstimo não foi realizado.",
+                    "Atenção locatário " + statusLocatario + "!", JOptionPane.WARNING_MESSAGE);
+            habilitarDesabilitarCampos(false);
+        } else {
+            realizarEmprestimo();
+        }
+    }
+
+    public void realizarEmprestimo() {
+        @SuppressWarnings("unused")
+        int codigoLivro = 0;
+        int codigoLocador, codigoLocatario = 0;
+        int codigoProduto = 0;
+        int codigoEmprestimo = 0;
+        // int quantidade = 0;
+        String status = "ATIVO";
+        listaEmprestimoLivroModel = new ArrayList<>();
+
+        // pegar o id do locador
+        locadorModel = locadorService.getLocadorDAO(jcbLocador.getSelectedItem().toString());
+        codigoLocador = locadorModel.getIdLocador();
+
+        // pegar o id do locatario
+        locatarioModel = locatarioService.getLocatarioDAO(jcbLocatario.getSelectedItem().toString());
+        codigoLocatario = locatarioModel.getIdLocatario();
+
+        // pegar o id do livro
+        livroModel = livroService.getLivroDAO(jcbLivro.getSelectedItem().toString());
+        codigoLivro = livroModel.getIdLivro();
+
+        int cont = jtEmprestimoLivro.getRowCount();
+        for (int i = 0; i < cont; i++) {
+            livroModel = new LivroModel();
+            emprestimoModel = new EmprestimoModel();
+
+            livroModel = livroService.getLivroDAO(codigoProduto);
+            emprestimoLivroModel = new EmprestimoLivroModel();
+            codigoProduto = (int) jtEmprestimoLivro.getValueAt(i, 0);
+
+            // emprestimo
+            emprestimoModel.setIdLocador(codigoLocador);
+            emprestimoModel.setIdLocatario(codigoLocatario);
+            emprestimoModel.setIdEmprestimo(codigoProduto);
+            emprestimoModel.setIdLivro(codigoProduto);
+            emprestimoModel.setQuantidadeEmprestimo(Integer.parseInt(jtEmprestimoLivro.getValueAt(i, 6).toString()));
+            emprestimoModel.setStatus(status);
+            emprestimoModel.setDataDevolucao(jtEmprestimoLivro.getValueAt(i, 5).toString());
+            emprestimoModel.setDataEmprestimo(jtEmprestimoLivro.getValueAt(i, 4).toString());
+
+            codigoEmprestimo = emprestimoService.salvarEmprestimoDAO(emprestimoModel);
+            if (codigoEmprestimo > 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Empréstimo registrado com sucesso:\n" + "Locador: " + locadorModel.getNome() + "\n"
+                        + "Locatário: " + locatarioModel.getNome() + "\n" + "Data de Devolução: "
+                        + emprestimoModel.getDataDevolucao() + "\n",
+                        "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao registrar o empréstimo!", "Erro",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+            // emprestimo livro
+            emprestimoLivroModel.setIdEmprestimoLivro(codigoProduto);
+            emprestimoLivroModel.setLivro(codigoProduto);
+            emprestimoLivroModel.setQuantidadeEmprestimo(emprestimoModel.getQuantidadeEmprestimo());
+            emprestimoLivroModel.setEmprestimo(codigoEmprestimo);
+
+            // livro
+            livroModel.setIdLivro(codigoProduto);
+            livroModel.setQuantidadeLivro(livroService.getLivroDAO(codigoProduto).getQuantidadeLivro()
+                    - Integer.parseInt(jtEmprestimoLivro.getValueAt(i, 6).toString()));
+            livroModel.setTitulo(livroService.getLivroDAO(codigoProduto).getTitulo());
+            listaEmprestimoLivroModel.add(emprestimoLivroModel);
+            listaLivroModel.add(livroModel);
+        }
+
+        // salvar os livros do empréstimo
+        if (emprestimoLivroService.salvarEmprestimosLivrosDAO(listaEmprestimoLivroModel)) {
+            // alterar estoque de livros
+            livroService.alterarEstoqueLivroDAO(listaLivroModel);
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar os livros do empréstimo!", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -495,9 +923,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbDevolver;
     private javax.swing.JButton jbEmprestar;
     private javax.swing.JButton jbRemoverItens;
     private javax.swing.JComboBox<String> jcbLocador;
@@ -507,6 +934,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlCategoria;
     private javax.swing.JLabel jlQtde;
     private javax.swing.JTable jtAdicionarEmprestimo;
+    private javax.swing.JTable jtDevolucao;
+    private javax.swing.JTable jtListarEmprestimo;
     private javax.swing.JTextField jtfAutor1;
     private javax.swing.JTextField jtfAutor2;
     private javax.swing.JFormattedTextField jtfDataDevolucao;

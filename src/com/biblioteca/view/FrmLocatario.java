@@ -415,12 +415,12 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
 
     private void jtLocPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLocPesquisaMouseClicked
         alterarSalvar = "alterar";
+        jbSalvar.setText("Alterar");
         jtfNome.requestFocusInWindow();
         int linha = jtLocPesquisa.getSelectedRow();
         try {
             String nomeLocatario = (String) jtLocPesquisa.getValueAt(linha, 0);
             locatarioModel = locatarioService.getLocatarioDAO(nomeLocatario);
-
             jtfBairro.setText(locatarioModel.getBairroLocatario());
             jtfCep.setText(locatarioModel.getCepLocatario());
             jtfCidade.setText(locatarioModel.getCidadeLocatario());
@@ -431,12 +431,10 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
             jtfTelefone.setText(locatarioModel.getTelefoneLocatario());
             jtfUf.setText(locatarioModel.getEstadoLocatario());
             jcbStatus.setSelectedItem(locatarioModel.getStatusLocatario());
-            this.alterarLocatario();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Código invalido ou nenhum locatário selecionado", "Erro",
                     JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_jtLocPesquisaMouseClicked
 
     private void jtLocatarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLocatarioMouseClicked
@@ -477,44 +475,32 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         jcbStatus.setSelectedItem("ATIVO");
         jtfNome.requestFocus();
         this.alterarSalvar = "salvar";
+        jbSalvar.setText("Salvar");
     }
 
     private void carregarLocatarioPesquisa() {
-        /**
-         * Array que buscará no BD (atraves do Controller) os dados para serem
-         * exibidos na tabela
-         */
         listaLocatarioModel = locatarioService.getListaLocatarioDAO();
         DefaultTableModel modelo = (DefaultTableModel) jtLocPesquisa.getModel();
-
-        // Setando a quantidade de linhas que a tabela para não haver duplicação de
-        // dados
         modelo.setNumRows(0);
-
         try {
             // insere os produtos na tabela
             int cont = listaLocatarioModel.size();
             for (int i = 0; i < cont; i++) {
                 modelo.addRow(new Object[]{
-                    listaLocatarioModel.get(i).getIdLocatario(),
                     listaLocatarioModel.get(i).getNomeLocatario(),
-                    listaLocatarioModel.get(i).getStatusLocatario()});
+                    listaLocatarioModel.get(i).getTelefoneLocatario(),
+                    listaLocatarioModel.get(i).getStatusLocatario()
+                });
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao buscar locatários para preencher a tabela\n" + e.toString());
+            JOptionPane.showMessageDialog(this, "Erro ao buscar locatários para preencher a tabela\n"
+                    + e.toString());
         }
     }
 
     private void carregarLocatario() {
-        /**
-         * Array que buscará no BD (atraves do Controller) os dados para serem
-         * exibidos na tabela
-         */
         listaLocatarioModel = locatarioService.getListaLocatarioDAO();
         DefaultTableModel modelo = (DefaultTableModel) jtLocatario.getModel();
-
-        // Setando a quantidade de linhas que a tabela para não haver duplicação de
-        // dados
         modelo.setNumRows(0);
 
         try {
@@ -534,7 +520,7 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                     listaLocatarioModel.get(i).getStatusLocatario()});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao buscar locadores para preencher a tabela\n" + e.toString());
+            JOptionPane.showMessageDialog(this, "Erro ao buscar locatários para preencher a tabela\n" + e.toString());
         }
     }
 
@@ -550,14 +536,13 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         locatarioModel.setEstadoLocatario(jtfUf.getText().toUpperCase());
         locatarioModel.setStatusLocatario(jcbStatus.getSelectedItem().toString());
         try {
-            if (locatarioService.salvarLocatarioDAO(locatarioModel)) {
-                JOptionPane.showMessageDialog(this,
-                        "Locatário: " + locatarioModel.getNomeLocatario() + " cadastrado com sucesso!", "Atenção",
-                        JOptionPane.WARNING_MESSAGE);
-                limparCampos();
-                carregarLocatario();
-                carregarLocatarioPesquisa();
-            }
+            locatarioService.salvarLocatarioDAO(locatarioModel);
+            JOptionPane.showMessageDialog(this,
+                    "Locatário: " + locatarioModel.getNomeLocatario() + " cadastrado com sucesso!", "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+            limparCampos();
+            carregarLocatario();
+            carregarLocatarioPesquisa();
         } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar o locatário\n" + e.toString(), "Erro",
                     JOptionPane.ERROR_MESSAGE);
@@ -586,11 +571,14 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
             carregarLocatario();
             limparCampos();
             this.jbSalvar.setText("Salvar");
+
         } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao alterar o locatário!", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao alterar o locatário!",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    /*
     public void pesquisaLocatario() {
         try {
             DefaultTableModel modelo = (DefaultTableModel) this.jtLocPesquisa.getModel();
@@ -602,11 +590,8 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Erro ao pesquisar o locatário!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+     */
 
-    //    private void corLinhaTabela() {
-//        ColorirLinhaLocatario colorirLinhas = new ColorirLinhaLocatario(10);
-//        jtLocatario.getColumnModel().getColumn(10).setCellRenderer(colorirLinhas);
-//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

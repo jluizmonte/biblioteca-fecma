@@ -74,7 +74,7 @@ public class LocatarioDao extends ConnectionMySQL implements ILocatario {
         LocatarioModel locatarioModel = new LocatarioModel();
         try {
             this.conectar();
-            this.executarSQL("SELECT * FROM tbl_locatario WHERE nome_locador= '" + pLocatarioModel + "'" + ";");
+            this.executarSQL("SELECT * FROM tbl_locatario WHERE nome_locatario= '" + pLocatarioModel + "'" + ";");
 
             while (this.getResultSet().next()) {
                 locatarioModel.setIdLocatario(this.getResultSet().getInt(1));

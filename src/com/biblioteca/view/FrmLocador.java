@@ -397,7 +397,6 @@ public class FrmLocador extends javax.swing.JInternalFrame {
             jtfRua.setText(locadorModel.getLogradouroLocador());
             jtfTelefone.setText(locadorModel.getTelefoneLocador());
             jtfUf.setText(locadorModel.getEstadoLocador());
-            this.alterarLocador();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Código invalido ou nenhum locador selecionado", "Erro",
                     JOptionPane.ERROR_MESSAGE);

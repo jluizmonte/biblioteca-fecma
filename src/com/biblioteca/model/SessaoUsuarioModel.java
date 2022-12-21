@@ -6,9 +6,9 @@ package com.biblioteca.model;
  */
 public class SessaoUsuarioModel {
 
-    public static int codigoUsuario=1;
-    public static String nomeUsuario="Jhon Doe";
-    public static String loginUsuario="jhon";
-    public static String nivelAcesso="LOCADOR";
-    public static String instituicao="NSOFT";
+    public static int codigoUsuario;
+    public static String nomeUsuario;
+    public static String loginUsuario;
+    public static String nivelAcesso;
+    public static String instituicao;
 }

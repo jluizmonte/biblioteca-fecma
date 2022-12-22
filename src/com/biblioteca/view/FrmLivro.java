@@ -365,7 +365,6 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
         jbSalvar.setText("Salvar");
         limparCampos();
-
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
@@ -380,7 +379,6 @@ public class FrmLivro extends javax.swing.JInternalFrame {
 
     private void jtLivroPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLivroPesquisaMouseClicked
         alterarSalvar = "alterar";
-
         int linha = jtLivroPesquisa.getSelectedRow();
         try {
             String tituloLivro = (String) jtLivroPesquisa.getValueAt(linha, 0);
@@ -404,15 +402,11 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     private void jtLivroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLivroMouseClicked
         int linha = jtLivroPesquisa.getSelectedRow();
         String tituloLivro = (String) jtLivroPesquisa.getValueAt(linha, 0);
-        // menu de opções para o usuario confirmar a exclusão
         Object[] opcoes = {"Sim", "Não"};
         Object resposta;
         resposta = JOptionPane.showInputDialog(null, "Deseja excluir o livro?", "Excluir?",
                 JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
         if (resposta.equals("Sim")) {
-            /**
-             * exclui o livro do banco de dados e atualiza a tabela
-             */
             livroModel = livroService.getLivroDAO(tituloLivro);
             int codigoLivro = livroModel.getIdLivro();
             if (livroService.excluirLivroDAO(codigoLivro)) {
@@ -426,23 +420,10 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtLivroMouseClicked
 
-    /**
-     *
-     */
     private void carregarLivrosPesquisa() {
-        /**
-         * Array que buscará no BD (atraves do Controller) os dados para serem
-         * exibidos na tabela
-         */
         listaModelLivro = livroService.getListaLivroDAO();
         DefaultTableModel modelo = (DefaultTableModel) jtLivroPesquisa.getModel();
-
-        /**
-         * Setando a quantidade de linhas que a tabela para não haver duplicação
-         * de dados
-         */
         modelo.setNumRows(0);
-
         try {
             int cont = listaModelLivro.size();
             for (int i = 0; i < cont; i++) {
@@ -456,21 +437,9 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         }
     }
 
-    /**
-     *
-     */
     private void carregarLivros() {
-        /**
-         * Array que buscará no BD (atraves do Controller) os dados para serem
-         * exibidos na tabela
-         */
         listaModelLivro = livroService.getListaLivroDAO();
         DefaultTableModel modeloTabela = (DefaultTableModel) jtLivro.getModel();
-
-        /**
-         * Setando a quantidade de linhas que a tabela para não haver duplicação
-         * de dados
-         */
         modeloTabela.setNumRows(0);
 
         try {

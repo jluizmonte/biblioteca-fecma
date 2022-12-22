@@ -134,6 +134,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         jtfDataCadastro.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         jtfQtde.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jtfQtde.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jcbEstado.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NOVO", "USADO", "OUTRO" }));
@@ -445,7 +446,6 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         try {
             int cont = listaModelLivro.size();
             for (int i = 0; i < cont; i++) {
-
                 modeloTabela.addRow(new Object[]{
                     listaModelLivro.get(i).getTituloLivro(),
                     listaModelLivro.get(i).getAutor1Livro(),

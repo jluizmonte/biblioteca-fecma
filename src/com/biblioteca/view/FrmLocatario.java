@@ -5,10 +5,7 @@ import com.biblioteca.service.LocatarioService;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -401,8 +398,8 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
             this.salvarLocatario();
             Object[] opcoes = {"Sim", "Não"};
             Object resposta;
-            resposta = JOptionPane.showInputDialog(null, "Deseja salvar outro Locatário?", "Salvar Novo?",
-                    JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
+            resposta = JOptionPane.showInputDialog(null, "Deseja salvar outro Locatário?",
+                    "Salvar Novo?", JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
             if (resposta.equals("Sim")) {
                 jtfNome.requestFocus();
             }
@@ -432,23 +429,20 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
             jtfUf.setText(locatarioModel.getEstadoLocatario());
             jcbStatus.setSelectedItem(locatarioModel.getStatusLocatario());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Código invalido ou nenhum locatário selecionado", "Erro",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Código invalido ou nenhum locatário selecionado",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jtLocPesquisaMouseClicked
 
     private void jtLocatarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLocatarioMouseClicked
         int linha = jtLocPesquisa.getSelectedRow();
         String nomeLocatario = (String) jtLocPesquisa.getValueAt(linha, 0);
-        // menu de opções para o usuario confirmar a exclusão
         Object[] opcoes = {"Sim", "Não"};
         Object resposta;
         resposta = JOptionPane.showInputDialog(null, "Deseja excluir o Locatário?", "Excluir",
                 JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
+      
         if (resposta.equals("Sim")) {
-            /**
-             * exclui o livro do banco de dados e atualiza a tabela
-             */
             locatarioModel = locatarioService.getLocatarioDAO(nomeLocatario);
             int codigoLocatario = locatarioModel.getIdLocatario();
             try {

@@ -443,7 +443,7 @@ public class FrmLocador extends javax.swing.JInternalFrame {
         alterarSalvar = "salvar";
     }
 
-    public void carregarLocadorPesquisa() {
+    private void carregarLocadorPesquisa() {
         /**
          * Array que buscará no BD (atraves do Controller) os dados para serem
          * exibidos na tabela
@@ -469,7 +469,7 @@ public class FrmLocador extends javax.swing.JInternalFrame {
         }
     }
 
-    public void carregarLocador() {
+    private void carregarLocador() {
         /**
          * Array que buscará no BD (atraves do Controller) os dados para serem
          * exibidos na tabela

@@ -88,4 +88,12 @@ public class GetDateUtil {
         date = (timepoint.format(fmt));
         return date;
     }
+
+    public String setarDataPadraoUs() {
+        String date = "";
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDateTime timepoint = LocalDateTime.now();
+        date = (timepoint.format(fmt));
+        return date;
+    }
 }

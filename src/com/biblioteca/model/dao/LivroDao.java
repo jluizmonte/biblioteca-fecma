@@ -72,7 +72,7 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
         LivroModel livroModel = new LivroModel();
         try {
             this.conectar();
-            this.executarSQL("SELECT * FROM tbl_livro WHERE livro_titulo = '" + pLivroModel + "'" + ";");
+            this.executarSQL("SELECT * FROM tbl_livro WHERE titulo_livro = '" + pLivroModel + "'" + ";");
             while (this.getResultSet().next()) {
                 livroModel.setIdLivro(this.getResultSet().getInt(1));
                 livroModel.setTituloLivro(this.getResultSet().getString(2));

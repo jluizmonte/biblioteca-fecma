@@ -2,6 +2,7 @@ package com.biblioteca.view;
 
 import com.biblioteca.model.LivroModel;
 import com.biblioteca.service.LivroService;
+import com.biblioteca.util.GetDateUtil;
 import com.biblioteca.util.MetodosPadrao;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
@@ -18,8 +19,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     LivroService livroService = new LivroService();
     ArrayList<LivroModel> listaModelLivro = new ArrayList<>();
     String alterarSalvar;
-    int qtdeLivro = 0;
-    MetodosPadrao metodosPadrao = new MetodosPadrao();
+
 
     /**
      * Creates new form FrmLivro
@@ -401,8 +401,9 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtLivroPesquisaMouseClicked
 
     private void jtLivroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLivroMouseClicked
-        int linha = jtLivroPesquisa.getSelectedRow();
-        String tituloLivro = (String) jtLivroPesquisa.getValueAt(linha, 0);
+        int linha = jtLivro.getSelectedRow();
+        String tituloLivro = (String) jtLivro.getValueAt(linha, 0);
+        
         Object[] opcoes = {"Sim", "Não"};
         Object resposta;
         resposta = JOptionPane.showInputDialog(null, "Deseja excluir o livro?", "Excluir?",
@@ -442,7 +443,6 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         listaModelLivro = livroService.getListaLivroDAO();
         DefaultTableModel modeloTabela = (DefaultTableModel) jtLivro.getModel();
         modeloTabela.setNumRows(0);
-
         try {
             int cont = listaModelLivro.size();
             for (int i = 0; i < cont; i++) {
@@ -473,6 +473,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         jtfGenero.setText("");
         jcbEstado.setSelectedItem("NOVO");
         alterarSalvar = "salvar";
+        jtfDataCadastro.setText(new GetDateUtil().setarDataPadraoUs());
     }
 
     /**
@@ -513,17 +514,17 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         livroModel.setTituloLivro(jtfTitulo.getText().toUpperCase());
         livroModel.setQtdeLivro(Integer.parseInt(jtfQtde.getText()));
         livroModel.setEstadoLivro(jcbEstado.getSelectedItem().toString());
-
-        if (livroService.atualizarLivroDAO(livroModel)) {
-            JOptionPane.showMessageDialog(this, "Livro alterado com sucesso!", "Atenção", JOptionPane.WARNING_MESSAGE);
-            jbSalvar.setText("Salvar");
-            carregarLivrosPesquisa();
-            carregarLivros();
-            limparCampos();
-            this.jbSalvar.setText("Salvar");
-        } else {
+        try {
+            if (livroService.atualizarLivroDAO(livroModel)) {
+                JOptionPane.showMessageDialog(this, "Livro alterado com sucesso!", "Atenção", JOptionPane.WARNING_MESSAGE);
+                jbSalvar.setText("Salvar");
+                carregarLivrosPesquisa();
+                carregarLivros();
+                limparCampos();
+                this.jbSalvar.setText("Salvar");
+            }
+        } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(this, "Erro ao alterar o livro!", "Erro", JOptionPane.ERROR_MESSAGE);
-
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

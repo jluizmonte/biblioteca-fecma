@@ -64,26 +64,26 @@ public class GetDateUtil {
     }
 
     /**
-     * retorna dia, mês e ano atuais
+     * retorna dia, mês e ano atuais no padrão dd-mm-yyyy
      *
      * @return
      */
-    public String getDateTime() {
+    public String setarData() {
         String date = "";
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yy");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime timepoint = LocalDateTime.now();
         date = (timepoint.format(fmt));
         return date;
     }
 
     /**
-     * retorna a data atualizada de 1 mês
+     * retorna a data atualizada de 1 mês no formato dd-mm-yyyy
      *
      * @return
      */
-    public String getDateTimeMonth() {
+    public String setarDataFutura() {
         String date = "";
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yy");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime timepoint = LocalDateTime.now().plusMonths(1);
         date = (timepoint.format(fmt));
         return date;

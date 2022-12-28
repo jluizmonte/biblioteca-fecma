@@ -435,8 +435,8 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtLocPesquisaMouseClicked
 
     private void jtLocatarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLocatarioMouseClicked
-        int linha = jtLocPesquisa.getSelectedRow();
-        String nomeLocatario = (String) jtLocPesquisa.getValueAt(linha, 0);
+        int linha = jtLocatario.getSelectedRow();
+        String nomeLocatario = (String) jtLocatario.getValueAt(linha, 0);
         Object[] opcoes = {"Sim", "Não"};
         Object resposta;
         resposta = JOptionPane.showInputDialog(null, "Deseja excluir o Locatário?", "Excluir",

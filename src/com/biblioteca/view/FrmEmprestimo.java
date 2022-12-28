@@ -62,7 +62,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         setarData();
         listarLocatarios();
         listarLocadores();
-        listarLivros();
+        limparCampos();
         carregarEmprestimo();
         carregarLivroDevolucao();
     }
@@ -85,7 +85,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jtfAutor1 = new javax.swing.JTextField();
         jtfAutor2 = new javax.swing.JTextField();
-        jcbTitulo = new javax.swing.JComboBox<String>();
+        jcbTitulo = new javax.swing.JComboBox<>();
         jlQuantidade = new javax.swing.JLabel();
         jlCategoria = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -93,8 +93,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jcbLocador = new javax.swing.JComboBox<String>();
-        jcbLocatario = new javax.swing.JComboBox<String>();
+        jcbLocador = new javax.swing.JComboBox<>();
+        jcbLocatario = new javax.swing.JComboBox<>();
         jtfDataEmprestimo = new javax.swing.JFormattedTextField();
         jtfDataDevolucao = new javax.swing.JFormattedTextField();
         jlAdicionar = new javax.swing.JLabel();
@@ -138,14 +138,16 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("2° AUTOR");
 
-        jtfAutor1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtfAutor1.setForeground(new java.awt.Color(255, 255, 255));
+        jtfAutor1.setEditable(false);
+        jtfAutor1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jtfAutor1.setForeground(new java.awt.Color(0, 0, 0));
 
-        jtfAutor2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtfAutor2.setForeground(new java.awt.Color(255, 255, 255));
+        jtfAutor2.setEditable(false);
+        jtfAutor2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jtfAutor2.setForeground(new java.awt.Color(0, 0, 0));
 
         jcbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jcbTitulo.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "SELECIONE UM LIVRO" }));
+        jcbTitulo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LIVRO" }));
         jcbTitulo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -153,6 +155,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                 jcbTituloPopupMenuWillBecomeInvisible(evt);
             }
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jcbTituloPopupMenuWillBecomeVisible(evt);
             }
         });
 
@@ -186,10 +189,10 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jLabel11.setText("DEVOLUÇÃO");
 
         jcbLocador.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jcbLocador.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "SELECIONE UM LOCADOR" }));
+        jcbLocador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LOCADOR" }));
 
         jcbLocatario.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jcbLocatario.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "SELECIONE UM LOCATÁRIO" }));
+        jcbLocatario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LOCATÁRIO" }));
 
         try {
             jtfDataEmprestimo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
@@ -519,13 +522,12 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        setarData();
-        limparCampos();
         listarLocatarios();
         listarLocadores();
         listarLivros();
         carregarEmprestimo();
         carregarLivroDevolucao();
+        limparCampos();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jbRemoverItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRemoverItensActionPerformed
@@ -542,7 +544,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         listarLivros();
         carregarEmprestimo();
         carregarLivroDevolucao();
-        new ArrayList<>();
     }//GEN-LAST:event_jbEmprestarActionPerformed
 
     private void jlAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAdicionarMouseClicked
@@ -597,12 +598,17 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
     private void jcbTituloPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jcbTituloPopupMenuWillBecomeInvisible
         if (jcbTitulo.isVisible()) {
-            exibirQuantidadeLivro();
+            preencherCampos();
         }
     }//GEN-LAST:event_jcbTituloPopupMenuWillBecomeInvisible
+
+    private void jcbTituloPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jcbTituloPopupMenuWillBecomeVisible
+        listarLivros();
+    }//GEN-LAST:event_jcbTituloPopupMenuWillBecomeVisible
+
     private void setarData() {
-        jtfDataEmprestimo.setText(getDateUtil.getDateTime());
-        jtfDataDevolucao.setText(getDateUtil.getDateTimeMonth());
+        jtfDataEmprestimo.setText(getDateUtil.setarData());
+        jtfDataDevolucao.setText(getDateUtil.setarDataFutura());
     }
 
     private void listarLocatarios() {
@@ -652,6 +658,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jtfAutor1.setText(String.valueOf(livroModel.getAutor1Livro()));
         jtfAutor2.setText(String.valueOf(livroModel.getAutor2Livro()));
         jlCategoria.setText(String.valueOf(livroModel.getGeneroLivro()));
+
     }
 
     private void carregarEmprestimo() {
@@ -684,32 +691,22 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         }
     }
 
-    private void exibirQuantidadeLivro() {
-        livroModel = livroService.getLivroDAO(jcbTitulo.getSelectedItem().toString());
-        jlQuantidade.setText(String.valueOf(livroModel.getQtdeLivro()));
-        jlCategoria.setText(livroModel.getGeneroLivro());
-        jtfAutor1.setText(livroModel.getAutor1Livro());
-        jtfAutor2.setText(livroModel.getAutor2Livro());
-
-    }
-
     private void limparCampos() {
-        jtfAutor1.setText("");
-        jtfAutor2.setText("");
-        jlCategoria.setText("ROMANCE");
-        jlQuantidade.setText("0");
+        jtfAutor1.setText("SELECIONE UM LIVRO");
+        jtfAutor2.setText("SELECIONE UM LIVRO");
+        jlCategoria.setText("SELECIONE UM LIVRO");
+        jlQuantidade.setText("SELECIONE UM LIVRO");
         jcbLocador.setSelectedItem("SELECIONE UM LOCADOR");
         jcbLocatario.setSelectedItem("SELECIONE UM LOCATÁRIO");
         jcbTitulo.setSelectedItem("SELECIONE UM LIVRO");
-        jtfDataDevolucao.setText("");
-        jtfDataEmprestimo.setText("");
+        setarData();
         DefaultTableModel modelo = (DefaultTableModel) jtAdicionarEmprestimo.getModel();
         modelo.setNumRows(0);
     }
 
     private void adicionarLivroTabela() {
-        int codigoLivro, codigoLocador, codigoLocatario, codigoEmprestimo, quantidade = 0;
-
+        int codigoLivro, codigoLocador, codigoLocatario, quantidade = 0;
+        String livro = jcbTitulo.getSelectedItem().toString();
         // pegar o id do locador
         locadorModel = locadorService.getLocadorDAO(jcbLocador.getSelectedItem().toString());
         codigoLocador = locadorModel.getIdLocador();
@@ -733,7 +730,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             quantidade = livroModel.getQtdeLivro();
             if (quantidade > 1) {
                 quantidade = Integer.parseInt((JOptionPane.showInputDialog(this,
-                        "Quantas unidades emprestar deste livro?", "Quantidade", JOptionPane.QUESTION_MESSAGE)));
+                        "Quantas unidades emprestar deste livro?\n" + livro + "?", "Quantidade", JOptionPane.QUESTION_MESSAGE)));
             } else {
                 quantidade = Integer.parseInt(jlQuantidade.getText());
             }

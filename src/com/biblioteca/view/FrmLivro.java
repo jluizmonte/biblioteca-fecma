@@ -3,7 +3,6 @@ package com.biblioteca.view;
 import com.biblioteca.model.LivroModel;
 import com.biblioteca.service.LivroService;
 import com.biblioteca.util.GetDateUtil;
-import com.biblioteca.util.MetodosPadrao;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -19,7 +18,6 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     LivroService livroService = new LivroService();
     ArrayList<LivroModel> listaModelLivro = new ArrayList<>();
     String alterarSalvar;
-
 
     /**
      * Creates new form FrmLivro
@@ -403,7 +401,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     private void jtLivroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLivroMouseClicked
         int linha = jtLivro.getSelectedRow();
         String tituloLivro = (String) jtLivro.getValueAt(linha, 0);
-        
+
         Object[] opcoes = {"Sim", "Não"};
         Object resposta;
         resposta = JOptionPane.showInputDialog(null, "Deseja excluir o livro?", "Excluir?",

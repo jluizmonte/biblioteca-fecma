@@ -101,7 +101,7 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
         LivroModel livroModel = new LivroModel();
         try {
             this.conectar();
-            this.executarSQL("SELECT * FROM tbl_livro;");
+            this.executarSQL("SELECT * FROM tbl_livro ORDER BY titulo_livro ASC;");
             while (this.getResultSet().next()) {
                 livroModel = new LivroModel();
                 livroModel.setIdLivro(this.getResultSet().getInt(1));

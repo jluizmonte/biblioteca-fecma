@@ -16,7 +16,7 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
     public int salvarEmprestimoDAO(EmprestimoModel pEmprestimoModel) {
         try {
             this.conectar();
-            this.executarInsertUpdateSQL("INSERT INTO tbl_emprestimo fk_locador,fk_locatario,fk_livro,"
+            this.executarInsertUpdateSQL("INSERT INTO tbl_emprestimo (fk_locador,fk_locatario,fk_livro,"
                     + "data_emprestimo,devolucao_emprestimo,status_emprestimo" + ") VALUES (" + "'"
                     + pEmprestimoModel.getIdLocador() + "'," + "'" + pEmprestimoModel.getIdLocatario() + "'," + "'"
                     + pEmprestimoModel.getIdLivro() + "'," + "'" + pEmprestimoModel.getDataEmprestimo() + "'," + "'"

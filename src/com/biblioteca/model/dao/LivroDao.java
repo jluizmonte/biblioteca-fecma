@@ -174,7 +174,7 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
             this.conectar();
             for (int i = 0; i < pListaLivroModel.size(); i++) {
                 this.executarInsertUpdateSQL(
-                        "UPDATE tbl_livro SET livro_quantidade = '" + pListaLivroModel.get(i).getQtdeLivro()
+                        "UPDATE tbl_livro SET quantidade_livro = '" + pListaLivroModel.get(i).getQtdeLivro()
                         + "' WHERE pk_id_livro = '" + pListaLivroModel.get(i).getIdLivro() + "'");
             }
             return true;

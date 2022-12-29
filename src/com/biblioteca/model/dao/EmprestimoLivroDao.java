@@ -16,10 +16,11 @@ public class EmprestimoLivroDao extends ConnectionMySQL implements IEmprestimoLi
     public boolean salvarEmprestimosLivrosDAO(EmprestimoLivroModel pModelEmprestimosLivros) {
         try {
             this.conectar();
-            return this.executarInsertUpdateSQL("INSERT INTO tbl_emprestimo_livro (" + "fk_livro,fk_emprestimo,emprestimo_quantidade)"
-                    + "VALUES (" + "'" + pModelEmprestimosLivros.getIdLivro() + "'," + "'"
-                    + pModelEmprestimosLivros.getIdEmprestimo() + "'," + "'"
-                    + pModelEmprestimosLivros.getQuantidadeEmprestimo() + "'" + ");");
+            return this.executarInsertUpdateSQL(""
+                    + "INSERT INTO tbl_emprestimo_livro (fk_livro, fk_emprestimo, emprestimo_quantidade) VALUES ('"
+                    + pModelEmprestimosLivros.getIdLivro() + "','"
+                    + pModelEmprestimosLivros.getIdEmprestimo() + "','"
+                    + pModelEmprestimosLivros.getQuantidadeEmprestimo() + "');");
         } catch (Exception e) {
             e.toString();
             return false;
@@ -34,10 +35,11 @@ public class EmprestimoLivroDao extends ConnectionMySQL implements IEmprestimoLi
             this.conectar();
             int cont = plistaModelEmprestimosLivros.size();
             for (int i = 0; i < cont; i++) {
-                this.executarInsertUpdateSQL("INSERT INTO tbl_emprestimo_livro (fk_livro," + "fk_emprestimo,emprestimo_quantidade"
-                        + ") VALUES (" + "'" + plistaModelEmprestimosLivros.get(i).getIdLivro()
-                        + "'," + "'" + plistaModelEmprestimosLivros.get(i).getIdEmprestimo() + "'," + "'"
-                        + plistaModelEmprestimosLivros.get(i).getQuantidadeEmprestimo() + "'" + ");");
+                this.executarInsertUpdateSQL(
+                        "INSERT INTO tbl_emprestimo_livro (fk_livro,fk_emprestimo,emprestimo_quantidade) VALUES('"
+                        + plistaModelEmprestimosLivros.get(i).getIdLivro() + "','"
+                        + plistaModelEmprestimosLivros.get(i).getIdEmprestimo() + "','"
+                        + plistaModelEmprestimosLivros.get(i).getQuantidadeEmprestimo() + "');");
             }
             return true;
         } catch (Exception e) {

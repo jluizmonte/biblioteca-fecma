@@ -15,6 +15,7 @@ import com.biblioteca.service.LivrosEmprestimosLivrosService;
 import com.biblioteca.service.LocadorService;
 import com.biblioteca.service.LocatarioService;
 import com.biblioteca.util.GetDateUtil;
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -85,7 +86,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jtfAutor1 = new javax.swing.JTextField();
         jtfAutor2 = new javax.swing.JTextField();
-        jcbTitulo = new javax.swing.JComboBox<>();
+        jcbTitulo = new javax.swing.JComboBox<String>();
         jlQuantidade = new javax.swing.JLabel();
         jlCategoria = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -93,8 +94,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jcbLocador = new javax.swing.JComboBox<>();
-        jcbLocatario = new javax.swing.JComboBox<>();
+        jcbLocador = new javax.swing.JComboBox<String>();
+        jcbLocatario = new javax.swing.JComboBox<String>();
         jtfDataEmprestimo = new javax.swing.JFormattedTextField();
         jtfDataDevolucao = new javax.swing.JFormattedTextField();
         jlAdicionar = new javax.swing.JLabel();
@@ -147,7 +148,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jtfAutor2.setForeground(new java.awt.Color(0, 0, 0));
 
         jcbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jcbTitulo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LIVRO" }));
+        jcbTitulo.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "SELECIONE UM LIVRO" }));
         jcbTitulo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -189,10 +190,10 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jLabel11.setText("DEVOLUÇÃO");
 
         jcbLocador.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jcbLocador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LOCADOR" }));
+        jcbLocador.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "SELECIONE UM LOCADOR" }));
 
         jcbLocatario.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jcbLocatario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LOCATÁRIO" }));
+        jcbLocatario.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "SELECIONE UM LOCATÁRIO" }));
 
         try {
             jtfDataEmprestimo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
@@ -210,7 +211,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jtfDataDevolucao.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtfDataDevolucao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jlAdicionar.setBackground(new java.awt.Color(255, 102, 0));
         jlAdicionar.setDisplayedMnemonic('4');
         jlAdicionar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlAdicionar.setForeground(new java.awt.Color(255, 255, 255));
@@ -219,6 +219,12 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jlAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jlAdicionarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlAdicionarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlAdicionarMouseExited(evt);
             }
         });
 
@@ -304,7 +310,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jlQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jlCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))))
@@ -374,9 +380,9 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(jcbLocatario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel10)
                                     .addComponent(jtfDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -384,9 +390,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jtfDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel11)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jlAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jlAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -456,16 +460,27 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
         jtDevolucaoLivro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Título", "Locatário", "Empréstimo", "Devolução"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jtDevolucaoLivro);
+        if (jtDevolucaoLivro.getColumnModel().getColumnCount() > 0) {
+            jtDevolucaoLivro.getColumnModel().getColumn(0).setResizable(false);
+            jtDevolucaoLivro.getColumnModel().getColumn(0).setPreferredWidth(5);
+            jtDevolucaoLivro.getColumnModel().getColumn(3).setPreferredWidth(30);
+            jtDevolucaoLivro.getColumnModel().getColumn(4).setPreferredWidth(30);
+        }
 
         jbDevolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/devolver.png"))); // NOI18N
         jbDevolver.setText("FAZER DEVOLUÇÃO");
@@ -532,18 +547,37 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
     private void jbRemoverItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRemoverItensActionPerformed
         int linha = jtAdicionarEmprestimo.getSelectedRow();
-        DefaultTableModel modelo = (DefaultTableModel) jtAdicionarEmprestimo.getModel();
-        modelo.removeRow(linha);
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(this, "Selecione um livro!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+        } else {
+            DefaultTableModel modelo = (DefaultTableModel) jtAdicionarEmprestimo.getModel();
+            modelo.removeRow(linha);
+        }
+
     }//GEN-LAST:event_jbRemoverItensActionPerformed
 
     private void jbEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEmprestarActionPerformed
-        liberarEmprestimo();
-        limparCampos();
-        listarLocatarios();
-        listarLocadores();
-        listarLivros();
-        carregarEmprestimo();
-        carregarLivroDevolucao();
+        Object[] opcoes = {"Sim", "Não"};
+        Object resposta;
+        resposta = JOptionPane.showInputDialog(null, "Deseja realizar este empréstimo?", "Atenção!",
+                JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
+        if (resposta.equals("Sim")) {
+            liberarEmprestimo();
+            limparCampos();
+            listarLocatarios();
+            listarLocadores();
+            listarLivros();
+            carregarEmprestimo();
+            carregarLivroDevolucao();
+        } else {
+            limparCampos();
+            listarLocatarios();
+            listarLocadores();
+            listarLivros();
+            carregarEmprestimo();
+            carregarLivroDevolucao();
+        }
+
     }//GEN-LAST:event_jbEmprestarActionPerformed
 
     private void jlAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAdicionarMouseClicked
@@ -605,6 +639,14 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     private void jcbTituloPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jcbTituloPopupMenuWillBecomeVisible
         listarLivros();
     }//GEN-LAST:event_jcbTituloPopupMenuWillBecomeVisible
+
+    private void jlAdicionarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAdicionarMouseEntered
+        jlAdicionar.setForeground(Color.yellow);
+    }//GEN-LAST:event_jlAdicionarMouseEntered
+
+    private void jlAdicionarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAdicionarMouseExited
+        jlAdicionar.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jlAdicionarMouseExited
 
     private void setarData() {
         jtfDataEmprestimo.setText(getDateUtil.setarData());
@@ -719,7 +761,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         livroModel = livroService.getLivroDAO(jcbTitulo.getSelectedItem().toString());
         codigoLivro = livroModel.getIdLivro();
 
-        if (jlQuantidade.getText().equals("")) {
+        if (jlQuantidade.getText().equals("") || jlQuantidade.getText().equals("SELECIONE UM LIVRO")) {
             JOptionPane.showMessageDialog(this, "Você deve inserir a quantidade de livros!", "Atenção",
                     JOptionPane.WARNING_MESSAGE);
         } else {
@@ -727,15 +769,16 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             locadorModel = locadorService.getLocadorDAO(codigoLocador);
             locatarioModel = locatarioService.getLocatarioDAO(codigoLocatario);
 
+            String dataDevolucao = jtfDataDevolucao.getText();
+            String dataEmprestimo = jtfDataEmprestimo.getText();
+
             quantidade = livroModel.getQtdeLivro();
             if (quantidade > 1) {
                 quantidade = Integer.parseInt((JOptionPane.showInputDialog(this,
-                        "Quantas unidades emprestar deste livro?\n" + livro + "?", "Quantidade", JOptionPane.QUESTION_MESSAGE)));
+                        "Quantas unidades emprestar deste livro?\n" + livro + "?", "Atenção", JOptionPane.QUESTION_MESSAGE)));
             } else {
                 quantidade = Integer.parseInt(jlQuantidade.getText());
             }
-            String dataDevolucao = jtfDataDevolucao.getText();
-            String dataEmprestimo = jtfDataEmprestimo.getText();
 
             // adiciona uma linha na tabela
             DefaultTableModel modelo = (DefaultTableModel) jtAdicionarEmprestimo.getModel();

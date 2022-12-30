@@ -377,24 +377,32 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalvarActionPerformed
 
     private void jtLivroPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLivroPesquisaMouseClicked
-        alterarSalvar = "alterar";
         int linha = jtLivroPesquisa.getSelectedRow();
-        try {
-            String tituloLivro = (String) jtLivroPesquisa.getValueAt(linha, 0);
-            livroModel = livroService.getLivroDAO(tituloLivro);
-
-            jtfAno.setText(String.valueOf(livroModel.getAnoLivro()));
-            jtfAutor1.setText(livroModel.getAutor1Livro());
-            jtfAutor2.setText(livroModel.getAutor2Livro());
-            jtfGenero.setText(livroModel.getGeneroLivro());
-            jtfDataCadastro.setText(livroModel.getDataCadastroLivro());
-            jtfObs.setText(livroModel.getDescricaoLivro());
-            jtfTitulo.setText(livroModel.getTituloLivro());
-            jtfQtde.setText(String.valueOf(livroModel.getQtdeLivro()));
-            jcbEstado.setSelectedItem(livroModel.getEstadoLivro());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Código invalido ou nenhum livro selecionado", "Erro",
-                    JOptionPane.ERROR_MESSAGE);
+        String tituloLivro = (String) jtLivroPesquisa.getValueAt(linha, 0);
+        livroModel = livroService.getLivroDAO(tituloLivro);
+        Object[] options = {"Sim", "Não"};
+        int n = JOptionPane.showOptionDialog(null,
+                "Deseja alterar este livro:\n" + tituloLivro + " ?",
+                "Atenção", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (n == 0) {
+            alterarSalvar = "alterar";
+            try {
+                jtfAno.setText(String.valueOf(livroModel.getAnoLivro()));
+                jtfAutor1.setText(livroModel.getAutor1Livro());
+                jtfAutor2.setText(livroModel.getAutor2Livro());
+                jtfGenero.setText(livroModel.getGeneroLivro());
+                jtfDataCadastro.setText(livroModel.getDataCadastroLivro());
+                jtfObs.setText(livroModel.getDescricaoLivro());
+                jtfTitulo.setText(livroModel.getTituloLivro());
+                jtfQtde.setText(String.valueOf(livroModel.getQtdeLivro()));
+                jcbEstado.setSelectedItem(livroModel.getEstadoLivro());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Código invalido ou nenhum livro selecionado", "Erro",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "O livro selecionado não foi alterado!", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jtLivroPesquisaMouseClicked
 
@@ -489,7 +497,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         livroModel.setEstadoLivro(jcbEstado.getSelectedItem().toString());
         try {
             if (livroService.salvarLivroDAO(livroModel)) {
-                JOptionPane.showMessageDialog(this, "Livro: " + livroModel.getTituloLivro() + " cadastrado com sucesso!",
+                JOptionPane.showMessageDialog(this, "O livro foi cadastrado com sucesso!",
                         "Atenção", JOptionPane.WARNING_MESSAGE);
                 limparCampos();
             }

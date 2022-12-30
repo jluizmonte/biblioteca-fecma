@@ -2,6 +2,7 @@ package com.biblioteca.model.dao;
 
 import com.biblioteca.connection.ConnectionMySQL;
 import com.biblioteca.controller.IEmprestimoLocatario;
+import com.biblioteca.model.EmprestimoLivroModel;
 import com.biblioteca.model.EmprestimoLocatarioModel;
 import com.biblioteca.model.EmprestimoModel;
 import com.biblioteca.model.LivroModel;
@@ -20,25 +21,30 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
     @Override
     public ArrayList<EmprestimoLocatarioModel> getListaEmprestimosLocatarioDAO() {
 
-        ArrayList<EmprestimoLocatarioModel> listaEmprestimoLocatarioModel = new ArrayList<>();
-        EmprestimoModel emprestimoModel = new EmprestimoModel();
         LocatarioModel locatarioModel = new LocatarioModel();
         LocadorModel locadorModel = new LocadorModel();
         LivroModel livroModel = new LivroModel();
+
+        EmprestimoModel emprestimoModel = new EmprestimoModel();
+        EmprestimoLivroModel emprestimoLivroModel = new EmprestimoLivroModel();
         EmprestimoLocatarioModel emprestimoLocatarioModel = new EmprestimoLocatarioModel();
+        ArrayList<EmprestimoLocatarioModel> listaEmprestimoLocatarioModel = new ArrayList<>();
 
         try {
             this.conectar();
-            this.executarSQL("SELECT * FROM tbl_emprestimo "
+            this.executarSQL(
+                    "SELECT * FROM tbl_emprestimo "
                     + "INNER JOIN tbl_locatario ON tbl_locatario.pk_id_locatario = tbl_emprestimo.fk_locatario "
                     + "INNER JOIN tbl_locador ON tbl_locador.pk_id_locador = tbl_emprestimo.fk_locador "
-                    + "INNER JOIN tbl_livro ON tbl_livro.pk_id_livro = tbl_emprestimo.fk_livro;");
+                    + "INNER JOIN tbl_livro ON tbl_livro.pk_id_livro = tbl_emprestimo.fk_livro "
+                    + "INNER JOIN tbl_emprestimo_livro ON tbl_emprestimo.pk_id_emprestimo=tbl_emprestimo_livro.pk_id_emprestimo_livro;");
             while (this.getResultSet().next()) {
-                emprestimoModel = new EmprestimoModel();
                 locatarioModel = new LocatarioModel();
                 locadorModel = new LocadorModel();
                 livroModel = new LivroModel();
+                emprestimoModel = new EmprestimoModel();
                 emprestimoLocatarioModel = new EmprestimoLocatarioModel();
+                emprestimoLivroModel = new EmprestimoLivroModel();
 
                 // emprestimo
                 emprestimoModel = new EmprestimoModel();
@@ -87,14 +93,23 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                 livroModel.setDataCadastroLivro(this.getResultSet().getString(36));
                 livroModel.setQtdeLivro(this.getResultSet().getInt(36));
 
+                //emprestimo livro
+                emprestimoLivroModel.setIdEmprestimo(this.getResultSet().getInt(37));
+                emprestimoLivroModel.setIdLivro(this.getResultSet().getInt(38));
+                emprestimoLivroModel.setIdEmprestimoLivro(this.getResultSet().getInt(39));
+                emprestimoLivroModel.setQuantidadeEmprestimo(this.getResultSet().getInt(40));
+                
+                //emprestimo locatario
                 emprestimoLocatarioModel.setEmprestimoModel(emprestimoModel);
                 emprestimoLocatarioModel.setLocatarioModel(locatarioModel);
                 emprestimoLocatarioModel.setLocadorModel(locadorModel);
                 emprestimoLocatarioModel.setLivroModel(livroModel);
+
                 listaEmprestimoLocatarioModel.add(emprestimoLocatarioModel);
             }
         } catch (SQLException e) {
-            e.toString();  JOptionPane.showMessageDialog(null, "Erro ao salvar os dados!",
+            e.toString();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados!",
                     "Atenção", JOptionPane.ERROR_MESSAGE);
         } finally {
             this.fecharConexao();

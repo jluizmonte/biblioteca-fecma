@@ -86,7 +86,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jtfAutor1 = new javax.swing.JTextField();
         jtfAutor2 = new javax.swing.JTextField();
-        jcbTitulo = new javax.swing.JComboBox<String>();
+        jcbTitulo = new javax.swing.JComboBox<>();
         jlQuantidade = new javax.swing.JLabel();
         jlCategoria = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -94,8 +94,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jcbLocador = new javax.swing.JComboBox<String>();
-        jcbLocatario = new javax.swing.JComboBox<String>();
+        jcbLocador = new javax.swing.JComboBox<>();
+        jcbLocatario = new javax.swing.JComboBox<>();
         jtfDataEmprestimo = new javax.swing.JFormattedTextField();
         jtfDataDevolucao = new javax.swing.JFormattedTextField();
         jlAdicionar = new javax.swing.JLabel();
@@ -148,7 +148,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jtfAutor2.setForeground(new java.awt.Color(0, 0, 0));
 
         jcbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jcbTitulo.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "SELECIONE UM LIVRO" }));
+        jcbTitulo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LIVRO" }));
         jcbTitulo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -190,10 +190,10 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jLabel11.setText("DEVOLUÇÃO");
 
         jcbLocador.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jcbLocador.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "SELECIONE UM LOCADOR" }));
+        jcbLocador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LOCADOR" }));
 
         jcbLocatario.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jcbLocatario.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "SELECIONE UM LOCATÁRIO" }));
+        jcbLocatario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LOCATÁRIO" }));
 
         try {
             jtfDataEmprestimo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
@@ -463,12 +463,19 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id", "Título", "Locatário", "Empréstimo", "Devolução"
+                "Id", "Título", "Locatário", "Empréstimo", "Devolução", "null"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -478,8 +485,13 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         if (jtDevolucaoLivro.getColumnModel().getColumnCount() > 0) {
             jtDevolucaoLivro.getColumnModel().getColumn(0).setResizable(false);
             jtDevolucaoLivro.getColumnModel().getColumn(0).setPreferredWidth(5);
+            jtDevolucaoLivro.getColumnModel().getColumn(1).setResizable(false);
+            jtDevolucaoLivro.getColumnModel().getColumn(2).setResizable(false);
+            jtDevolucaoLivro.getColumnModel().getColumn(3).setResizable(false);
             jtDevolucaoLivro.getColumnModel().getColumn(3).setPreferredWidth(30);
+            jtDevolucaoLivro.getColumnModel().getColumn(4).setResizable(false);
             jtDevolucaoLivro.getColumnModel().getColumn(4).setPreferredWidth(30);
+            jtDevolucaoLivro.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jbDevolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/devolver.png"))); // NOI18N
@@ -557,11 +569,11 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbRemoverItensActionPerformed
 
     private void jbEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEmprestarActionPerformed
-        Object[] opcoes = {"Sim", "Não"};
-        Object resposta;
-        resposta = JOptionPane.showInputDialog(null, "Deseja realizar este empréstimo?", "Atenção!",
-                JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
-        if (resposta.equals("Sim")) {
+        Object[] options = {"Sim", "Não"};
+        int n = JOptionPane.showOptionDialog(null,
+                "Deseja realizar o empréstimo?", "Atenção", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (n == 0) {
             liberarEmprestimo();
             limparCampos();
             listarLocatarios();
@@ -570,6 +582,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             carregarEmprestimo();
             carregarLivroDevolucao();
         } else {
+            JOptionPane.showMessageDialog(this, "Empréstimo cancelado pelo locador!", "Atenção", JOptionPane.ERROR_MESSAGE);
             limparCampos();
             listarLocatarios();
             listarLocadores();
@@ -601,7 +614,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
                 livroModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
                 livroModel.setQtdeLivro(
-                        listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getQtdeLivro()
+                        livroModel.getQtdeLivro()
                         + listaLivrosEmprestimosLivrosModel.get(i).getEmprestimoLivroModel().getQuantidadeEmprestimo());
 
                 emprestimoModel.setStatusEmprestimo("INATIVO");
@@ -618,7 +631,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                 emprestimoService.atualizarEmprestimoDAO(emprestimoModel);
                 JOptionPane.showMessageDialog(this, "Livro devolvido com sucesso!", "Atenção",
                         JOptionPane.WARNING_MESSAGE);
-
+                carregarEmprestimo();
+                carregarLivroDevolucao();
             } catch (HeadlessException e) {
                 JOptionPane.showMessageDialog(this, "Erro ao registrar a devolução", "Erro", JOptionPane.ERROR_MESSAGE);
             }
@@ -812,12 +826,13 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                                 listaEmprestimoLocatarioModel.get(i).getLivroModel().getTituloLivro(),
                                 listaEmprestimoLocatarioModel.get(i).getLocatarioModel().getNomeLocatario(),
                                 listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataEmprestimo(),
-                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataDevolucao()
+                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataDevolucao(),
+                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getQuantidadeEmprestimo()
                             });
                 }
             }
 
-        } catch (Exception e) {
+        } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(this, "Erro ao buscar livros para preencher a tabela\n" + e.toString());
         }
     }
@@ -880,7 +895,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
             codigoEmprestimo = emprestimoService.salvarEmprestimoDAO(emprestimoModel);
             if (codigoEmprestimo > 0) {
-                JOptionPane.showMessageDialog(this, "Empréstimo registrado com sucesso:\n"
+                JOptionPane.showMessageDialog(this, "Empréstimo registrado com sucesso!\n"
                         + "Locador: " + locadorModel.getNomeLocador() + "\n"
                         + "Locatário: " + locatarioModel.getNomeLocatario() + "\n"
                         + "Data de Devolução: " + emprestimoModel.getDataDevolucao() + "\n",

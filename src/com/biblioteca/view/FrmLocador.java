@@ -438,7 +438,7 @@ public class FrmLocador extends javax.swing.JInternalFrame {
         jtfNumero.setText("");
         jtfRua.setText("");
         jtfTelefone.setText("");
-        jtfUf.setText("UF");
+        jtfUf.setText("PE");
         jtfNome.requestFocus();
         alterarSalvar = "salvar";
     }
@@ -513,7 +513,7 @@ public class FrmLocador extends javax.swing.JInternalFrame {
         locadorModel.setEstadoLocador(jtfUf.getText().toUpperCase());
         try {
             if (locadorService.salvarLocadorDAO(locadorModel)) {
-                JOptionPane.showMessageDialog(this, "Locador: " + locadorModel.getNomeLocador() + " cadastrado com sucesso!",
+                JOptionPane.showMessageDialog(this, "Locador: \n" + locadorModel.getNomeLocador() + " cadastrado com sucesso!",
                         "Atenção", JOptionPane.WARNING_MESSAGE);
                 limparCampos();
                 carregarLocador();

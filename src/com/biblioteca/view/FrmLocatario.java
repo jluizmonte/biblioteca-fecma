@@ -57,7 +57,6 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         jtfBairro = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jtfCidade = new javax.swing.JTextField();
-        jtfCep = new javax.swing.JTextField();
         jtfUf = new javax.swing.JTextField();
         jtfEmail = new javax.swing.JTextField();
         jtfTelefone = new javax.swing.JFormattedTextField();
@@ -65,6 +64,7 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         jbCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jcbStatus = new javax.swing.JComboBox<>();
+        jtfCep = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtLocPesquisa = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -130,8 +130,6 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
 
         jtfCidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jtfCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         jtfUf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jtfEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -168,6 +166,13 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         jcbStatus.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ATIVO", "SUSPENSO", "BLOQUEADO" }));
 
+        try {
+            jtfCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jtfCep.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,11 +185,11 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
-                                        .addComponent(jLabel8)))
+                                        .addComponent(jLabel8))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -261,12 +266,12 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
                         .addComponent(jLabel9)))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jtfUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
@@ -532,7 +537,7 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         try {
             locatarioService.salvarLocatarioDAO(locatarioModel);
             JOptionPane.showMessageDialog(this,
-                    "Locatário: " + locatarioModel.getNomeLocatario() + " cadastrado com sucesso!", "Atenção",
+                    "Locatário: \n" + locatarioModel.getNomeLocatario() + "\nCadastrado com sucesso!", "Atenção",
                     JOptionPane.WARNING_MESSAGE);
             limparCampos();
             carregarLocatario();
@@ -610,7 +615,7 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtLocPesquisa;
     private javax.swing.JTable jtLocatario;
     private javax.swing.JTextField jtfBairro;
-    private javax.swing.JTextField jtfCep;
+    private javax.swing.JFormattedTextField jtfCep;
     private javax.swing.JTextField jtfCidade;
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfNome;

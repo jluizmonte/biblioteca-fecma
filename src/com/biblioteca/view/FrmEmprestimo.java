@@ -577,7 +577,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             carregarEmprestimo();
             carregarLivroDevolucao();
         }
-
     }//GEN-LAST:event_jbEmprestarActionPerformed
 
     private void jlAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAdicionarMouseClicked

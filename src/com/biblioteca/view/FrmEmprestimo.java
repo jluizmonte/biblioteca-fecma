@@ -666,6 +666,19 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jtfDataDevolucao.setText(getDateUtil.setarDataFutura());
     }
 
+    private void limparCampos() {
+        jtfAutor1.setText("SELECIONE UM LIVRO");
+        jtfAutor2.setText("SELECIONE UM LIVRO");
+        jlCategoria.setText("SELECIONE UM LIVRO");
+        jlQuantidade.setText("SELECIONE UM LIVRO");
+        jcbLocador.setSelectedItem("SELECIONE UM LOCADOR");
+        jcbLocatario.setSelectedItem("SELECIONE UM LOCATÁRIO");
+        jcbTitulo.setSelectedItem("SELECIONE UM LIVRO");
+        setarData();
+        DefaultTableModel modelo = (DefaultTableModel) jtAdicionarEmprestimo.getModel();
+        modelo.setNumRows(0);
+    }
+
     private void listarLocatarios() {
         try {
             listaLocatarioModel = locatarioService.getListaLocatarioDAO();
@@ -675,7 +688,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                 jcbLocatario.addItem(listaLocatarioModel.get(i).getNomeLocatario());
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar os locatários", "Erro", JOptionPane.ERROR);
+            JOptionPane.showMessageDialog(null, "Erro ao listar os locatários",
+                    "Erro", JOptionPane.ERROR);
         }
     }
 
@@ -688,7 +702,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                 jcbLocador.addItem(listaLocadorModel.get(i).getNomeLocador());
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar os locadores", "Erro", JOptionPane.ERROR);
+            JOptionPane.showMessageDialog(null, "Erro ao listar os locadores",
+                    "Erro", JOptionPane.ERROR);
         }
     }
 
@@ -703,7 +718,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar os livros", "Erro", JOptionPane.ERROR);
+            JOptionPane.showMessageDialog(null, "Erro ao listar os livros",
+                    "Erro", JOptionPane.ERROR);
         }
     }
 
@@ -713,7 +729,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jtfAutor1.setText(String.valueOf(livroModel.getAutor1Livro()));
         jtfAutor2.setText(String.valueOf(livroModel.getAutor2Livro()));
         jlCategoria.setText(String.valueOf(livroModel.getGeneroLivro()));
-
     }
 
     private void carregarEmprestimo() {
@@ -744,19 +759,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao buscar livros para preencher a tabela\n" + e.toString());
         }
-    }
-
-    private void limparCampos() {
-        jtfAutor1.setText("SELECIONE UM LIVRO");
-        jtfAutor2.setText("SELECIONE UM LIVRO");
-        jlCategoria.setText("SELECIONE UM LIVRO");
-        jlQuantidade.setText("SELECIONE UM LIVRO");
-        jcbLocador.setSelectedItem("SELECIONE UM LOCADOR");
-        jcbLocatario.setSelectedItem("SELECIONE UM LOCATÁRIO");
-        jcbTitulo.setSelectedItem("SELECIONE UM LIVRO");
-        setarData();
-        DefaultTableModel modelo = (DefaultTableModel) jtAdicionarEmprestimo.getModel();
-        modelo.setNumRows(0);
     }
 
     private void adicionarLivroTabela() {

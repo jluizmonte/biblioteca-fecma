@@ -512,8 +512,8 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
                     listaLocatarioModel.get(i).getNumeroLocatario(),
                     listaLocatarioModel.get(i).getBairroLocatario(),
                     listaLocatarioModel.get(i).getCidadeLocatario(),
-                    listaLocatarioModel.get(i).getEstadoLocatario(),
                     listaLocatarioModel.get(i).getCepLocatario(),
+                    listaLocatarioModel.get(i).getEstadoLocatario(),
                     listaLocatarioModel.get(i).getTelefoneLocatario(),
                     listaLocatarioModel.get(i).getEmailLocatario(),
                     listaLocatarioModel.get(i).getStatusLocatario()});

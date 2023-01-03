@@ -87,17 +87,18 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                 livroModel.setTituloLivro(this.getResultSet().getString(30));
                 livroModel.setAutor1Livro(this.getResultSet().getString(31));
                 livroModel.setAutor2Livro(this.getResultSet().getString(32));
-                livroModel.setAnoLivro(this.getResultSet().getString(33));
-                livroModel.setGeneroLivro(this.getResultSet().getString(34));
-                livroModel.setDescricaoLivro((this.getResultSet().getString(35)));
-                livroModel.setDataCadastroLivro(this.getResultSet().getString(36));
-                livroModel.setQtdeLivro(this.getResultSet().getInt(36));
+                livroModel.setGeneroLivro(this.getResultSet().getString(33));
+                livroModel.setAnoLivro(this.getResultSet().getString(34));
+                livroModel.setDataCadastroLivro(this.getResultSet().getString(35));
+                livroModel.setDescricaoLivro((this.getResultSet().getString(36)));
+                livroModel.setDataCadastroLivro(this.getResultSet().getString(37));
+                livroModel.setQtdeLivro(this.getResultSet().getInt(38));
 
                 //emprestimo livro
-                emprestimoLivroModel.setIdEmprestimo(this.getResultSet().getInt(37));
-                emprestimoLivroModel.setIdLivro(this.getResultSet().getInt(38));
-                emprestimoLivroModel.setIdEmprestimoLivro(this.getResultSet().getInt(39));
-                emprestimoLivroModel.setQuantidadeEmprestimo(this.getResultSet().getInt(40));
+                emprestimoLivroModel.setIdEmprestimo(this.getResultSet().getInt(38));
+                emprestimoLivroModel.setIdLivro(this.getResultSet().getInt(39));
+                emprestimoLivroModel.setIdEmprestimoLivro(this.getResultSet().getInt(40));
+                emprestimoLivroModel.setQuantidadeEmprestimo(this.getResultSet().getInt(41));
                 
                 //emprestimo locatario
                 emprestimoLocatarioModel.setEmprestimoModel(emprestimoModel);
@@ -108,8 +109,8 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                 listaEmprestimoLocatarioModel.add(emprestimoLocatarioModel);
             }
         } catch (SQLException e) {
-            e.toString();
-            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados!",
+            System.out.println(e.toString());
+            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados!\n"+e.toString(),
                     "Atenção", JOptionPane.ERROR_MESSAGE);
         } finally {
             this.fecharConexao();

@@ -15,7 +15,7 @@ public class ConnectionMySQL {
     private boolean status = false;
 
     private String servidor = "192.168.0.253"; //OU localhost
-    private String banco = "livraria";
+    private String banco = "livraria_backup";
     private String usuario = "cci";
     private String senha = "@3325cci3333";
 

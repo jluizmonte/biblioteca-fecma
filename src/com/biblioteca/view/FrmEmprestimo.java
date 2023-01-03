@@ -565,7 +565,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             DefaultTableModel modelo = (DefaultTableModel) jtAdicionarEmprestimo.getModel();
             modelo.removeRow(linha);
         }
-
     }//GEN-LAST:event_jbRemoverItensActionPerformed
 
     private void jbEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEmprestarActionPerformed

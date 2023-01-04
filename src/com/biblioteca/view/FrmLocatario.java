@@ -2,6 +2,7 @@ package com.biblioteca.view;
 
 import com.biblioteca.model.LocatarioModel;
 import com.biblioteca.service.LocatarioService;
+import com.biblioteca.util.ColorirLinhaLocatario;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -28,6 +29,8 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         carregarLocatario();
         carregarLocatarioPesquisa();
         limparCampos();
+        corTabelaLocatario();
+        corTabelaLocatarioPesquisa();
     }
 
     /**
@@ -446,7 +449,7 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         Object resposta;
         resposta = JOptionPane.showInputDialog(null, "Deseja excluir o Locatário?", "Excluir",
                 JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
-      
+
         if (resposta.equals("Sim")) {
             locatarioModel = locatarioService.getLocatarioDAO(nomeLocatario);
             int codigoLocatario = locatarioModel.getIdLocatario();
@@ -577,6 +580,15 @@ public class FrmLocatario extends javax.swing.JInternalFrame {
         }
     }
 
+    private void corTabelaLocatario() {
+        ColorirLinhaLocatario colorirLinhas = new ColorirLinhaLocatario(9);
+        jtLocatario.getColumnModel().getColumn(9).setCellRenderer(colorirLinhas);
+    }
+
+    private void corTabelaLocatarioPesquisa() {
+        ColorirLinhaLocatario colorirLinhaLocatario = new ColorirLinhaLocatario(2);
+        jtLocPesquisa.getColumnModel().getColumn(2).setCellRenderer(colorirLinhaLocatario);
+    }
     /*
     public void pesquisaLocatario() {
         try {

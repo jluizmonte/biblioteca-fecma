@@ -14,6 +14,7 @@ import com.biblioteca.service.LivroService;
 import com.biblioteca.service.LivrosEmprestimosLivrosService;
 import com.biblioteca.service.LocadorService;
 import com.biblioteca.service.LocatarioService;
+import com.biblioteca.util.ColorirLinhaEmprestimo;
 import com.biblioteca.util.GetDateUtil;
 import java.awt.Color;
 import java.awt.HeadlessException;
@@ -60,10 +61,11 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     public FrmEmprestimo() {
         initComponents();
         setarData();
+        corLinhaTabela();
         listarLocatarios();
         listarLocadores();
         limparCampos();
-        carregarEmprestimo();
+    //    carregarEmprestimo();
         carregarLivroDevolucao();
     }
 
@@ -462,7 +464,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id", "Título", "Locatário", "Empréstimo", "Devolução", "null"
+                "Id", "Título", "Locatário", "Empréstimo", "Devolução", "Qtde"
             }
         ) {
             Class[] types = new Class [] {
@@ -922,6 +924,11 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Erro ao salvar os livros do empréstimo!", "Erro",
                     JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+     private void corLinhaTabela() {
+        ColorirLinhaEmprestimo colorirLinhas = new ColorirLinhaEmprestimo(6);
+        jtListarEmprestimo.getColumnModel().getColumn(6).setCellRenderer(colorirLinhas);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

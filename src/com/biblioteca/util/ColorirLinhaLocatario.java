@@ -35,7 +35,7 @@ public class ColorirLinhaLocatario extends DefaultTableCellRenderer {
 
             case "SUSPENSO":
                 setForeground(Color.white);
-                setBackground(new java.awt.Color(255,127,0));
+                setBackground(new java.awt.Color(255, 127, 0));
                 setFont(font);
                 setHorizontalAlignment(CENTER);
                 break;

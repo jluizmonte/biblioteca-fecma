@@ -27,25 +27,29 @@ public class ColorirLinhaEmprestimo extends DefaultTableCellRenderer {
         switch (table.getValueAt(row, colunaEmprestimo).toString()) {
 
             case "ATIVO":
-                setForeground(new java.awt.Color(0, 110, 109));
+                setForeground(Color.white);
+                setBackground(new java.awt.Color(0, 110, 109));
                 setFont(font);
                 setHorizontalAlignment(CENTER);
                 break;
 
             case "SUSPENSO":
-                setForeground(new java.awt.Color(0, 83, 156));
+                setForeground(Color.white);
+                setBackground(new java.awt.Color(0, 83, 156));
                 setFont(font);
                 setHorizontalAlignment(CENTER);
                 break;
 
             case "INATIVO":
-                setForeground(Color.RED);
+                setForeground(Color.white);
+                setBackground(Color.RED);
                 setFont(font);
                 setHorizontalAlignment(CENTER);
                 break;
 
             default:
-                setForeground(Color.BLACK);
+                setForeground(Color.white);
+                setBackground(Color.BLACK);
                 setHorizontalAlignment(CENTER);
                 break;
         }

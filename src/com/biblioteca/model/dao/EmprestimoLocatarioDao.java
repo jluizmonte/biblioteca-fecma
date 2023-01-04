@@ -71,6 +71,7 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                 locatarioModel.setStatusLocatario(this.getResultSet().getString(18));
 
                 // locador
+                locadorModel = new LocadorModel();
                 locadorModel.setIdLocador(this.getResultSet().getInt(19));
                 locadorModel.setNomeLocador(this.getResultSet().getString(20));
                 locadorModel.setLogradouroLocador(this.getResultSet().getString(21));
@@ -83,6 +84,7 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                 locadorModel.setEmailLocador(this.getResultSet().getString(28));
 
                 // livro
+                livroModel = new LivroModel();
                 livroModel.setIdLivro(this.getResultSet().getInt(29));
                 livroModel.setTituloLivro(this.getResultSet().getString(30));
                 livroModel.setAutor1Livro(this.getResultSet().getString(31));
@@ -90,17 +92,19 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                 livroModel.setGeneroLivro(this.getResultSet().getString(33));
                 livroModel.setAnoLivro(this.getResultSet().getString(34));
                 livroModel.setDataCadastroLivro(this.getResultSet().getString(35));
-                livroModel.setDescricaoLivro((this.getResultSet().getString(36)));
-                livroModel.setDataCadastroLivro(this.getResultSet().getString(37));
-                livroModel.setQtdeLivro(this.getResultSet().getInt(38));
+                livroModel.setQtdeLivro(this.getResultSet().getInt(36));
+                livroModel.setDescricaoLivro((this.getResultSet().getString(37)));
+                livroModel.setDescricaoLivro(this.getResultSet().getString(38));
 
                 //emprestimo livro
-                emprestimoLivroModel.setIdEmprestimo(this.getResultSet().getInt(38));
-                emprestimoLivroModel.setIdLivro(this.getResultSet().getInt(39));
-                emprestimoLivroModel.setIdEmprestimoLivro(this.getResultSet().getInt(40));
-                emprestimoLivroModel.setQuantidadeEmprestimo(this.getResultSet().getInt(41));
-                
+                emprestimoLivroModel = new EmprestimoLivroModel();
+                emprestimoLivroModel.setIdEmprestimo(this.getResultSet().getInt(39));
+                emprestimoLivroModel.setIdLivro(this.getResultSet().getInt(40));
+                emprestimoLivroModel.setIdEmprestimoLivro(this.getResultSet().getInt(41));
+                emprestimoLivroModel.setQuantidadeEmprestimo(this.getResultSet().getInt(42));
+
                 //emprestimo locatario
+                emprestimoLocatarioModel = new EmprestimoLocatarioModel();
                 emprestimoLocatarioModel.setEmprestimoModel(emprestimoModel);
                 emprestimoLocatarioModel.setLocatarioModel(locatarioModel);
                 emprestimoLocatarioModel.setLocadorModel(locadorModel);
@@ -110,7 +114,7 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados!\n"+e.toString(),
+            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados!\n" + e.toString(),
                     "Atenção", JOptionPane.ERROR_MESSAGE);
         } finally {
             this.fecharConexao();

@@ -1,18 +1,19 @@
 package com.biblioteca.model.dao;
 
 import com.biblioteca.connection.ConnectionMySQL;
-import com.biblioteca.controller.ILivrosEmprestimosLivrosDao;
 import com.biblioteca.model.EmprestimoLivroModel;
 import com.biblioteca.model.LivroModel;
 import com.biblioteca.model.LivrosEmprestimosLivrosModel;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import com.biblioteca.controller.ILivrosEmprestimosLivros;
 
 /**
  *
  * @author joseluiz
  */
-public class LivrosEmprestimosLivrosDao extends ConnectionMySQL implements ILivrosEmprestimosLivrosDao {
+public class LivrosEmprestimosLivrosDao extends ConnectionMySQL implements ILivrosEmprestimosLivros {
 
     @Override
     public ArrayList<LivrosEmprestimosLivrosModel> getListaLivrosEmprestimoLivrosDAO(int pCodigoEmprestimo) {
@@ -48,6 +49,7 @@ public class LivrosEmprestimosLivrosDao extends ConnectionMySQL implements ILivr
 
                 livrosEprestimoLivroModel.setLivroModel(livroModel);
                 livrosEprestimoLivroModel.setEmprestimoLivroModel(emprestimoLivroModel);
+ 
                 listaLivroEmprestimoLivroModel.add(livrosEprestimoLivroModel);
             }
         } catch (SQLException e) {

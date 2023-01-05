@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author joseluiz
  */
-public interface ILivrosEmprestimosLivrosDao {
+public interface ILivrosEmprestimosLivros {
 
     public ArrayList<LivrosEmprestimosLivrosModel> getListaLivrosEmprestimoLivrosDAO(int pCodigoEmprestimo);
 

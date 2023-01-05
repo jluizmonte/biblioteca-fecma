@@ -12,6 +12,7 @@ public class EmprestimoLocatarioModel {
     private LocatarioModel locatarioModel;
     private LocadorModel locadorModel;
     private LivroModel livroModel;
+    private EmprestimoLivroModel emprestimoLivroModel;
     private ArrayList<EmprestimoLivroModel> listaEmprestimoLivroModel;
 
     public EmprestimoModel getEmprestimoModel() {
@@ -44,6 +45,14 @@ public class EmprestimoLocatarioModel {
 
     public void setLivroModel(LivroModel livroModel) {
         this.livroModel = livroModel;
+    }
+
+    public EmprestimoLivroModel getEmprestimoLivroModel() {
+        return emprestimoLivroModel;
+    }
+
+    public void setEmprestimoLivroModel(EmprestimoLivroModel emprestimoLivroModel) {
+        this.emprestimoLivroModel = emprestimoLivroModel;
     }
 
     public ArrayList<EmprestimoLivroModel> getListaEmprestimoLivroModel() {

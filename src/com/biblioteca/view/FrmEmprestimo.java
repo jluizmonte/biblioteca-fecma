@@ -822,7 +822,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                                 listaEmprestimoLocatarioModel.get(i).getLocatarioModel().getNomeLocatario(),
                                 listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataEmprestimo(),
                                 listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataDevolucao(),
-                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getQuantidadeEmprestimo()
+                                listaEmprestimoLocatarioModel.get(i).getEmprestimoLivroModel().getQuantidadeEmprestimo()+" Livros"
                             });
                 }
             }

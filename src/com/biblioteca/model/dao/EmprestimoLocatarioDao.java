@@ -38,6 +38,7 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                     + "INNER JOIN tbl_locador ON tbl_locador.pk_id_locador = tbl_emprestimo.fk_locador "
                     + "INNER JOIN tbl_livro ON tbl_livro.pk_id_livro = tbl_emprestimo.fk_livro "
                     + "INNER JOIN tbl_emprestimo_livro ON tbl_emprestimo.pk_id_emprestimo=tbl_emprestimo_livro.pk_id_emprestimo_livro;");
+
             while (this.getResultSet().next()) {
                 locatarioModel = new LocatarioModel();
                 locadorModel = new LocadorModel();
@@ -47,7 +48,6 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                 emprestimoLivroModel = new EmprestimoLivroModel();
 
                 // emprestimo
-                emprestimoModel = new EmprestimoModel();
                 emprestimoModel.setIdEmprestimo(this.getResultSet().getInt(1));
                 emprestimoModel.setIdLocador(this.getResultSet().getInt(2));
                 emprestimoModel.setIdLocatario(this.getResultSet().getInt(3));
@@ -57,7 +57,6 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                 emprestimoModel.setStatusEmprestimo(this.getResultSet().getString(7));
 
                 // locatário
-                locatarioModel = new LocatarioModel();
                 locatarioModel.setIdLocatario(this.getResultSet().getInt(8));
                 locatarioModel.setNomeLocatario(this.getResultSet().getString(9));
                 locatarioModel.setLogradouroLocatario(this.getResultSet().getString(10));
@@ -71,7 +70,6 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                 locatarioModel.setStatusLocatario(this.getResultSet().getString(18));
 
                 // locador
-                locadorModel = new LocadorModel();
                 locadorModel.setIdLocador(this.getResultSet().getInt(19));
                 locadorModel.setNomeLocador(this.getResultSet().getString(20));
                 locadorModel.setLogradouroLocador(this.getResultSet().getString(21));
@@ -84,7 +82,6 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                 locadorModel.setEmailLocador(this.getResultSet().getString(28));
 
                 // livro
-                livroModel = new LivroModel();
                 livroModel.setIdLivro(this.getResultSet().getInt(29));
                 livroModel.setTituloLivro(this.getResultSet().getString(30));
                 livroModel.setAutor1Livro(this.getResultSet().getString(31));
@@ -97,19 +94,18 @@ public class EmprestimoLocatarioDao extends ConnectionMySQL implements IEmpresti
                 livroModel.setDescricaoLivro(this.getResultSet().getString(38));
 
                 //emprestimo livro
-                emprestimoLivroModel = new EmprestimoLivroModel();
                 emprestimoLivroModel.setIdEmprestimo(this.getResultSet().getInt(39));
                 emprestimoLivroModel.setIdLivro(this.getResultSet().getInt(40));
                 emprestimoLivroModel.setIdEmprestimoLivro(this.getResultSet().getInt(41));
                 emprestimoLivroModel.setQuantidadeEmprestimo(this.getResultSet().getInt(42));
 
                 //emprestimo locatario
-                emprestimoLocatarioModel = new EmprestimoLocatarioModel();
                 emprestimoLocatarioModel.setEmprestimoModel(emprestimoModel);
                 emprestimoLocatarioModel.setLocatarioModel(locatarioModel);
                 emprestimoLocatarioModel.setLocadorModel(locadorModel);
                 emprestimoLocatarioModel.setLivroModel(livroModel);
-
+                emprestimoLocatarioModel.setEmprestimoLivroModel(emprestimoLivroModel);
+                
                 listaEmprestimoLocatarioModel.add(emprestimoLocatarioModel);
             }
         } catch (SQLException e) {

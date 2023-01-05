@@ -14,10 +14,11 @@ public class ConnectionMySQL {
     private ResultSet resultSet;
     private boolean status = false;
 
-    private String servidor = "192.168.0.253"; //OU localhost
+//    private String servidor = "192.168.0.253"; //OU localhost
+    private String servidor = "192.168.0.203"; //<- maquina nova
     private String banco = "livraria_backup";
-    private String usuario = "cci";
-    private String senha = "@3325cci3333";
+    private String usuario = "nsoft";
+    private String senha = "Jos3@Luiz";
 
     /**
      *

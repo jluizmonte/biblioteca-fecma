@@ -561,7 +561,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     private void jbRemoverItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRemoverItensActionPerformed
         int linha = jtAdicionarEmprestimo.getSelectedRow();
         if (linha < 0) {
-            JOptionPane.showMessageDialog(this, "Selecione um livro!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione um livro!", "Atenção!",
+                    JOptionPane.WARNING_MESSAGE);
         } else {
             DefaultTableModel modelo = (DefaultTableModel) jtAdicionarEmprestimo.getModel();
             modelo.removeRow(linha);
@@ -582,7 +583,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             carregarEmprestimo();
             carregarLivroDevolucao();
         } else {
-            JOptionPane.showMessageDialog(this, "Empréstimo cancelado pelo locador!", "Atenção", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Empréstimo cancelado pelo locador!",
+                    "Atenção", JOptionPane.ERROR_MESSAGE);
             limparCampos();
             listarLocatarios();
             listarLocadores();
@@ -597,46 +599,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jlAdicionarMouseClicked
 
     private void jbDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDevolverActionPerformed
-        Object[] opcoes = {"Sim", "Não"};
-        Object resposta;
-        resposta = JOptionPane.showInputDialog(null, "Registrar devolução do(s) livro(s)", "Registrar?",
-                JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
-        if (resposta.equals("Sim")) {
-            int linha = jtDevolucaoLivro.getSelectedRow();
-            int codigoEmprestimo = (int) jtDevolucaoLivro.getValueAt(linha, 0);
-
-            listaLivrosEmprestimosLivrosModel = livrosEmprestimosLivrosService.getListaLivrosEmprestimosLivrosDAO(codigoEmprestimo);
-            emprestimoModel = emprestimoService.getEmprestimoDAO(codigoEmprestimo);
-            for (int i = 0; i < listaLivrosEmprestimosLivrosModel.size(); i++) {
-
-                livroModel = new LivroModel();
-                emprestimoLivroModel = new EmprestimoLivroModel();
-
-                livroModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
-                livroModel.setQtdeLivro(
-                        livroModel.getQtdeLivro()
-                        + listaLivrosEmprestimosLivrosModel.get(i).getEmprestimoLivroModel().getQuantidadeEmprestimo());
-
-                emprestimoModel.setStatusEmprestimo("INATIVO");
-                emprestimoModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
-                emprestimoModel.setDataDevolucao(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 4)));
-                emprestimoModel.setDataEmprestimo(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 3)));
-
-                livroModel.setQtdeLivro(1);
-                listaLivroModel.add(livroModel);
-            }
-
-            try {
-                livroService.alterarEstoqueLivrosDAO(listaLivroModel);
-                emprestimoService.atualizarEmprestimoDAO(emprestimoModel);
-                JOptionPane.showMessageDialog(this, "Livro devolvido com sucesso!", "Atenção",
-                        JOptionPane.WARNING_MESSAGE);
-                carregarEmprestimo();
-                carregarLivroDevolucao();
-            } catch (HeadlessException e) {
-                JOptionPane.showMessageDialog(this, "Erro ao registrar a devolução", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        devolverLivro();
     }//GEN-LAST:event_jbDevolverActionPerformed
 
     private void jtListarEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListarEmprestimoMouseClicked
@@ -752,6 +715,33 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         }
     }
 
+    private void carregarLivroDevolucao() {
+        DefaultTableModel modelo = (DefaultTableModel) jtDevolucaoLivro.getModel();
+        // Setando a quantidade de linhas que a tabela para não haver duplicação de
+        // dados
+        modelo.setNumRows(0);
+        try {
+            // insere os produtos na tabela
+            int cont = listaEmprestimoLocatarioModel.size();
+            for (int i = 0; i < cont; i++) {
+                if (listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getStatusEmprestimo().equals("ATIVO")) {
+                    modelo.addRow(
+                            new Object[]{
+                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getIdEmprestimo(),
+                                listaEmprestimoLocatarioModel.get(i).getLivroModel().getTituloLivro(),
+                                listaEmprestimoLocatarioModel.get(i).getLocatarioModel().getNomeLocatario(),
+                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataEmprestimo(),
+                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataDevolucao(),
+                                listaEmprestimoLocatarioModel.get(i).getEmprestimoLivroModel().getQuantidadeEmprestimo() + " Livros"
+                            });
+                }
+            }
+
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao buscar livros para preencher a tabela\n" + e.toString());
+        }
+    }
+
     private void adicionarLivroTabela() {
         int codigoLivro, codigoLocador, codigoLocatario, quantidade;
 
@@ -802,33 +792,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                 dataDevolucao,
                 quantidade
             });
-        }
-    }
-
-    private void carregarLivroDevolucao() {
-        DefaultTableModel modelo = (DefaultTableModel) jtDevolucaoLivro.getModel();
-        // Setando a quantidade de linhas que a tabela para não haver duplicação de
-        // dados
-        modelo.setNumRows(0);
-        try {
-            // insere os produtos na tabela
-            int cont = listaEmprestimoLocatarioModel.size();
-            for (int i = 0; i < cont; i++) {
-                if (listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getStatusEmprestimo().equals("ATIVO")) {
-                    modelo.addRow(
-                            new Object[]{
-                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getIdEmprestimo(),
-                                listaEmprestimoLocatarioModel.get(i).getLivroModel().getTituloLivro(),
-                                listaEmprestimoLocatarioModel.get(i).getLocatarioModel().getNomeLocatario(),
-                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataEmprestimo(),
-                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataDevolucao(),
-                                listaEmprestimoLocatarioModel.get(i).getEmprestimoLivroModel().getQuantidadeEmprestimo()+" Livros"
-                            });
-                }
-            }
-
-        } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao buscar livros para preencher a tabela\n" + e.toString());
         }
     }
 
@@ -922,6 +885,49 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Erro ao salvar os livros do empréstimo!", "Erro",
                     JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void devolverLivro() {
+        Object[] opcoes = {"Sim", "Não"};
+        Object resposta;
+        resposta = JOptionPane.showInputDialog(null, "Registrar devolução do(s) livro(s)", "Registrar?",
+                JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
+        if (resposta.equals("Sim")) {
+            int linha = jtDevolucaoLivro.getSelectedRow();
+            int codigoEmprestimo = (int) jtDevolucaoLivro.getValueAt(linha, 0);
+
+            listaLivrosEmprestimosLivrosModel = livrosEmprestimosLivrosService.getListaLivrosEmprestimosLivrosDAO(codigoEmprestimo);
+            emprestimoModel = emprestimoService.getEmprestimoDAO(codigoEmprestimo);
+            for (int i = 0; i < listaLivrosEmprestimosLivrosModel.size(); i++) {
+
+                livroModel = new LivroModel();
+                emprestimoLivroModel = new EmprestimoLivroModel();
+
+                livroModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
+                livroModel.setQtdeLivro(
+                        livroModel.getQtdeLivro()
+                        + listaLivrosEmprestimosLivrosModel.get(i).getEmprestimoLivroModel().getQuantidadeEmprestimo());
+
+                emprestimoModel.setStatusEmprestimo("INATIVO");
+                emprestimoModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
+                emprestimoModel.setDataDevolucao(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 4)));
+                emprestimoModel.setDataEmprestimo(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 3)));
+
+                livroModel.setQtdeLivro(1);
+                listaLivroModel.add(livroModel);
+            }
+
+            try {
+                livroService.alterarEstoqueLivrosDAO(listaLivroModel);
+                emprestimoService.atualizarEmprestimoDAO(emprestimoModel);
+                JOptionPane.showMessageDialog(this, "Livro devolvido com sucesso!", "Atenção",
+                        JOptionPane.WARNING_MESSAGE);
+                carregarEmprestimo();
+                carregarLivroDevolucao();
+            } catch (HeadlessException e) {
+                JOptionPane.showMessageDialog(this, "Erro ao registrar a devolução", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

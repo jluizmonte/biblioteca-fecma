@@ -380,11 +380,13 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         int linha = jtLivroPesquisa.getSelectedRow();
         String tituloLivro = (String) jtLivroPesquisa.getValueAt(linha, 0);
         livroModel = livroService.getLivroDAO(tituloLivro);
+        
         Object[] options = {"Sim", "Não"};
         int n = JOptionPane.showOptionDialog(null,
                 "Deseja alterar este livro:\n" + tituloLivro + " ?",
                 "Atenção", JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        
         if (n == 0) {
             alterarSalvar = "alterar";
             try {

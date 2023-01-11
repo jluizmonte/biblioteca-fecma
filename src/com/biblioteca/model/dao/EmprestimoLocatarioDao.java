@@ -8,7 +8,7 @@ import com.biblioteca.model.EmprestimoModel;
 import com.biblioteca.model.LivroModel;
 import com.biblioteca.model.LocadorModel;
 import com.biblioteca.model.LocatarioModel;
-import java.sql.SQLException;
+import java.sql.SQLException;                                                                                                                                                                                                                                                                                                                                                                                                                                          
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 

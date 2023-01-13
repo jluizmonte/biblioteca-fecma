@@ -23,7 +23,8 @@ public class LivrosEmprestimosLivrosDao extends ConnectionMySQL implements ILivr
         EmprestimoLivroModel emprestimoLivroModel = new EmprestimoLivroModel();
         try {
             this.conectar();
-            this.executarSQL("select * from tbl_livro join tbl_emprestimo_livro on pk_id_livro=pk_id_emprestimo_livro where fk_emprestimo='" + pCodigoEmprestimo + "';");
+            this.executarSQL("select * from tbl_livro join tbl_emprestimo_livro "
+                    + "on pk_id_livro=pk_id_emprestimo_livro where fk_emprestimo='" + pCodigoEmprestimo + "';");
 
             while (this.getResultSet().next()) {
                 livrosEprestimoLivroModel = new LivrosEmprestimosLivrosModel();
@@ -46,10 +47,10 @@ public class LivrosEmprestimosLivrosDao extends ConnectionMySQL implements ILivr
                 emprestimoLivroModel.setIdLivro(this.getResultSet().getInt(12));
                 emprestimoLivroModel.setIdEmprestimo(this.getResultSet().getInt(13));
                 emprestimoLivroModel.setQuantidadeEmprestimo(this.getResultSet().getInt(14));
-
+                System.out.print("Livros: " + emprestimoLivroModel.getQuantidadeEmprestimo());
                 livrosEprestimoLivroModel.setLivroModel(livroModel);
                 livrosEprestimoLivroModel.setEmprestimoLivroModel(emprestimoLivroModel);
- 
+
                 listaLivroEmprestimoLivroModel.add(livrosEprestimoLivroModel);
             }
         } catch (SQLException e) {

@@ -16,7 +16,7 @@ public class ConnectionMySQL {
 
     private String servidor = "192.168.0.253"; //OU localhost
  //   private String servidor = "192.168.0.211"; //<- maquina nova
-    private String banco = "livraria";
+    private String banco = "livraria_backup";
     private String usuario = "cci";
     private String senha = "@3325cci3333";
 

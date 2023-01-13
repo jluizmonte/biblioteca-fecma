@@ -142,11 +142,9 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
         jtfAutor1.setEditable(false);
         jtfAutor1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jtfAutor1.setForeground(new java.awt.Color(0, 0, 0));
 
         jtfAutor2.setEditable(false);
         jtfAutor2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jtfAutor2.setForeground(new java.awt.Color(0, 0, 0));
 
         jcbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jcbTitulo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LIVRO" }));
@@ -507,19 +505,21 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addGap(51, 51, 51)
-                    .addComponent(jScrollPane3)
-                    .addContainerGap())
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(208, Short.MAX_VALUE)
-                    .addComponent(jLabel7)
-                    .addGap(188, 188, 188)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbDevolver)
-                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 207, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(188, 188, 188))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jbDevolver)
+                                .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

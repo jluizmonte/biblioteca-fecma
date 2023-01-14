@@ -24,7 +24,7 @@ public class Teste {
         SessaoUsuarioModel.loginUsuario = "luiz";
         SessaoUsuarioModel.nivelAcesso = "ADMINISTRADOR";
         SessaoUsuarioModel.nomeUsuario = "José Luiz";
-            new FrmTelaPrincipal().setVisible(true);
+          new FrmTelaPrincipal().setVisible(true);
 //        SplashView Splash = new SplashView();
 //        Splash.setVisible(true);
 //        for (int i = 0; i <= 50; i++) {

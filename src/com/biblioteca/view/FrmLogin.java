@@ -1,7 +1,6 @@
 package com.biblioteca.view;
 
 import com.biblioteca.model.SessaoUsuarioModel;
-import com.biblioteca.model.SessaoUsuarioModel;
 import com.biblioteca.model.UsuarioModel;
 import com.biblioteca.service.UsuarioService;
 import java.awt.Color;

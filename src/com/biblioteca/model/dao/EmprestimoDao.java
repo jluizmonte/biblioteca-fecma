@@ -84,7 +84,8 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
         try {
             this.conectar();
             return this.executarInsertUpdateSQL(
-                    "UPDATE tbl_emprestimo SET " + "pk_id_emprestimo = '" + pEmprestimoModel.getIdEmprestimo() + "',"
+                    //                    "UPDATE tbl_emprestimo SET " + "pk_id_emprestimo = '" + pEmprestimoModel.getIdEmprestimo() + "',"
+                    "UPDATE tbl_emprestimo SET "
                     + "fk_locador ='" + pEmprestimoModel.getIdLocador()
                     + "'," + "fk_locatario = '" + pEmprestimoModel.getIdLocatario() + "',"
                     + "fk_livro ='" + pEmprestimoModel.getIdLivro() + "',"

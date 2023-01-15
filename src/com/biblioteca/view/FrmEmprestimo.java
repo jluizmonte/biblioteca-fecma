@@ -815,8 +815,9 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     public void realizarEmprestimo() {
         int codigoLivro = 0;
         int codigoLocador, codigoLocatario = 0;
-        int codigoEmprestimo;
-
+        int codigoProduto = 0;
+        int codigoEmprestimo = 0;
+        // int quantidade = 0;
         String status = "ATIVO";
         listaEmprestimoLivroModel = new ArrayList<>();
 
@@ -833,34 +834,30 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         codigoLivro = livroModel.getIdLivro();
 
         int cont = jtAdicionarEmprestimo.getRowCount();
-
         for (int i = 0; i < cont; i++) {
             livroModel = new LivroModel();
             emprestimoModel = new EmprestimoModel();
 
-            livroModel = livroService.getLivroDAO(codigoLivro);
+            livroModel = livroService.getLivroDAO(codigoProduto);
             emprestimoLivroModel = new EmprestimoLivroModel();
-            //codigoEmprestimo = (int) jtAdicionarEmprestimo.getValueAt(i, 0);
+            codigoProduto = (int) jtAdicionarEmprestimo.getValueAt(i, 0);
 
             // emprestimo
             emprestimoModel.setIdLocador(codigoLocador);
             emprestimoModel.setIdLocatario(codigoLocatario);
-            //    emprestimoModel.setIdEmprestimo(codigoEmprestimo);
-            emprestimoModel.setIdLivro(codigoLivro);
-
-            int qtde = Integer.parseInt(jtAdicionarEmprestimo.getValueAt(i, 4).toString());
-
-            emprestimoModel.setQuantidadeEmprestimo(qtde);
+            emprestimoModel.setIdEmprestimo(codigoProduto);
+            emprestimoModel.setIdLivro(codigoProduto);
+            emprestimoModel.setQuantidadeEmprestimo(Integer.parseInt(jtAdicionarEmprestimo.getValueAt(i, 4).toString()));
             emprestimoModel.setStatusEmprestimo(status);
             emprestimoModel.setDataDevolucao(jtAdicionarEmprestimo.getValueAt(i, 3).toString());
             emprestimoModel.setDataEmprestimo(jtAdicionarEmprestimo.getValueAt(i, 2).toString());
 
             codigoEmprestimo = emprestimoService.salvarEmprestimoDAO(emprestimoModel);
             if (codigoEmprestimo > 0) {
-                JOptionPane.showMessageDialog(this, "Empréstimo registrado com sucesso!\n"
-                        + "Locador: " + locadorModel.getNomeLocador() + "\n"
-                        + "Locatário: " + locatarioModel.getNomeLocatario() + "\n"
-                        + "Data de Devolução: " + emprestimoModel.getDataDevolucao() + "\n",
+                JOptionPane.showMessageDialog(this,
+                        "Empréstimo registrado com sucesso:\n" + "Locador: " + locadorModel.getNomeLocador() + "\n"
+                        + "Locatário: " + locatarioModel.getNomeLocatario() + "\n" + "Data de Devolução: "
+                        + emprestimoModel.getDataDevolucao() + "\n",
                         "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao registrar o empréstimo!", "Erro",
@@ -868,17 +865,16 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             }
 
             // emprestimo livro
-            emprestimoLivroModel.setIdEmprestimoLivro(codigoEmprestimo);
-            emprestimoLivroModel.setIdLivro(codigoLivro);
+            emprestimoLivroModel.setIdEmprestimoLivro(emprestimoModel.getIdEmprestimo());
+            emprestimoLivroModel.setIdLivro(codigoProduto);
             emprestimoLivroModel.setQuantidadeEmprestimo(emprestimoModel.getQuantidadeEmprestimo());
-            //   emprestimoLivroModel.setIdEmprestimo(codigoEmprestimo);
+            emprestimoLivroModel.setIdEmprestimo(emprestimoModel.getIdEmprestimo());
 
             // livro
-            livroModel.setIdLivro(codigoLivro);
-            livroModel.setQtdeLivro(livroService.getLivroDAO(codigoLivro).getQtdeLivro()
+            livroModel.setIdLivro(codigoProduto);
+            livroModel.setQtdeLivro(livroService.getLivroDAO(codigoProduto).getQtdeLivro()
                     - Integer.parseInt(jtAdicionarEmprestimo.getValueAt(i, 4).toString()));
-            livroModel.setTituloLivro(livroService.getLivroDAO(codigoLivro).getTituloLivro());
-
+            livroModel.setTituloLivro(livroService.getLivroDAO(codigoProduto).getTituloLivro());
             listaEmprestimoLivroModel.add(emprestimoLivroModel);
             listaLivroModel.add(livroModel);
         }
@@ -888,8 +884,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             // alterar estoque de livros
             livroService.alterarEstoqueLivrosDAO(listaLivroModel);
         } else {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar os livros do empréstimo!", "Erro",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao salvar os livros do empréstimo!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -902,45 +897,43 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             int linha = jtDevolucaoLivro.getSelectedRow();
             int codigoEmprestimo = (int) jtDevolucaoLivro.getValueAt(linha, 0);
 
-            listaLivrosEmprestimosLivrosModel
-                    = livrosEmprestimosLivrosService.getListaLivrosEmprestimosLivrosDAO(codigoEmprestimo);
+            listaLivrosEmprestimosLivrosModel = livrosEmprestimosLivrosService
+                    .getListaLivrosEmprestimosLivrosDAO(codigoEmprestimo);
 
-            emprestimoLivroModel = emprestimoLivroService.getEmprestimosLivrosDAO(codigoEmprestimo);
             emprestimoModel = emprestimoService.getEmprestimoDAO(codigoEmprestimo);
-
-            JOptionPane.showMessageDialog(null, emprestimoLivroModel.getQuantidadeEmprestimo());
-            String nomeLivro = String.valueOf(jtDevolucaoLivro.getValueAt(linha, 1));
             for (int i = 0; i < listaLivrosEmprestimosLivrosModel.size(); i++) {
+
                 livroModel = new LivroModel();
-                //   emprestimoLivroModel = new EmprestimoLivroModel();
+                emprestimoLivroModel = new EmprestimoLivroModel();
+
                 livroModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
                 livroModel.setQtdeLivro(
-                        livroService.getLivroDAO(nomeLivro).getQtdeLivro()
-                        + listaLivrosEmprestimosLivrosModel.get(i).getEmprestimoLivroModel().getQuantidadeEmprestimo());
-                int x = listaLivrosEmprestimosLivrosModel.get(i).getEmprestimoLivroModel().getQuantidadeEmprestimo();
-                JOptionPane.showMessageDialog(null, x);
+                        (listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getQtdeLivro()
+                        + listaLivrosEmprestimosLivrosModel.get(i).getEmprestimoLivroModel()
+                                .getQuantidadeEmprestimo()));
 
                 emprestimoModel.setStatusEmprestimo("INATIVO");
+                emprestimoModel.setIdEmprestimo(codigoEmprestimo);
                 emprestimoModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
                 emprestimoModel.setDataDevolucao(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 4)));
                 emprestimoModel.setDataEmprestimo(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 3)));
-                emprestimoLivroModel.setIdEmprestimo(codigoEmprestimo);
-                livroModel.setQtdeLivro(1);
                 listaLivroModel.add(livroModel);
-
             }
 
             try {
-                emprestimoService.atualizarEmprestimoDAO(emprestimoModel);
                 livroService.alterarEstoqueLivrosDAO(listaLivroModel);
+                emprestimoService.atualizarEmprestimoDAO(emprestimoModel);
                 JOptionPane.showMessageDialog(this, "Livro devolvido com sucesso!", "Atenção",
                         JOptionPane.WARNING_MESSAGE);
-                carregarEmprestimo();
-                carregarLivroDevolucao();
+
             } catch (HeadlessException e) {
                 JOptionPane.showMessageDialog(this, "Erro ao registrar a devolução", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         }
+        carregarEmprestimo();
+        carregarLivroDevolucao();
+        listarLivros();
+        limparCampos();
     }
 
     private void corLinhaTabela() {

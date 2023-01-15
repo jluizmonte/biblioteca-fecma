@@ -14,12 +14,14 @@ public class ConnectionMySQL {
     private ResultSet resultSet;
     private boolean status = false;
 
-    private String servidor = "192.168.0.253"; //OU localhost
- //   private String servidor = "192.168.0.211"; //<- maquina nova
+//    private String servidor = "192.168.0.253"; //OU localhost
+    //   private String servidor = "192.168.0.211"; //<- maquina nova
+    private String servidor = "localhost";
     private String banco = "livraria_backup";
-    private String usuario = "cci";
-    private String senha = "@3325cci3333";
-
+//    private String usuario = "cci";
+//    private String senha = "@3325cci3333";
+    private String usuario = "root";
+    private String senha = "Jos3@Luiz";
     /**
      *
      * @return getCon() retorna a conexão com sucesso ou não

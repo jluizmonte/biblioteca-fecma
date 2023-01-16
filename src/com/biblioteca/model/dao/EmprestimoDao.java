@@ -16,12 +16,12 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
     public int salvarEmprestimoDAO(EmprestimoModel pEmprestimoModel) {
         try {
             this.conectar();
-            this.executarInsertUpdateSQL("INSERT INTO tbl_emprestimo (fk_locador,fk_locatario,fk_livro,"
+            return this.insertSQL("INSERT INTO tbl_emprestimo (fk_locador,fk_locatario,fk_livro,"
                     + "data_emprestimo,devolucao_emprestimo,status_emprestimo" + ") VALUES (" + "'"
                     + pEmprestimoModel.getIdLocador() + "'," + "'" + pEmprestimoModel.getIdLocatario() + "'," + "'"
                     + pEmprestimoModel.getIdLivro() + "'," + "'" + pEmprestimoModel.getDataEmprestimo() + "'," + "'"
                     + pEmprestimoModel.getDataDevolucao() + "','" + pEmprestimoModel.getStatusEmprestimo() + "');");
-            return 1;
+            //   return 1;
         } catch (Exception e) {
             e.toString();
             return 0;

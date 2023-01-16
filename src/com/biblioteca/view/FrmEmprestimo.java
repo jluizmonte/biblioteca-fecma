@@ -812,7 +812,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         }
     }
 
-  public void realizarEmprestimo() {
+    public void realizarEmprestimo() {
         int codigoLivro = 0;
         int codigoLocador, codigoLocatario = 0;
         int codigoProduto = 0;
@@ -837,7 +837,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         for (int i = 0; i < cont; i++) {
             livroModel = new LivroModel();
             emprestimoModel = new EmprestimoModel();
-
             livroModel = livroService.getLivroDAO(codigoProduto);
             emprestimoLivroModel = new EmprestimoLivroModel();
             codigoProduto = (int) jtAdicionarEmprestimo.getValueAt(i, 0);
@@ -864,12 +863,11 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                         JOptionPane.ERROR_MESSAGE);
             }
 
-            // emprestimo livro
-            emprestimoLivroModel.setIdEmprestimoLivro(emprestimoModel.getIdEmprestimo());
-            emprestimoLivroModel.setIdLivro(codigoProduto);
+            emprestimoLivroModel.setIdEmprestimoLivro(codigoProduto);
+            emprestimoLivroModel.setIdLivro(codigoLivro);
+            emprestimoLivroModel.setIdEmprestimo(codigoEmprestimo);
             emprestimoLivroModel.setQuantidadeEmprestimo(emprestimoModel.getQuantidadeEmprestimo());
-            emprestimoLivroModel.setIdEmprestimo(emprestimoModel.getIdEmprestimo());
-
+          
             // livro
             livroModel.setIdLivro(codigoProduto);
             livroModel.setQtdeLivro(livroService.getLivroDAO(codigoProduto).getQtdeLivro()

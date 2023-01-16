@@ -15,13 +15,14 @@ public class ConnectionMySQL {
     private boolean status = false;
 
 //    private String servidor = "192.168.0.253"; //OU localhost
-    //   private String servidor = "192.168.0.211"; //<- maquina nova
-    private String servidor = "localhost";
+    private String servidor = "192.168.0.253"; //<- maquina nova
+//    private String servidor = "localhost";
     private String banco = "livraria_backup";
-//    private String usuario = "cci";
-//    private String senha = "@3325cci3333";
-    private String usuario = "root";
-    private String senha = "Jos3@Luiz";
+    private String usuario = "cci";
+    private String senha = "@3325cci3333";
+//    private String usuario = "root";
+//    private String senha = "Jos3@Luiz";
+
     /**
      *
      * @return getCon() retorna a conexão com sucesso ou não
@@ -89,6 +90,30 @@ public class ConnectionMySQL {
             return false;
         }
         return true;
+    }
+
+    public int insertSQL(String pSQL) {
+        int status = 0;
+        try {
+            // createStatement de con para criar o Statement
+            this.setStatement(getCon().createStatement());
+
+            // Definido o Statement, executamos a query no banco de dados
+            this.getStatement().executeUpdate(pSQL);
+
+            // consulta o ultimo id inserido
+            this.setResultSet(this.getStatement().executeQuery("SELECT last_insert_id();"));
+
+            // recupera o ultimo id inserido
+            while (this.resultSet.next()) {
+                status = this.resultSet.getInt(1);
+            }
+            // retorna o ultimo id inserido
+            return status;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return status;
+        }
     }
 
     /**

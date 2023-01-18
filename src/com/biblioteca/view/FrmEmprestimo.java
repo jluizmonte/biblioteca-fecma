@@ -812,7 +812,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         }
     }
 
-    public void realizarEmprestimo() {
+    public void realizarEmprestimo() 
+    {
         int codigoLivro = 0;
         int codigoLocador, codigoLocatario = 0;
         int codigoProduto = 0;

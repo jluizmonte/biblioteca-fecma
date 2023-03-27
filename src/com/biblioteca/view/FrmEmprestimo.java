@@ -42,7 +42,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
     EmprestimoModel emprestimoModel = new EmprestimoModel();
     EmprestimoService emprestimoService = new EmprestimoService();
-
+    ArrayList<EmprestimoModel> listaEmprestimoModel = new ArrayList<>();
+    
     EmprestimoLocatarioService emprestimoLocatarioService = new EmprestimoLocatarioService();
     ArrayList<EmprestimoLocatarioModel> listaEmprestimoLocatarioModel = new ArrayList<>();
 
@@ -195,7 +196,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jcbLocatario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UM LOCATÁRIO" }));
 
         try {
-            jtfDataEmprestimo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
+            jtfDataEmprestimo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -203,7 +204,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         jtfDataEmprestimo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         try {
-            jtfDataDevolucao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
+            jtfDataDevolucao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -693,21 +694,22 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
     private void carregarEmprestimo() {
         DefaultTableModel modelo = (DefaultTableModel) jtListarEmprestimo.getModel();
-        listaEmprestimoLocatarioModel = emprestimoLocatarioService.getListaEmprestimosLocatarioDAO();
+       // listaEmprestimoLocatarioModel = emprestimoLocatarioService.getListaEmprestimosLocatarioDAO();
+        listaEmprestimoModel = emprestimoService.getEmprestimoListaDAO();
         modelo.setNumRows(0);
 
         try {
-            int cont = listaEmprestimoLocatarioModel.size();
+            int cont = listaEmprestimoModel.size();
             for (int i = 0; i < cont; i++) {
                 modelo.addRow(
                         new Object[]{
-                            listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getIdEmprestimo(),
-                            listaEmprestimoLocatarioModel.get(i).getLivroModel().getTituloLivro(),
-                            listaEmprestimoLocatarioModel.get(i).getLocadorModel().getNomeLocador(),
-                            listaEmprestimoLocatarioModel.get(i).getLocatarioModel().getNomeLocatario(),
-                            listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataEmprestimo(),
-                            listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataDevolucao(),
-                            listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getStatusEmprestimo()});
+                            listaEmprestimoModel.get(i).getIdEmprestimo(),
+                            listaEmprestimoModel.get(i).getLivroModel().getTituloLivro(),
+                            listaEmprestimoModel.get(i).getLocadorModel().getNomeLocador(),
+                            listaEmprestimoModel.get(i).getLocatarioModel().getNomeLocatario(),
+                            listaEmprestimoModel.get(i).getDataEmprestimo(),
+                            listaEmprestimoModel.get(i).getDataDevolucao(),
+                            listaEmprestimoModel.get(i).getStatusEmprestimo()});
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao buscar livros para preencher a tabela\n" + e.toString());
@@ -721,17 +723,17 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         modelo.setNumRows(0);
         try {
             // insere os produtos na tabela
-            int cont = listaEmprestimoLocatarioModel.size();
+            int cont = listaEmprestimoModel.size();
             for (int i = 0; i < cont; i++) {
-                if (listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getStatusEmprestimo().equals("ATIVO")) {
+                if (listaEmprestimoModel.get(i).getStatusEmprestimo().equals("ATIVO")) {
                     modelo.addRow(
                             new Object[]{
-                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getIdEmprestimo(),
-                                listaEmprestimoLocatarioModel.get(i).getLivroModel().getTituloLivro(),
-                                listaEmprestimoLocatarioModel.get(i).getLocatarioModel().getNomeLocatario(),
-                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataEmprestimo(),
-                                listaEmprestimoLocatarioModel.get(i).getEmprestimoModel().getDataDevolucao(),
-                                listaEmprestimoLocatarioModel.get(i).getEmprestimoLivroModel().getQuantidadeEmprestimo()
+                                listaEmprestimoModel.get(i).getIdEmprestimo(),
+                                listaEmprestimoModel.get(i).getLivroModel().getTituloLivro(),
+                                listaEmprestimoModel.get(i).getLocatarioModel().getNomeLocatario(),
+                                listaEmprestimoModel.get(i).getDataEmprestimo(),
+                                listaEmprestimoModel.get(i).getDataDevolucao(),
+                                listaEmprestimoModel.get(i).getQuantidadeEmprestimo()
                             });
                 }
             }
@@ -812,8 +814,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         }
     }
 
-    public void realizarEmprestimo() 
-    {
+    public void realizarEmprestimo() {
         int codigoLivro = 0;
         int codigoLocador, codigoLocatario = 0;
         int codigoProduto = 0;
@@ -868,7 +869,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             emprestimoLivroModel.setIdLivro(codigoLivro);
             emprestimoLivroModel.setIdEmprestimo(codigoEmprestimo);
             emprestimoLivroModel.setQuantidadeEmprestimo(emprestimoModel.getQuantidadeEmprestimo());
-          
+
             // livro
             livroModel.setIdLivro(codigoProduto);
             livroModel.setQtdeLivro(livroService.getLivroDAO(codigoProduto).getQtdeLivro()

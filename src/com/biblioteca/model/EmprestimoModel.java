@@ -1,5 +1,7 @@
 package com.biblioteca.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Instrutores
@@ -12,8 +14,16 @@ public class EmprestimoModel {
     private int idLivro;
     private String dataEmprestimo;
     private String dataDevolucao;
-    private String statusEmprestimo;
     private int quantidadeEmprestimo;
+    private String statusEmprestimo;
+
+    private LocatarioModel locatarioModel;
+    private LocadorModel locadorModel;
+    private LivroModel livroModel;
+    private EmprestimoLivroModel emprestimoLivroModel;
+    private ArrayList<EmprestimoModel> listaEmprestimoModel;
+
+    private int idEmprestimoLivro;
 
     public int getIdEmprestimo() {
         return idEmprestimo;
@@ -78,5 +88,55 @@ public class EmprestimoModel {
     public void setQuantidadeEmprestimo(int quantidadeEmprestimo) {
         this.quantidadeEmprestimo = quantidadeEmprestimo;
     }
+
+    public LocatarioModel getLocatarioModel() {
+        return locatarioModel;
+    }
+
+    public void setLocatarioModel(LocatarioModel locatarioModel) {
+        this.locatarioModel = locatarioModel;
+    }
+
+    public LocadorModel getLocadorModel() {
+        return locadorModel;
+    }
+
+    public void setLocadorModel(LocadorModel locadorModel) {
+        this.locadorModel = locadorModel;
+    }
+
+    public LivroModel getLivroModel() {
+        return livroModel;
+    }
+
+    public void setLivroModel(LivroModel livroModel) {
+        this.livroModel = livroModel;
+    }
+
+    public EmprestimoLivroModel getEmprestimoLivroModel() {
+        return emprestimoLivroModel;
+    }
+
+    public void setEmprestimoLivroModel(EmprestimoLivroModel emprestimoLivroModel) {
+        this.emprestimoLivroModel = emprestimoLivroModel;
+    }
+
+    public ArrayList<EmprestimoModel> getListaEmprestimoModel() {
+        return listaEmprestimoModel;
+    }
+
+    public void setListaEmprestimoModel(ArrayList<EmprestimoModel> listaEmprestimoModel) {
+        this.listaEmprestimoModel = listaEmprestimoModel;
+    }
+
+    public int getIdEmprestimoLivro() {
+        return idEmprestimoLivro;
+    }
+
+    public void setIdEmprestimoLivro(int idEmprestimoLivro) {
+        this.idEmprestimoLivro = idEmprestimoLivro;
+    }
+
+    
 
 }

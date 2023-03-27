@@ -3,8 +3,13 @@ package com.biblioteca.model.dao;
 import com.biblioteca.connection.ConnectionMySQL;
 import com.biblioteca.controller.IEmprestimo;
 import com.biblioteca.model.EmprestimoModel;
+import com.biblioteca.model.LivroModel;
+import com.biblioteca.model.LocadorModel;
+import com.biblioteca.model.LocatarioModel;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,10 +22,12 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
         try {
             this.conectar();
             return this.insertSQL("INSERT INTO tbl_emprestimo (fk_locador,fk_locatario,fk_livro,"
-                    + "data_emprestimo,devolucao_emprestimo,status_emprestimo" + ") VALUES (" + "'"
+                    + "data_emprestimo,devolucao_emprestimo, quantidade,status_emprestimo" + ") VALUES (" + "'"
                     + pEmprestimoModel.getIdLocador() + "'," + "'" + pEmprestimoModel.getIdLocatario() + "'," + "'"
                     + pEmprestimoModel.getIdLivro() + "'," + "'" + pEmprestimoModel.getDataEmprestimo() + "'," + "'"
-                    + pEmprestimoModel.getDataDevolucao() + "','" + pEmprestimoModel.getStatusEmprestimo() + "');");
+                    + pEmprestimoModel.getDataDevolucao() + "','"
+                    + pEmprestimoModel.getQuantidadeEmprestimo() + "','"
+                    + pEmprestimoModel.getStatusEmprestimo() + "');");
             //   return 1;
         } catch (Exception e) {
             e.toString();
@@ -154,4 +161,101 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
         }
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
+    public ArrayList<EmprestimoModel> getEmprestimoListaDAO() {
+
+        LocatarioModel locatarioModel = new LocatarioModel();
+        LocadorModel locadorModel = new LocadorModel();
+        LivroModel livroModel = new LivroModel();
+
+        EmprestimoModel emprestimoModel = new EmprestimoModel();
+        ArrayList<EmprestimoModel> ListaEmprestimoModel = new ArrayList<>();
+
+        try {
+            this.conectar();
+            this.executarSQL(
+                    "SELECT * FROM tbl_emprestimo "
+                    + "INNER JOIN tbl_locatario ON tbl_locatario.pk_id_locatario = tbl_emprestimo.fk_locatario "
+                    + "INNER JOIN tbl_locador ON tbl_locador.pk_id_locador = tbl_emprestimo.fk_locador "
+                    + "INNER JOIN tbl_livro ON tbl_livro.pk_id_livro = tbl_emprestimo.fk_livro;");
+
+            while (this.getResultSet().next()) {
+                locatarioModel = new LocatarioModel();
+                locadorModel = new LocadorModel();
+                livroModel = new LivroModel();
+                emprestimoModel = new EmprestimoModel();
+            
+                // emprestimo
+                emprestimoModel.setIdEmprestimo(this.getResultSet().getInt(1));
+                emprestimoModel.setIdLocador(this.getResultSet().getInt(2));
+                emprestimoModel.setIdLocatario(this.getResultSet().getInt(3));
+                emprestimoModel.setIdLivro(this.getResultSet().getInt(4));
+                emprestimoModel.setDataEmprestimo(this.getResultSet().getString(5));
+                emprestimoModel.setDataDevolucao(this.getResultSet().getString(6));
+                emprestimoModel.setQuantidadeEmprestimo(this.getResultSet().getInt(7));
+                emprestimoModel.setStatusEmprestimo(this.getResultSet().getString(8));
+
+                // locatário
+                locatarioModel.setIdLocatario(this.getResultSet().getInt(9));
+                locatarioModel.setNomeLocatario(this.getResultSet().getString(10));
+                locatarioModel.setLogradouroLocatario(this.getResultSet().getString(11));
+                locatarioModel.setNumeroLocatario(this.getResultSet().getString(12));
+                locatarioModel.setBairroLocatario(this.getResultSet().getString(13));
+                locatarioModel.setCidadeLocatario(this.getResultSet().getString(14));
+                locatarioModel.setEstadoLocatario(this.getResultSet().getString(15));
+                locatarioModel.setCepLocatario(this.getResultSet().getString(16));
+                locatarioModel.setTelefoneLocatario(this.getResultSet().getString(17));
+                locatarioModel.setEmailLocatario(this.getResultSet().getString(18));
+                locatarioModel.setStatusLocatario(this.getResultSet().getString(19));
+
+                // locador
+                locadorModel.setIdLocador(this.getResultSet().getInt(20));
+                locadorModel.setNomeLocador(this.getResultSet().getString(21));
+                locadorModel.setLogradouroLocador(this.getResultSet().getString(22));
+                locadorModel.setNumeroLocador(this.getResultSet().getString(23));
+                locadorModel.setBairroLocador(this.getResultSet().getString(24));
+                locadorModel.setCidadeLocador(this.getResultSet().getString(25));
+                locadorModel.setEstadoLocador(this.getResultSet().getString(26));
+                locadorModel.setCepLocador(this.getResultSet().getString(27));
+                locadorModel.setTelefoneLocador(this.getResultSet().getString(28));
+                locadorModel.setEmailLocador(this.getResultSet().getString(29));
+
+                // livro
+                livroModel.setIdLivro(this.getResultSet().getInt(30));
+                livroModel.setTituloLivro(this.getResultSet().getString(31));
+                livroModel.setAutor1Livro(this.getResultSet().getString(32));
+                livroModel.setAutor2Livro(this.getResultSet().getString(33));
+                livroModel.setGeneroLivro(this.getResultSet().getString(34));
+                livroModel.setAnoLivro(this.getResultSet().getString(35));
+                livroModel.setDataCadastroLivro(this.getResultSet().getString(36));
+                livroModel.setQtdeLivro(this.getResultSet().getInt(37));
+                livroModel.setEstadoLivro((this.getResultSet().getString(38)));
+                livroModel.setDescricaoLivro(this.getResultSet().getString(39));
+
+                //emprestimo livro
+//                emprestimoModel.setIdEmprestimo(this.getResultSet().getInt(39));
+//                emprestimoModel.setIdLivro(this.getResultSet().getInt(40));
+//                emprestimoModel.setIdEmprestimoLivro(this.getResultSet().getInt(41));
+//                emprestimoModel.setQuantidadeEmprestimo(this.getResultSet().getInt(42));
+//                //emprestimo locatario
+                // emprestimoModel.setEmprestimoModel(emprestimoModel);
+                emprestimoModel.setLocatarioModel(locatarioModel);
+                emprestimoModel.setLocadorModel(locadorModel);
+                emprestimoModel.setLivroModel(livroModel);
+                //  emprestimoModel.setEmprestimoLivroModel(emprestimoLivroModel);
+                ListaEmprestimoModel.add(emprestimoModel);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados!\n" + e.toString(),
+                    "Atenção", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            this.fecharConexao();
+        }
+        return ListaEmprestimoModel;
+    }
 }

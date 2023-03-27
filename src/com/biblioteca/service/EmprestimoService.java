@@ -40,4 +40,12 @@ public class EmprestimoService {
         return emprestimoDao.salvarEmprestimosDAO(plistaModelEmprestimos);
     }
 
+    /**
+     * retorna uma lista de emprestimo com JOIN
+     *
+     * @return
+     */
+    public ArrayList<EmprestimoModel> getEmprestimoListaDAO() {
+        return emprestimoDao.getEmprestimoListaDAO();
+    }
 }

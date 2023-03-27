@@ -62,4 +62,6 @@ public interface IEmprestimo {
      * @return
      */
     public EmprestimoModel getQuantidadeEmprestimo();
+
+    public ArrayList<EmprestimoModel> getEmprestimoListaDAO();
 }

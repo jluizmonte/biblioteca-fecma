@@ -70,7 +70,7 @@ public class GetDateUtil {
      */
     public String setarData() {
         String date = "";
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime timepoint = LocalDateTime.now();
         date = (timepoint.format(fmt));
         return date;
@@ -83,7 +83,7 @@ public class GetDateUtil {
      */
     public String setarDataFutura() {
         String date = "";
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime timepoint = LocalDateTime.now().plusMonths(1);
         date = (timepoint.format(fmt));
         return date;

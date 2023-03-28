@@ -1,17 +1,12 @@
 package com.biblioteca.view;
 
-import com.biblioteca.model.EmprestimoLivroModel;
-import com.biblioteca.model.EmprestimoLocatarioModel;
+
 import com.biblioteca.model.EmprestimoModel;
 import com.biblioteca.model.LivroModel;
-import com.biblioteca.model.LivrosEmprestimosLivrosModel;
 import com.biblioteca.model.LocadorModel;
 import com.biblioteca.model.LocatarioModel;
-import com.biblioteca.service.EmprestimoLivroService;
-import com.biblioteca.service.EmprestimoLocatarioService;
 import com.biblioteca.service.EmprestimoService;
 import com.biblioteca.service.LivroService;
-import com.biblioteca.service.LivrosEmprestimosLivrosService;
 import com.biblioteca.service.LocadorService;
 import com.biblioteca.service.LocatarioService;
 import com.biblioteca.util.ColorirLinhaEmprestimo;
@@ -44,15 +39,15 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     EmprestimoService emprestimoService = new EmprestimoService();
     ArrayList<EmprestimoModel> listaEmprestimoModel = new ArrayList<>();
     
-    EmprestimoLocatarioService emprestimoLocatarioService = new EmprestimoLocatarioService();
-    ArrayList<EmprestimoLocatarioModel> listaEmprestimoLocatarioModel = new ArrayList<>();
-
-    EmprestimoLivroModel emprestimoLivroModel = new EmprestimoLivroModel();
-    EmprestimoLivroService emprestimoLivroService = new EmprestimoLivroService();
-    ArrayList<EmprestimoLivroModel> listaEmprestimoLivroModel = new ArrayList<>();
-
-    LivrosEmprestimosLivrosService livrosEmprestimosLivrosService = new LivrosEmprestimosLivrosService();
-    ArrayList<LivrosEmprestimosLivrosModel> listaLivrosEmprestimosLivrosModel = new ArrayList<>();
+//    EmprestimoLocatarioService emprestimoLocatarioService = new EmprestimoLocatarioService();
+//    ArrayList<EmprestimoLocatarioModel2> listaEmprestimoLocatarioModel = new ArrayList<>();
+//
+//    EmprestimoLivroModel2 emprestimoLivroModel = new EmprestimoLivroModel2();
+//    EmprestimoLivroService emprestimoLivroService = new EmprestimoLivroService();
+//    ArrayList<EmprestimoLivroModel2> listaEmprestimoLivroModel = new ArrayList<>();
+//
+//    LivrosEmprestimosLivrosService livrosEmprestimosLivrosService = new LivrosEmprestimosLivrosService();
+//    ArrayList<LivrosEmprestimosLivrosModel> listaLivrosEmprestimosLivrosModel = new ArrayList<>();
 
     GetDateUtil getDateUtil = new GetDateUtil();
 
@@ -821,8 +816,8 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         int codigoEmprestimo = 0;
         // int quantidade = 0;
         String status = "ATIVO";
-        listaEmprestimoLivroModel = new ArrayList<>();
-
+        listaEmprestimoModel = new ArrayList<>();
+        
         // pegar o id do locador
         locadorModel = locadorService.getLocadorDAO(jcbLocador.getSelectedItem().toString());
         codigoLocador = locadorModel.getIdLocador();
@@ -840,7 +835,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             livroModel = new LivroModel();
             emprestimoModel = new EmprestimoModel();
             livroModel = livroService.getLivroDAO(codigoProduto);
-            emprestimoLivroModel = new EmprestimoLivroModel();
+          //  emprestimoLivroModel = new EmprestimoLivroModel2();
             codigoProduto = (int) jtAdicionarEmprestimo.getValueAt(i, 0);
 
             // emprestimo
@@ -865,22 +860,22 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
                         JOptionPane.ERROR_MESSAGE);
             }
 
-            emprestimoLivroModel.setIdEmprestimoLivro(codigoProduto);
-            emprestimoLivroModel.setIdLivro(codigoLivro);
-            emprestimoLivroModel.setIdEmprestimo(codigoEmprestimo);
-            emprestimoLivroModel.setQuantidadeEmprestimo(emprestimoModel.getQuantidadeEmprestimo());
+            emprestimoModel.setIdEmprestimoLivro(codigoProduto);
+            emprestimoModel.setIdLivro(codigoLivro);
+            emprestimoModel.setIdEmprestimo(codigoEmprestimo);
+            emprestimoModel.setQuantidadeEmprestimo(emprestimoModel.getQuantidadeEmprestimo());
 
             // livro
             livroModel.setIdLivro(codigoProduto);
             livroModel.setQtdeLivro(livroService.getLivroDAO(codigoProduto).getQtdeLivro()
                     - Integer.parseInt(jtAdicionarEmprestimo.getValueAt(i, 4).toString()));
             livroModel.setTituloLivro(livroService.getLivroDAO(codigoProduto).getTituloLivro());
-            listaEmprestimoLivroModel.add(emprestimoLivroModel);
+            listaEmprestimoModel.add(emprestimoModel);
             listaLivroModel.add(livroModel);
         }
 
         // salvar os livros do empréstimo
-        if (emprestimoLivroService.salvarEmprestimosLivrosDAO(listaEmprestimoLivroModel)) {
+        if (emprestimoService.salvarEmprestimosDAO(listaEmprestimoModel)) {
             // alterar estoque de livros
             livroService.alterarEstoqueLivrosDAO(listaLivroModel);
         } else {
@@ -889,6 +884,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     }
 
     public void devolverLivro() {
+   /*
         Object[] opcoes = {"Sim", "Não"};
         Object resposta;
         resposta = JOptionPane.showInputDialog(null, "Registrar devolução do(s) livro(s)", "Registrar?",
@@ -899,12 +895,12 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
             listaLivrosEmprestimosLivrosModel = livrosEmprestimosLivrosService
                     .getListaLivrosEmprestimosLivrosDAO(codigoEmprestimo);
-
+listaEmprestimoModel=emprestimoService.getListaEmprestimoDAO();
             emprestimoModel = emprestimoService.getEmprestimoDAO(codigoEmprestimo);
             for (int i = 0; i < listaLivrosEmprestimosLivrosModel.size(); i++) {
 
                 livroModel = new LivroModel();
-                emprestimoLivroModel = new EmprestimoLivroModel();
+                emprestimoLivroModel = new EmprestimoLivroModel2();
 
                 livroModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
                 livroModel.setQtdeLivro(
@@ -933,7 +929,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         carregarEmprestimo();
         carregarLivroDevolucao();
         listarLivros();
-        limparCampos();
+        limparCampos();*/
     }
 
     private void corLinhaTabela() {

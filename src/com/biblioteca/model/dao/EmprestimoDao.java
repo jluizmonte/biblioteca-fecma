@@ -144,12 +144,13 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
             int cont = plistaModelEmprestimos.size();
             for (int i = 0; i < cont; i++) {
                 this.executarInsertUpdateSQL("INSERT INTO tbl_emprestimo (" + "fk_locador," + "fk_locatario," + "fk_livro,"
-                        + "data_emprstimo," + "devolucao_emprestimo," + "status_emprestimo" + ") VALUES (" + "'"
+                        + "data_emprestimo," + "devolucao_emprestimo," + "quantidade," + "status_emprestimo" + ") VALUES (" + "'"
                         + plistaModelEmprestimos.get(i).getIdLocador() + "'," + "'"
                         + plistaModelEmprestimos.get(i).getIdLocatario() + "'," + "'"
                         + plistaModelEmprestimos.get(i).getIdLivro() + "'," + "'"
                         + plistaModelEmprestimos.get(i).getDataEmprestimo() + "'," + "'"
-                        + plistaModelEmprestimos.get(i).getDataDevolucao() + "'," + "'"
+                        + plistaModelEmprestimos.get(i).getDataDevolucao() + "'," + ""
+                        + plistaModelEmprestimos.get(i).getQuantidadeEmprestimo() + "," + "'"
                         + plistaModelEmprestimos.get(i).getStatusEmprestimo() + "'" + ");");
             }
             return true;
@@ -181,14 +182,14 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
                     "SELECT * FROM tbl_emprestimo "
                     + "INNER JOIN tbl_locatario ON tbl_locatario.pk_id_locatario = tbl_emprestimo.fk_locatario "
                     + "INNER JOIN tbl_locador ON tbl_locador.pk_id_locador = tbl_emprestimo.fk_locador "
-                    + "INNER JOIN tbl_livro ON tbl_livro.pk_id_livro = tbl_emprestimo.fk_livro;");
+                    + "INNER JOIN tbl_livro ON tbl_livro.pk_id_livro = tbl_emprestimo.fk_livro order by pk_id_emprestimo asc;");
 
             while (this.getResultSet().next()) {
                 locatarioModel = new LocatarioModel();
                 locadorModel = new LocadorModel();
                 livroModel = new LivroModel();
                 emprestimoModel = new EmprestimoModel();
-            
+
                 // emprestimo
                 emprestimoModel.setIdEmprestimo(this.getResultSet().getInt(1));
                 emprestimoModel.setIdLocador(this.getResultSet().getInt(2));
@@ -257,5 +258,45 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
             this.fecharConexao();
         }
         return ListaEmprestimoModel;
+    }
+
+    public ArrayList<EmprestimoModel> getListaLivrosEmprestimoLivrosDAO(int pCodigoEmprestimo) {
+        ArrayList<EmprestimoModel> listaLivroEmprestimoLivroModel = new ArrayList<>();
+        LivroModel livroModel = new LivroModel();
+        EmprestimoModel emprestimoModel = new EmprestimoModel();
+        try {
+            this.conectar();
+            this.executarSQL("select * from tbl_livro join tbl_emprestimo"
+                    + "on pk_id_livro=fk_livro where fk_emprestimo='" + pCodigoEmprestimo + "';");
+
+            while (this.getResultSet().next()) {
+                livroModel = new LivroModel();
+
+                livroModel.setIdLivro(this.getResultSet().getInt(1));
+                livroModel.setTituloLivro(this.getResultSet().getString(2));
+                livroModel.setAutor1Livro(this.getResultSet().getString(3));
+                livroModel.setAutor2Livro(this.getResultSet().getString(4));
+                livroModel.setGeneroLivro(this.getResultSet().getString(5));
+                livroModel.setAnoLivro(this.getResultSet().getString(6));
+                livroModel.setDataCadastroLivro(this.getResultSet().getString(7));
+                livroModel.setQtdeLivro(this.getResultSet().getInt(8));
+                livroModel.setEstadoLivro(this.getResultSet().getString(9));
+                livroModel.setDescricaoLivro(this.getResultSet().getString(10));
+
+                // emprestimo-->
+                emprestimoModel.setIdEmprestimoLivro(this.getResultSet().getInt(11));
+                emprestimoModel.setIdLivro(this.getResultSet().getInt(12));
+                emprestimoModel.setIdEmprestimo(this.getResultSet().getInt(13));
+                emprestimoModel.setQuantidadeEmprestimo(this.getResultSet().getInt(14));
+              
+
+                listaLivroEmprestimoLivroModel.add(emprestimoModel);
+            }
+        } catch (SQLException e) {
+            e.toString();
+        } finally {
+            this.fecharConexao();
+        }
+        return listaLivroEmprestimoLivroModel;
     }
 }

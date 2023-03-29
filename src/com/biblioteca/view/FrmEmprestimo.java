@@ -678,7 +678,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
     private void carregarEmprestimo() {
         DefaultTableModel modelo = (DefaultTableModel) jtListarEmprestimo.getModel();
-        // listaEmprestimoLocatarioModel = emprestimoLocatarioService.getListaEmprestimosLocatarioDAO();
         listaEmprestimoModel = emprestimoService.getEmprestimoListaDAO();
         modelo.setNumRows(0);
 

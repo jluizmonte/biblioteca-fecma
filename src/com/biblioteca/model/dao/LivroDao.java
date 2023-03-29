@@ -169,13 +169,13 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
     }
 
     @Override
-    public boolean alterarEstoqueLivrosDAO(ArrayList<LivroModel> pListaLivroModel) {
+    public boolean alterarEstoqueListaLivrosDAO(ArrayList<LivroModel> plistaLivroModel) {
         try {
             this.conectar();
-            for (int i = 0; i < pListaLivroModel.size(); i++) {
+            for (int i = 0; i < plistaLivroModel.size(); i++) {
                 this.executarInsertUpdateSQL(
-                        "UPDATE tbl_livro SET quantidade_livro = '" + pListaLivroModel.get(i).getQtdeLivro()
-                        + "' WHERE pk_id_livro = '" + pListaLivroModel.get(i).getIdLivro() + "'");
+                        "UPDATE tbl_livro SET quantidade_livro = '" + plistaLivroModel.get(i).getQtdeLivro()
+                        + "' WHERE pk_id_livro = '" + plistaLivroModel.get(i).getIdLivro() + "'");
             }
             return true;
         } catch (Exception e) {
@@ -206,6 +206,26 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
             this.fecharConexao();
         }
         return livroModel;
+    }
+
+    @Override
+    public boolean alterarEstoqueLivrosDAO(LivroModel pLivroModel) {
+        try {
+            this.conectar();
+            this.executarInsertUpdateSQL(
+                    "UPDATE tbl_livro SET quantidade_livro = '" + pLivroModel.getQtdeLivro()
+                    + "' WHERE pk_id_livro = '" + pLivroModel.getIdLivro() + "'");
+
+            return true;
+        } catch (Exception e) {
+            e.toString();
+            JOptionPane.showMessageDialog(null, "Erro ao alterar os dados!",
+                    "Atenção", JOptionPane.ERROR_MESSAGE);
+            e.toString();
+            return false;
+        } finally {
+            this.fecharConexao();
+        }
     }
 
 }

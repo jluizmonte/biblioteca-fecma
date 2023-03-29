@@ -1,6 +1,5 @@
 package com.biblioteca.view;
 
-
 import com.biblioteca.model.EmprestimoModel;
 import com.biblioteca.model.LivroModel;
 import com.biblioteca.model.LocadorModel;
@@ -38,16 +37,6 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
     EmprestimoModel emprestimoModel = new EmprestimoModel();
     EmprestimoService emprestimoService = new EmprestimoService();
     ArrayList<EmprestimoModel> listaEmprestimoModel = new ArrayList<>();
-    
-//    EmprestimoLocatarioService emprestimoLocatarioService = new EmprestimoLocatarioService();
-//    ArrayList<EmprestimoLocatarioModel2> listaEmprestimoLocatarioModel = new ArrayList<>();
-//
-//    EmprestimoLivroModel2 emprestimoLivroModel = new EmprestimoLivroModel2();
-//    EmprestimoLivroService emprestimoLivroService = new EmprestimoLivroService();
-//    ArrayList<EmprestimoLivroModel2> listaEmprestimoLivroModel = new ArrayList<>();
-//
-//    LivrosEmprestimosLivrosService livrosEmprestimosLivrosService = new LivrosEmprestimosLivrosService();
-//    ArrayList<LivrosEmprestimosLivrosModel> listaLivrosEmprestimosLivrosModel = new ArrayList<>();
 
     GetDateUtil getDateUtil = new GetDateUtil();
 
@@ -689,7 +678,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
     private void carregarEmprestimo() {
         DefaultTableModel modelo = (DefaultTableModel) jtListarEmprestimo.getModel();
-       // listaEmprestimoLocatarioModel = emprestimoLocatarioService.getListaEmprestimosLocatarioDAO();
+        // listaEmprestimoLocatarioModel = emprestimoLocatarioService.getListaEmprestimosLocatarioDAO();
         listaEmprestimoModel = emprestimoService.getEmprestimoListaDAO();
         modelo.setNumRows(0);
 
@@ -817,7 +806,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         // int quantidade = 0;
         String status = "ATIVO";
         listaEmprestimoModel = new ArrayList<>();
-        
+
         // pegar o id do locador
         locadorModel = locadorService.getLocadorDAO(jcbLocador.getSelectedItem().toString());
         codigoLocador = locadorModel.getIdLocador();
@@ -835,7 +824,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             livroModel = new LivroModel();
             emprestimoModel = new EmprestimoModel();
             livroModel = livroService.getLivroDAO(codigoProduto);
-          //  emprestimoLivroModel = new EmprestimoLivroModel2();
+            //  emprestimoLivroModel = new EmprestimoLivroModel2();
             codigoProduto = (int) jtAdicionarEmprestimo.getValueAt(i, 0);
 
             // emprestimo
@@ -873,18 +862,12 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
             listaEmprestimoModel.add(emprestimoModel);
             listaLivroModel.add(livroModel);
         }
+        livroService.alterarEstoqueListaLivrosDAO(listaLivroModel);
 
-        // salvar os livros do empréstimo
-        if (emprestimoService.salvarEmprestimosDAO(listaEmprestimoModel)) {
-            // alterar estoque de livros
-            livroService.alterarEstoqueLivrosDAO(listaLivroModel);
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar os livros do empréstimo!", "Erro", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     public void devolverLivro() {
-   /*
+        /**/
         Object[] opcoes = {"Sim", "Não"};
         Object resposta;
         resposta = JOptionPane.showInputDialog(null, "Registrar devolução do(s) livro(s)", "Registrar?",
@@ -892,32 +875,24 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         if (resposta.equals("Sim")) {
             int linha = jtDevolucaoLivro.getSelectedRow();
             int codigoEmprestimo = (int) jtDevolucaoLivro.getValueAt(linha, 0);
-
-            listaLivrosEmprestimosLivrosModel = livrosEmprestimosLivrosService
-                    .getListaLivrosEmprestimosLivrosDAO(codigoEmprestimo);
-listaEmprestimoModel=emprestimoService.getListaEmprestimoDAO();
+            JOptionPane.showMessageDialog(rootPane, codigoEmprestimo);
             emprestimoModel = emprestimoService.getEmprestimoDAO(codigoEmprestimo);
-            for (int i = 0; i < listaLivrosEmprestimosLivrosModel.size(); i++) {
+            livroModel = new LivroModel();
 
-                livroModel = new LivroModel();
-                emprestimoLivroModel = new EmprestimoLivroModel2();
+            livroModel.setIdLivro(emprestimoModel.getIdLivro());
+            livroModel.setQtdeLivro(
+                    (livroService.getLivroDAO(livroModel.getIdLivro()).getQtdeLivro()
+                    + emprestimoModel.getQuantidadeEmprestimo()));
 
-                livroModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
-                livroModel.setQtdeLivro(
-                        (listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getQtdeLivro()
-                        + listaLivrosEmprestimosLivrosModel.get(i).getEmprestimoLivroModel()
-                                .getQuantidadeEmprestimo()));
-
-                emprestimoModel.setStatusEmprestimo("INATIVO");
-                emprestimoModel.setIdEmprestimo(codigoEmprestimo);
-                emprestimoModel.setIdLivro(listaLivrosEmprestimosLivrosModel.get(i).getLivroModel().getIdLivro());
-                emprestimoModel.setDataDevolucao(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 4)));
-                emprestimoModel.setDataEmprestimo(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 3)));
-                listaLivroModel.add(livroModel);
-            }
+            emprestimoModel.setStatusEmprestimo("INATIVO");
+            emprestimoModel.setIdEmprestimo(codigoEmprestimo);
+            emprestimoModel.setIdLivro(emprestimoModel.getIdLivro());
+            emprestimoModel.setDataDevolucao(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 4)));
+            emprestimoModel.setDataEmprestimo(String.valueOf(jtDevolucaoLivro.getValueAt(linha, 3)));
+            //listaLivroModel.add(livroModel);
 
             try {
-                livroService.alterarEstoqueLivrosDAO(listaLivroModel);
+                livroService.alterarEstoqueLivrosDAO(livroModel);
                 emprestimoService.atualizarEmprestimoDAO(emprestimoModel);
                 JOptionPane.showMessageDialog(this, "Livro devolvido com sucesso!", "Atenção",
                         JOptionPane.WARNING_MESSAGE);
@@ -929,7 +904,7 @@ listaEmprestimoModel=emprestimoService.getListaEmprestimoDAO();
         carregarEmprestimo();
         carregarLivroDevolucao();
         listarLivros();
-        limparCampos();*/
+        limparCampos();
     }
 
     private void corLinhaTabela() {

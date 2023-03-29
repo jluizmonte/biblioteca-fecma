@@ -36,8 +36,12 @@ public class LivroService {
         return livroDao.excluirLivroDAO(idLivroModel);
     }
 
-    public boolean alterarEstoqueLivrosDAO(ArrayList<LivroModel> pListaLivroModel) {
-        return livroDao.alterarEstoqueLivrosDAO(pListaLivroModel);
+    public boolean alterarEstoqueLivrosDAO(LivroModel pLivroModel) {
+        return livroDao.alterarEstoqueLivrosDAO(pLivroModel);
+    }
+
+    public boolean alterarEstoqueListaLivrosDAO(ArrayList<LivroModel> plistaLivroModels) {
+        return livroDao.alterarEstoqueListaLivrosDAO(plistaLivroModels);
     }
 
     public LivroModel getQuantidadeLivrosCadastrados() {

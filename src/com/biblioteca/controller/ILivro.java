@@ -59,10 +59,17 @@ public interface ILivro {
     /**
      * altera o estoque de livros (quantidade salva)
      *
+     * @param pLivroModel
+     * @return
+     */
+    public boolean alterarEstoqueLivrosDAO(LivroModel pLivroModel);
+
+    /**
+     *
      * @param pListaLivroModel
      * @return
      */
-    public boolean alterarEstoqueLivrosDAO(ArrayList<LivroModel> pListaLivroModel);
+    public boolean alterarEstoqueListaLivrosDAO(ArrayList<LivroModel> pListaLivroModel);
 
     /**
      * retorna a quantidade de livros cadastrados

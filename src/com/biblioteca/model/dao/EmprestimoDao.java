@@ -51,7 +51,8 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
                 emprestimoModel.setIdLivro(this.getResultSet().getInt(4));
                 emprestimoModel.setDataEmprestimo(this.getResultSet().getString(5));
                 emprestimoModel.setDataDevolucao(this.getResultSet().getString(6));
-                emprestimoModel.setStatusEmprestimo(this.getResultSet().getString(7));
+                emprestimoModel.setQuantidadeEmprestimo(this.getResultSet().getInt(7));
+                emprestimoModel.setStatusEmprestimo(this.getResultSet().getString(8));
             }
         } catch (SQLException e) {
             e.toString();
@@ -267,7 +268,7 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
         try {
             this.conectar();
             this.executarSQL("select * from tbl_livro join tbl_emprestimo"
-                    + "on pk_id_livro=fk_livro where fk_emprestimo='" + pCodigoEmprestimo + "';");
+                    + "on pk_id_livro=fk_livro where fk_emprestimo=" + pCodigoEmprestimo + ";");
 
             while (this.getResultSet().next()) {
                 livroModel = new LivroModel();
@@ -288,7 +289,6 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
                 emprestimoModel.setIdLivro(this.getResultSet().getInt(12));
                 emprestimoModel.setIdEmprestimo(this.getResultSet().getInt(13));
                 emprestimoModel.setQuantidadeEmprestimo(this.getResultSet().getInt(14));
-              
 
                 listaLivroEmprestimoLivroModel.add(emprestimoModel);
             }

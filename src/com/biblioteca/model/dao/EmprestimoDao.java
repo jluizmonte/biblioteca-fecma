@@ -237,18 +237,9 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
                 livroModel.setQtdeLivro(this.getResultSet().getInt(37));
                 livroModel.setEstadoLivro((this.getResultSet().getString(38)));
                 livroModel.setDescricaoLivro(this.getResultSet().getString(39));
-
-                //emprestimo livro
-//                emprestimoModel.setIdEmprestimo(this.getResultSet().getInt(39));
-//                emprestimoModel.setIdLivro(this.getResultSet().getInt(40));
-//                emprestimoModel.setIdEmprestimoLivro(this.getResultSet().getInt(41));
-//                emprestimoModel.setQuantidadeEmprestimo(this.getResultSet().getInt(42));
-//                //emprestimo locatario
-                // emprestimoModel.setEmprestimoModel(emprestimoModel);
                 emprestimoModel.setLocatarioModel(locatarioModel);
                 emprestimoModel.setLocadorModel(locadorModel);
                 emprestimoModel.setLivroModel(livroModel);
-                //  emprestimoModel.setEmprestimoLivroModel(emprestimoLivroModel);
                 ListaEmprestimoModel.add(emprestimoModel);
             }
         } catch (SQLException e) {

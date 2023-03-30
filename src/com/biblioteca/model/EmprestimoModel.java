@@ -16,12 +16,10 @@ public class EmprestimoModel {
     private String dataDevolucao;
     private int quantidadeEmprestimo;
     private String statusEmprestimo;
-
     private LocatarioModel locatarioModel;
     private LocadorModel locadorModel;
     private LivroModel livroModel;
     private ArrayList<EmprestimoModel> listaEmprestimoModel;
-
     private int idEmprestimoLivro;
 
     public int getIdEmprestimo() {

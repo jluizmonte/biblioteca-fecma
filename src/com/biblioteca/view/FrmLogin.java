@@ -64,7 +64,7 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
 
-        jtfLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfLogin.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jtfLogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtfLogin.setBorder(null);
         jtfLogin.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -78,7 +78,7 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
 
-        jtfSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfSenha.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jtfSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtfSenha.setBorder(null);
         jtfSenha.addMouseListener(new java.awt.event.MouseAdapter() {

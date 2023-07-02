@@ -1,8 +1,6 @@
 package com.biblioteca.main;
 
-import com.biblioteca.model.SessaoUsuarioModel;
 import com.biblioteca.view.FrmLogin;
-import com.biblioteca.view.FrmTelaPrincipal;
 import com.biblioteca.view.SplashView;
 import java.sql.SQLException;
 
@@ -10,7 +8,7 @@ import java.sql.SQLException;
  *
  * @author Aluno
  */
-public class Teste {
+public class BibliotecaMain {
 
     /**
      * @param args the command line arguments
@@ -34,6 +32,7 @@ public class Teste {
             }
 
             if (i == 50) {
+
                 FrmLogin loginView = new FrmLogin();
                 Splash.setVisible(false);
                 loginView.setVisible(true);

@@ -19,4 +19,8 @@ public class MetodosPadrao {
             return false;
         }
     }
+//    
+//    public String cancelamento(){
+//        JOptionPane.showMessageDialog(null, this);
+//    }
 }

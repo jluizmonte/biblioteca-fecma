@@ -2,7 +2,9 @@ package com.biblioteca.view;
 
 import com.biblioteca.model.LocadorModel;
 import com.biblioteca.service.LocadorService;
+import com.biblioteca.util.CaminhosIcones;
 import com.biblioteca.util.MetodosPadrao;
+import com.biblioteca.util.TextoPadrao;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -14,7 +16,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmLocador extends javax.swing.JInternalFrame {
 
-    MetodosPadrao metodosPadrao = new MetodosPadrao();
+    CaminhosIcones c = new CaminhosIcones();
+
     LocadorModel locadorModel = new LocadorModel();
     LocadorService locadorService = new LocadorService();
     ArrayList<LocadorModel> listaLocadorModel = new ArrayList<>();
@@ -340,7 +343,7 @@ public class FrmLocador extends javax.swing.JInternalFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Ver Locador", jPanel3);
@@ -353,7 +356,7 @@ public class FrmLocador extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
         );
 
         pack();
@@ -367,13 +370,20 @@ public class FrmLocador extends javax.swing.JInternalFrame {
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
         if (alterarSalvar.equals("salvar")) {
             this.salvarLocador();
-            Object[] opcoes = {"Sim", "Não"};
-            Object resposta;
-            resposta = JOptionPane.showInputDialog(null, "Deseja salvar outro Locador?", "Salvar Novo?",
-                    JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
-            if (resposta.equals("Sim")) {
+//            Object[] opcoes = {"Sim", "Não"};
+//            Object resposta;
+//            resposta = JOptionPane.showInputDialog(null, "Deseja salvar outro Locador?", "Salvar Novo?",
+//                    JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
+//
+//            if (resposta.equals("Sim")) {
+//                jtfNome.requestFocus();
+//            }
+            int x = JOptionPane.showConfirmDialog(null, "Deseja salvar outro locador?", "Salvar Novo?",
+                    JOptionPane.YES_NO_OPTION);
+            if (x == 0) {
                 jtfNome.requestFocus();
             }
+
         } else if (alterarSalvar.equals("alterar")) {
             this.alterarLocador();
         }
@@ -382,24 +392,33 @@ public class FrmLocador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalvarActionPerformed
 
     private void jtLocPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLocPesquisaMouseClicked
-        alterarSalvar = "alterar";
-        jtfNome.requestFocusInWindow();
-        int linha = jtLocPesquisa.getSelectedRow();
-        try {
-            String nomeLocador = (String) jtLocPesquisa.getValueAt(linha, 0);
-            locadorModel = locadorService.getLocadorDAO(nomeLocador);
-            jtfBairro.setText(locadorModel.getBairroLocador());
-            jtfCep.setText(locadorModel.getCepLocador());
-            jtfCidade.setText(locadorModel.getCidadeLocador());
-            jtfEmail.setText(locadorModel.getEmailLocador());
-            jtfNome.setText(locadorModel.getNomeLocador());
-            jtfNumero.setText(locadorModel.getNumeroLocador());
-            jtfRua.setText(locadorModel.getLogradouroLocador());
-            jtfTelefone.setText(locadorModel.getTelefoneLocador());
-            jtfUf.setText(locadorModel.getEstadoLocador());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Código invalido ou nenhum locador selecionado", "Erro",
-                    JOptionPane.ERROR_MESSAGE);
+        int x = JOptionPane.showConfirmDialog(this, "Deseja alterar este Locador?\n" + jtfNome.getText(),
+                "Alterar?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, c.perguntaGif);
+        if (x == 0) {
+            alterarSalvar = "alterar";
+            jtfNome.requestFocusInWindow();
+            int linha = jtLocPesquisa.getSelectedRow();
+            try {
+                String nomeLocador = (String) jtLocPesquisa.getValueAt(linha, 0);
+                locadorModel = locadorService.getLocadorDAO(nomeLocador);
+                jtfBairro.setText(locadorModel.getBairroLocador());
+                jtfCep.setText(locadorModel.getCepLocador());
+                jtfCidade.setText(locadorModel.getCidadeLocador());
+                jtfEmail.setText(locadorModel.getEmailLocador());
+                jtfNome.setText(locadorModel.getNomeLocador());
+                jtfNumero.setText(locadorModel.getNumeroLocador());
+                jtfRua.setText(locadorModel.getLogradouroLocador());
+                jtfTelefone.setText(locadorModel.getTelefoneLocador());
+                jtfUf.setText(locadorModel.getEstadoLocador());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Código inválido ou nenhum locador selecionado", "Erro",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, TextoPadrao.msgCancelamento, "Atenção",
+                    JOptionPane.PLAIN_MESSAGE, c.excluirGif);
+
         }
     }//GEN-LAST:event_jtLocPesquisaMouseClicked
 
@@ -505,7 +524,7 @@ public class FrmLocador extends javax.swing.JInternalFrame {
         locadorModel.setBairroLocador(jtfBairro.getText().toUpperCase());
         locadorModel.setCepLocador(jtfCep.getText());
         locadorModel.setCidadeLocador(jtfCidade.getText().toUpperCase());
-        locadorModel.setEmailLocador(jtfEmail.getText().toUpperCase());
+        locadorModel.setEmailLocador(jtfEmail.getText());
         locadorModel.setNomeLocador(jtfNome.getText().toUpperCase());
         locadorModel.setNumeroLocador(jtfNumero.getText());
         locadorModel.setLogradouroLocador(jtfRua.getText().toUpperCase());
@@ -513,7 +532,7 @@ public class FrmLocador extends javax.swing.JInternalFrame {
         locadorModel.setEstadoLocador(jtfUf.getText().toUpperCase());
         try {
             if (locadorService.salvarLocadorDAO(locadorModel)) {
-                JOptionPane.showMessageDialog(this, "Locador: \n" + locadorModel.getNomeLocador() + " cadastrado com sucesso!",
+                JOptionPane.showMessageDialog(this, "Locador: \n" + locadorModel.getNomeLocador() + "\nCadastrado com sucesso!",
                         "Atenção", JOptionPane.WARNING_MESSAGE);
                 limparCampos();
                 carregarLocador();

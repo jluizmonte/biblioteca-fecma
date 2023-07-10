@@ -2,6 +2,8 @@ package com.biblioteca.view;
 
 import com.biblioteca.model.SessaoUsuarioModel;
 import com.biblioteca.service.LivroService;
+import com.biblioteca.util.CaminhosIcones;
+import com.biblioteca.util.TextoPadrao;
 import java.awt.Frame;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +18,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     FrmLocador frmLocador = new FrmLocador();
     FrmLocatario frmLocatario = new FrmLocatario();
     LivroService livroService = new LivroService();
+    CaminhosIcones c = new CaminhosIcones();
 
     /**
      * Creates new form frmTela
@@ -327,7 +330,14 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiNovoLivroActionPerformed
 
     private void jmiEncerrarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEncerrarSistemaActionPerformed
-        System.exit(0);
+        int x = JOptionPane.showConfirmDialog(this, TextoPadrao.msgEncerrar, TextoPadrao.tituloJanela,
+                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, c.perguntaGif);
+        if (x == 0) {
+            System.exit(0);
+        } else {
+            JOptionPane.showMessageDialog(null, TextoPadrao.msgCancelamento,
+                    TextoPadrao.tituloJanela, HEIGHT, c.atencaoGif);
+        }
     }//GEN-LAST:event_jmiEncerrarSistemaActionPerformed
 
     private void jmiEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEmprestimoActionPerformed
@@ -360,6 +370,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         };
         clock.start();
     }
+
     private void setarAcesso() {
         switch (SessaoUsuarioModel.nivelAcesso) {
             case "ADMINISTRADOR":

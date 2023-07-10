@@ -15,7 +15,8 @@ public class ConnectionMySQL {
     private boolean status = false;
     private String servidor = "localhost";
     private String banco = "livraria";
-    private String usuario = "root";
+    //  private String usuario = "root";
+    private String usuario = "luiz";
     private String senha = "Jos3@Luiz";
 
     /**

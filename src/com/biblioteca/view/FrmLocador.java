@@ -363,27 +363,23 @@ public class FrmLocador extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        jbSalvar.setText("Salvar");
-        limparCampos();
+
+        int x = JOptionPane.showConfirmDialog(null, TextoPadrao.msgCancelar, TextoPadrao.msgTituloCancelar,
+                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, c.perguntaGif);
+        if (x == 0) {
+            jbSalvar.setText("Salvar");
+            limparCampos();
+        }
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
         if (alterarSalvar.equals("salvar")) {
             this.salvarLocador();
-//            Object[] opcoes = {"Sim", "Não"};
-//            Object resposta;
-//            resposta = JOptionPane.showInputDialog(null, "Deseja salvar outro Locador?", "Salvar Novo?",
-//                    JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
-//
-//            if (resposta.equals("Sim")) {
-//                jtfNome.requestFocus();
-//            }
-            int x = JOptionPane.showConfirmDialog(null, "Deseja salvar outro locador?", "Salvar Novo?",
-                    JOptionPane.YES_NO_OPTION);
+            int x = JOptionPane.showConfirmDialog(null, TextoPadrao.msgSalvar, TextoPadrao.msgTituloSalvar,
+                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, c.perguntaGif);
             if (x == 0) {
                 jtfNome.requestFocus();
             }
-
         } else if (alterarSalvar.equals("alterar")) {
             this.alterarLocador();
         }

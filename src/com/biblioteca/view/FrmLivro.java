@@ -477,7 +477,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         jtfAno.setText("");
         jtfAutor1.setText("");
         jtfAutor2.setText("");
-        jtfDataCadastro.setText("");
+  //      jtfDataCadastro.setText("");
         jtfQtde.setText("1");
         jtfObs.setText("");
         jtfTitulo.setText("");

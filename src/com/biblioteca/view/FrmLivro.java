@@ -18,6 +18,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     LivroService livroService = new LivroService();
     ArrayList<LivroModel> listaModelLivro = new ArrayList<>();
     String alterarSalvar;
+    GetDateUtil getDateUtil = new GetDateUtil();
 
     /**
      * Creates new form FrmLivro
@@ -25,6 +26,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
      */
     public FrmLivro() {
         initComponents();
+        setarDados();
         carregarLivros();
         carregarLivrosPesquisa();
         limparCampos();
@@ -129,9 +131,9 @@ public class FrmLivro extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         jtfDataCadastro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtfDataCadastro.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jtfDataCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jtfQtde.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jtfQtde.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtfQtde.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jcbEstado.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -535,6 +537,10 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(this, "Erro ao alterar o livro!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    private void setarDados(){
+        jtfDataCadastro.setText(getDateUtil.setarData());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

@@ -136,7 +136,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         jtfQtde.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtfQtde.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jcbEstado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jcbEstado.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NOVO", "USADO", "OUTRO" }));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N

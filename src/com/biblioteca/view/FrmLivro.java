@@ -2,8 +2,11 @@ package com.biblioteca.view;
 
 import com.biblioteca.model.LivroModel;
 import com.biblioteca.service.LivroService;
+import com.biblioteca.util.CaminhosIcones;
 import com.biblioteca.util.GetDateUtil;
+import com.biblioteca.util.TextoPadrao;
 import java.awt.HeadlessException;
+import static java.awt.image.ImageObserver.HEIGHT;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,8 +20,10 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     LivroModel livroModel = new LivroModel();
     LivroService livroService = new LivroService();
     ArrayList<LivroModel> listaModelLivro = new ArrayList<>();
-    String alterarSalvar;
+    String alterarSalvar, tipoLivro;
+    double valorLivro = 0;
     GetDateUtil getDateUtil = new GetDateUtil();
+    CaminhosIcones c = new CaminhosIcones();
 
     /**
      * Creates new form FrmLivro
@@ -51,7 +56,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jtfTitulo = new javax.swing.JTextField();
         jtfAutor1 = new javax.swing.JTextField();
-        jtfAutor2 = new javax.swing.JTextField();
+        jtfEditora = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jtfGenero = new javax.swing.JTextField();
@@ -68,8 +73,8 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         jbSalvar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jcbEmprestimo = new javax.swing.JCheckBox();
-        jcbVenda = new javax.swing.JCheckBox();
+        jcEmprestimo = new javax.swing.JCheckBox();
+        jcVenda = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtLivroPesquisa = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -97,13 +102,13 @@ public class FrmLivro extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("AUTOR SECUNDÁRIO");
+        jLabel4.setText("EDITORA");
 
         jtfTitulo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jtfAutor1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jtfAutor2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtfEditora.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,23 +180,23 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("SELECIONE O TIPO DE CADASTRO");
 
-        jcbEmprestimo.setBackground(new java.awt.Color(28, 89, 124));
-        jcbEmprestimo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jcbEmprestimo.setForeground(new java.awt.Color(255, 255, 255));
-        jcbEmprestimo.setText("EMPRÉSTIMO");
-        jcbEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+        jcEmprestimo.setBackground(new java.awt.Color(28, 89, 124));
+        jcEmprestimo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jcEmprestimo.setForeground(new java.awt.Color(255, 255, 255));
+        jcEmprestimo.setText("EMPRÉSTIMO");
+        jcEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbEmprestimoActionPerformed(evt);
+                jcEmprestimoActionPerformed(evt);
             }
         });
 
-        jcbVenda.setBackground(new java.awt.Color(28, 89, 124));
-        jcbVenda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jcbVenda.setForeground(new java.awt.Color(255, 255, 255));
-        jcbVenda.setText("VENDA");
-        jcbVenda.addActionListener(new java.awt.event.ActionListener() {
+        jcVenda.setBackground(new java.awt.Color(28, 89, 124));
+        jcVenda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jcVenda.setForeground(new java.awt.Color(255, 255, 255));
+        jcVenda.setText("VENDA");
+        jcVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbVendaActionPerformed(evt);
+                jcVendaActionPerformed(evt);
             }
         });
 
@@ -213,9 +218,9 @@ public class FrmLivro extends javax.swing.JInternalFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jLabel11)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jcbEmprestimo)
+                                                .addComponent(jcEmprestimo)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jcbVenda))))
+                                                .addComponent(jcVenda))))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jLabel2)
                                         .addComponent(jtfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,7 +245,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
                                                             .addComponent(jLabel8)))
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jtfAutor2)
+                                                .addComponent(jtfEditora)
                                                 .addComponent(jtfAno)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                     .addComponent(jLabel4)
@@ -267,8 +272,8 @@ public class FrmLivro extends javax.swing.JInternalFrame {
                         .addComponent(jLabel11)
                         .addGap(3, 3, 3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jcbVenda)
-                            .addComponent(jcbEmprestimo)))
+                            .addComponent(jcVenda)
+                            .addComponent(jcEmprestimo)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -281,7 +286,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfAutor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfAutor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -438,7 +443,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
             try {
                 jtfAno.setText(String.valueOf(livroModel.getAnoLivro()));
                 jtfAutor1.setText(livroModel.getAutor1Livro());
-                jtfAutor2.setText(livroModel.getAutor2Livro());
+                jtfEditora.setText(livroModel.getEditoraLivro());
                 jtfGenero.setText(livroModel.getGeneroLivro());
                 jtfDataCadastro.setText(livroModel.getDataCadastroLivro());
                 jtfObs.setText(livroModel.getDescricaoLivro());
@@ -476,15 +481,18 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtLivroMouseClicked
 
-    private void jcbEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEmprestimoActionPerformed
-        this.jcbVenda.setSelected(false);
-        this.jcbEmprestimo.setSelected(true);
-    }//GEN-LAST:event_jcbEmprestimoActionPerformed
+    private void jcEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcEmprestimoActionPerformed
+        this.jcVenda.setSelected(false);
+        this.jcEmprestimo.setSelected(true);
+        this.tipoLivro = "EMPRÉSTIMO";
+    }//GEN-LAST:event_jcEmprestimoActionPerformed
 
-    private void jcbVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbVendaActionPerformed
-        this.jcbVenda.setSelected(true);
-        this.jcbEmprestimo.setSelected(false);
-    }//GEN-LAST:event_jcbVendaActionPerformed
+    private void jcVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcVendaActionPerformed
+        this.jcVenda.setSelected(true);
+        this.jcEmprestimo.setSelected(false);
+        this.tipoLivro = "VENDA";
+        this.valorLivro = Double.parseDouble(JOptionPane.showInputDialog(this, "INSIRA O VALOR DO LIVRO", "Valor", JOptionPane.QUESTION_MESSAGE));
+    }//GEN-LAST:event_jcVendaActionPerformed
 
     private void carregarLivrosPesquisa() {
         listaModelLivro = livroService.getListaLivroDAO();
@@ -513,7 +521,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
                 modeloTabela.addRow(new Object[]{
                     listaModelLivro.get(i).getTituloLivro(),
                     listaModelLivro.get(i).getAutor1Livro(),
-                    listaModelLivro.get(i).getAutor2Livro(),
+                    listaModelLivro.get(i).getEditoraLivro(),
                     listaModelLivro.get(i).getGeneroLivro(),
                     listaModelLivro.get(i).getAnoLivro(),
                     listaModelLivro.get(i).getDataCadastroLivro(),
@@ -529,11 +537,11 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     private void limparCampos() {
         jtfAno.setText("");
         jtfAutor1.setText("");
-        jtfAutor2.setText("");
-        //      jtfDataCadastro.setText("");
-        jtfQtde.setText("1");
+        jtfEditora.setText("");
         jtfObs.setText("");
         jtfTitulo.setText("");
+        jcVenda.setSelected(false);
+        jcEmprestimo.setSelected(false);
         jtfGenero.setText("");
         jcbEstado.setSelectedItem("NOVO");
         alterarSalvar = "salvar";
@@ -546,22 +554,29 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     private void salvarLivro() {
         livroModel.setAnoLivro(jtfAno.getText());
         livroModel.setAutor1Livro(jtfAutor1.getText().toUpperCase());
-        livroModel.setAutor2Livro(jtfAutor2.getText().toUpperCase());
+        livroModel.setEditoraLivro(jtfEditora.getText().toUpperCase());
         livroModel.setDataCadastroLivro(jtfDataCadastro.getText());
         livroModel.setGeneroLivro(jtfGenero.getText().toUpperCase());
         livroModel.setDescricaoLivro(jtfObs.getText().toUpperCase());
         livroModel.setTituloLivro(jtfTitulo.getText().toUpperCase());
+        livroModel.setTipoLivro(this.tipoLivro);
         livroModel.setQtdeLivro(Integer.parseInt(jtfQtde.getText()));
         livroModel.setEstadoLivro(jcbEstado.getSelectedItem().toString());
-        try {
-            if (livroService.salvarLivroDAO(livroModel)) {
-                JOptionPane.showMessageDialog(this, "O livro foi cadastrado com sucesso!",
-                        "Atenção", JOptionPane.WARNING_MESSAGE);
-                limparCampos();
+        livroModel.setValorLivro(this.valorLivro);
+        if (jcEmprestimo.isSelected() || jcVenda.isSelected()) {
+            try {
+                if (livroService.salvarLivroDAO(livroModel)) {
+                    JOptionPane.showMessageDialog(this, "O livro foi cadastrado com sucesso!",
+                            "Atenção", JOptionPane.WARNING_MESSAGE);
+                    limparCampos();
+                }
+            } catch (HeadlessException e) {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar o livro\n" + e.toString(), "Erro",
+                        JOptionPane.ERROR_MESSAGE);
             }
-        } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar o livro\n" + e.toString(), "Erro",
-                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, TextoPadrao.msgTipoLivro,
+                    TextoPadrao.tituloJanela, HEIGHT, c.atencaoGif);
         }
     }
 
@@ -571,11 +586,12 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     private void alterarLivro() {
         livroModel.setAnoLivro(jtfAno.getText());
         livroModel.setAutor1Livro(jtfAutor1.getText().toUpperCase());
-        livroModel.setAutor2Livro(jtfAutor2.getText().toUpperCase());
+        livroModel.setEditoraLivro(jtfEditora.getText().toUpperCase());
         livroModel.setDataCadastroLivro(jtfDataCadastro.getText());
         livroModel.setGeneroLivro(jtfGenero.getText().toUpperCase());
         livroModel.setDescricaoLivro(jtfObs.getText().toUpperCase());
         livroModel.setTituloLivro(jtfTitulo.getText().toUpperCase());
+        livroModel.setTipoLivro(this.tipoLivro);
         livroModel.setQtdeLivro(Integer.parseInt(jtfQtde.getText()));
         livroModel.setEstadoLivro(jcbEstado.getSelectedItem().toString());
         try {
@@ -617,15 +633,15 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbSalvar;
-    private javax.swing.JCheckBox jcbEmprestimo;
+    private javax.swing.JCheckBox jcEmprestimo;
+    private javax.swing.JCheckBox jcVenda;
     private javax.swing.JComboBox<String> jcbEstado;
-    private javax.swing.JCheckBox jcbVenda;
     private javax.swing.JTable jtLivro;
     private javax.swing.JTable jtLivroPesquisa;
     private javax.swing.JTextField jtfAno;
     private javax.swing.JTextField jtfAutor1;
-    private javax.swing.JTextField jtfAutor2;
     private javax.swing.JFormattedTextField jtfDataCadastro;
+    private javax.swing.JTextField jtfEditora;
     private javax.swing.JTextField jtfGenero;
     private javax.swing.JTextArea jtfObs;
     private javax.swing.JTextField jtfQtde;

@@ -672,7 +672,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
         livroModel = livroService.getLivroDAO(jcbTitulo.getSelectedItem().toString());
         jlQuantidade.setText(String.valueOf(livroModel.getQtdeLivro()));
         jtfAutor1.setText(String.valueOf(livroModel.getAutor1Livro()));
-        jtfAutor2.setText(String.valueOf(livroModel.getAutor2Livro()));
+        jtfAutor2.setText(String.valueOf(livroModel.getEditoraLivro()));
         jlCategoria.setText(String.valueOf(livroModel.getGeneroLivro()));
     }
 

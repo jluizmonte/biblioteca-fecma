@@ -230,7 +230,7 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
                 livroModel.setIdLivro(this.getResultSet().getInt(30));
                 livroModel.setTituloLivro(this.getResultSet().getString(31));
                 livroModel.setAutor1Livro(this.getResultSet().getString(32));
-                livroModel.setAutor2Livro(this.getResultSet().getString(33));
+                livroModel.setEditoraLivro(this.getResultSet().getString(33));
                 livroModel.setGeneroLivro(this.getResultSet().getString(34));
                 livroModel.setAnoLivro(this.getResultSet().getString(35));
                 livroModel.setDataCadastroLivro(this.getResultSet().getString(36));
@@ -267,7 +267,7 @@ public class EmprestimoDao extends ConnectionMySQL implements IEmprestimo {
                 livroModel.setIdLivro(this.getResultSet().getInt(1));
                 livroModel.setTituloLivro(this.getResultSet().getString(2));
                 livroModel.setAutor1Livro(this.getResultSet().getString(3));
-                livroModel.setAutor2Livro(this.getResultSet().getString(4));
+                livroModel.setEditoraLivro(this.getResultSet().getString(4));
                 livroModel.setGeneroLivro(this.getResultSet().getString(5));
                 livroModel.setAnoLivro(this.getResultSet().getString(6));
                 livroModel.setDataCadastroLivro(this.getResultSet().getString(7));

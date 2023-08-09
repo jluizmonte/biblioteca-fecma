@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
+CREATE DATABASE  IF NOT EXISTS `livraria` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `livraria`;
+-- MySQL dump 10.13  Distrib 8.0.34, for Linux (x86_64)
 --
 -- Host: 192.168.1.138    Database: livraria
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	8.0.34
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -59,17 +61,19 @@ DROP TABLE IF EXISTS `tbl_livro`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_livro` (
   `pk_id_livro` int NOT NULL AUTO_INCREMENT,
+  `tipo_livro` varchar(45) DEFAULT NULL,
   `titulo_livro` varchar(50) DEFAULT NULL,
   `autor1_livro` varchar(50) DEFAULT NULL,
-  `autor2_livro` varchar(50) DEFAULT NULL,
+  `editora_livro` varchar(50) DEFAULT NULL,
   `genero_livro` varchar(20) DEFAULT NULL,
   `ano_livro` int DEFAULT NULL,
   `data_livro` varchar(10) DEFAULT NULL,
   `quantidade_livro` int DEFAULT NULL,
   `estado_livro` varchar(255) DEFAULT NULL COMMENT 'Estado de conservação do livro.',
   `descricao_livro` varchar(255) DEFAULT NULL COMMENT 'Observações gerais sobre o livro.',
+  `valor_livro` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`pk_id_livro`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,6 +82,7 @@ CREATE TABLE `tbl_livro` (
 
 LOCK TABLES `tbl_livro` WRITE;
 /*!40000 ALTER TABLE `tbl_livro` DISABLE KEYS */;
+INSERT INTO `tbl_livro` VALUES (7,NULL,'O LIVRO DOS ESPÍRITOS','ALLAN KARDEC','','CODIFICAÇÃO',2000,'06/08/2023',1,'NOVO','',NULL),(8,'null','O EVANGELHO SEGUNDO O ESPIRITISMO','ALLAN KARDEC','','CODIFICAÇÃO',1985,'08/08/2023',1,'NOVO','',NULL),(9,'Empréstimo','O LIVRO DOS MÉDIUNS','ALLAN KARDEC','','CODIFICAÇÃO',2009,'08/08/2023',1,'NOVO','',NULL),(10,'VENDA','OBRAS PÓSTUMAS','ALLAN KARDEC','IDE','CODIFICAÇÃO',2009,'08/08/2023',3,'NOVO','',NULL),(11,'EMPRÉSTIMO','O EVANGELHO SEGUNDO O ESPIRITISMO','ALLANK KARDEC','FEB','CODIFICAÇÃO',2000,'08/08/2023',3,'NOVO','',NULL),(12,'VENDA','A GENESE','ALLAN KARDEC ','IDE','CODIFICAÇÃO',2000,'08/08/2023',4,'NOVO','','10.0');
 /*!40000 ALTER TABLE `tbl_livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,4 +186,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-12 18:13:30
+-- Dump completed on 2023-08-08 22:41:15

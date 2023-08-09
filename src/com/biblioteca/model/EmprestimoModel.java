@@ -53,7 +53,7 @@ public class EmprestimoModel {
     public void setIdLivro(int idLivro) {
         this.idLivro = idLivro;
     }
-
+    
     public String getDataEmprestimo() {
         return dataEmprestimo;
     }

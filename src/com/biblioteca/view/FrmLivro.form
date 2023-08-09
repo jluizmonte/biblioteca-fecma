@@ -90,9 +90,9 @@
                                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                                       <Group type="102" alignment="1" attributes="0">
-                                                          <Component id="jcbEmprestimo" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jcEmprestimo" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="32767" attributes="0"/>
-                                                          <Component id="jcbVenda" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jcVenda" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                               </Group>
@@ -127,7 +127,7 @@
                                                           </Group>
                                                       </Group>
                                                       <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="jtfAutor2" max="32767" attributes="0"/>
+                                                          <Component id="jtfEditora" max="32767" attributes="0"/>
                                                           <Component id="jtfAno" max="32767" attributes="0"/>
                                                           <Group type="102" attributes="0">
                                                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -167,8 +167,8 @@
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jcbVenda" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jcbEmprestimo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jcVenda" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jcEmprestimo" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jLabel1" max="32767" attributes="0"/>
@@ -185,7 +185,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jtfAutor1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfAutor2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfEditora" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -266,7 +266,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="AUTOR SECUND&#xc1;RIO"/>
+                    <Property name="text" type="java.lang.String" value="EDITORA"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfTitulo">
@@ -283,7 +283,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtfAutor2">
+                <Component class="javax.swing.JTextField" name="jtfEditora">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="0"/>
@@ -465,7 +465,7 @@
                     <Property name="text" type="java.lang.String" value="SELECIONE O TIPO DE CADASTRO"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="jcbEmprestimo">
+                <Component class="javax.swing.JCheckBox" name="jcEmprestimo">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7c" green="59" red="1c" type="rgb"/>
@@ -479,10 +479,10 @@
                     <Property name="text" type="java.lang.String" value="EMPR&#xc9;STIMO"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbEmprestimoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcEmprestimoActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="jcbVenda">
+                <Component class="javax.swing.JCheckBox" name="jcVenda">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7c" green="59" red="1c" type="rgb"/>
@@ -496,7 +496,7 @@
                     <Property name="text" type="java.lang.String" value="VENDA"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbVendaActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcVendaActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

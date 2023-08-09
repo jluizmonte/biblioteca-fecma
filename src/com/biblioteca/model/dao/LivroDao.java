@@ -17,17 +17,19 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
     public boolean salvarLivroDAO(LivroModel pLivroModel) {
         try {
             this.conectar();
-            return this.executarInsertUpdateSQL("INSERT INTO tbl_livro (titulo_livro, autor1_livro, autor2_livro, genero_livro, ano_livro, data_livro, quantidade_livro, estado_livro, descricao_livro) "
+            return this.executarInsertUpdateSQL("INSERT INTO tbl_livro (tipo_livro,titulo_livro, autor1_livro, editora_livro, genero_livro, ano_livro, data_livro, quantidade_livro, estado_livro, descricao_livro,valor_livro) "
                     + "VALUES ("
+                    + "'" + pLivroModel.getTipoLivro() + "',"
                     + "'" + pLivroModel.getTituloLivro() + "',"
                     + "'" + pLivroModel.getAutor1Livro() + "',"
-                    + "'" + pLivroModel.getAutor2Livro() + "',"
+                    + "'" + pLivroModel.getEditoraLivro() + "',"
                     + "'" + pLivroModel.getGeneroLivro() + "',"
                     + "'" + pLivroModel.getAnoLivro() + "',"
                     + "'" + pLivroModel.getDataCadastroLivro() + "',"
                     + "'" + pLivroModel.getQtdeLivro() + "',"
                     + "'" + pLivroModel.getEstadoLivro() + "',"
-                    + "'" + pLivroModel.getDescricaoLivro() + "'"
+                    + "'" + pLivroModel.getDescricaoLivro() + "',"
+                    + "'" + pLivroModel.getValorLivro() + "'"
                     + ");");
         } catch (Exception e) {
             e.toString();
@@ -47,15 +49,17 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
             this.executarSQL("SELECT * FROM tbl_livro WHERE pk_id_livro = '" + pIdLivro + "';");
             while (this.getResultSet().next()) {
                 livroModel.setIdLivro(this.getResultSet().getInt(1));
-                livroModel.setTituloLivro(this.getResultSet().getString(2));
-                livroModel.setAutor1Livro(this.getResultSet().getString(3));
-                livroModel.setAutor2Livro(this.getResultSet().getString(4));
-                livroModel.setGeneroLivro(this.getResultSet().getString(5));
-                livroModel.setAnoLivro(this.getResultSet().getString(6));
-                livroModel.setDataCadastroLivro(this.getResultSet().getString(7));
-                livroModel.setQtdeLivro(this.getResultSet().getInt(8));
-                livroModel.setEstadoLivro(this.getResultSet().getString(9));
-                livroModel.setDescricaoLivro(this.getResultSet().getString(10));
+                livroModel.setTipoLivro(this.getResultSet().getString(2));
+                livroModel.setTituloLivro(this.getResultSet().getString(3));
+                livroModel.setAutor1Livro(this.getResultSet().getString(4));
+                livroModel.setEditoraLivro(this.getResultSet().getString(5));
+                livroModel.setGeneroLivro(this.getResultSet().getString(6));
+                livroModel.setAnoLivro(this.getResultSet().getString(7));
+                livroModel.setDataCadastroLivro(this.getResultSet().getString(8));
+                livroModel.setQtdeLivro(this.getResultSet().getInt(9));
+                livroModel.setEstadoLivro(this.getResultSet().getString(10));
+                livroModel.setDescricaoLivro(this.getResultSet().getString(11));
+                livroModel.setValorLivro(this.getResultSet().getDouble(12));
             }
         } catch (SQLException e) {
             e.toString();
@@ -75,15 +79,18 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
             this.executarSQL("SELECT * FROM tbl_livro WHERE titulo_livro = '" + pLivroModel + "'" + ";");
             while (this.getResultSet().next()) {
                 livroModel.setIdLivro(this.getResultSet().getInt(1));
-                livroModel.setTituloLivro(this.getResultSet().getString(2));
-                livroModel.setAutor1Livro(this.getResultSet().getString(3));
-                livroModel.setAutor2Livro(this.getResultSet().getString(4));
-                livroModel.setGeneroLivro(this.getResultSet().getString(5));
-                livroModel.setAnoLivro(this.getResultSet().getString(6));
-                livroModel.setDataCadastroLivro(this.getResultSet().getString(7));
-                livroModel.setQtdeLivro(this.getResultSet().getInt(8));
-                livroModel.setEstadoLivro(this.getResultSet().getString(9));
-                livroModel.setDescricaoLivro(this.getResultSet().getString(10));
+                livroModel.setTipoLivro(this.getResultSet().getString(2));
+                livroModel.setTituloLivro(this.getResultSet().getString(3));
+                livroModel.setAutor1Livro(this.getResultSet().getString(4));
+                livroModel.setEditoraLivro(this.getResultSet().getString(5));
+                livroModel.setGeneroLivro(this.getResultSet().getString(6));
+                livroModel.setAnoLivro(this.getResultSet().getString(7));
+                livroModel.setDataCadastroLivro(this.getResultSet().getString(8));
+                livroModel.setQtdeLivro(this.getResultSet().getInt(9));
+                livroModel.setEstadoLivro(this.getResultSet().getString(10));
+                livroModel.setDescricaoLivro(this.getResultSet().getString(11));
+                livroModel.setValorLivro(this.getResultSet().getDouble(12));
+
             }
         } catch (SQLException e) {
             e.toString();
@@ -105,15 +112,17 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
             while (this.getResultSet().next()) {
                 livroModel = new LivroModel();
                 livroModel.setIdLivro(this.getResultSet().getInt(1));
-                livroModel.setTituloLivro(this.getResultSet().getString(2));
-                livroModel.setAutor1Livro(this.getResultSet().getString(3));
-                livroModel.setAutor2Livro(this.getResultSet().getString(4));
-                livroModel.setGeneroLivro(this.getResultSet().getString(5));
-                livroModel.setAnoLivro(this.getResultSet().getString(6));
-                livroModel.setDataCadastroLivro(this.getResultSet().getString(7));
-                livroModel.setQtdeLivro(this.getResultSet().getInt(8));
-                livroModel.setEstadoLivro(this.getResultSet().getString(9));
-                livroModel.setDescricaoLivro(this.getResultSet().getString(10));
+                livroModel.setTipoLivro(this.getResultSet().getString(2));
+                livroModel.setTituloLivro(this.getResultSet().getString(3));
+                livroModel.setAutor1Livro(this.getResultSet().getString(4));
+                livroModel.setEditoraLivro(this.getResultSet().getString(5));
+                livroModel.setGeneroLivro(this.getResultSet().getString(6));
+                livroModel.setAnoLivro(this.getResultSet().getString(7));
+                livroModel.setDataCadastroLivro(this.getResultSet().getString(8));
+                livroModel.setQtdeLivro(this.getResultSet().getInt(9));
+                livroModel.setEstadoLivro(this.getResultSet().getString(10));
+                livroModel.setDescricaoLivro(this.getResultSet().getString(11));
+                livroModel.setValorLivro(this.getResultSet().getDouble(12));
 
                 listaLivroModel.add(livroModel);
             }
@@ -133,15 +142,17 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
             this.conectar();
             return this.executarInsertUpdateSQL("UPDATE tbl_livro SET "
                     + "pk_id_livro= '" + pLivroModel.getIdLivro() + "',"
+                    + "tipo_livro= '" + pLivroModel.getTipoLivro() + "',"
                     + "titulo_livro= '" + pLivroModel.getTituloLivro() + "',"
                     + "autor1_livro= '" + pLivroModel.getAutor1Livro() + "',"
-                    + "autor2_livro= '" + pLivroModel.getAutor2Livro() + "',"
+                    + "editora_livro= '" + pLivroModel.getEditoraLivro() + "',"
                     + "genero_livro= '" + pLivroModel.getGeneroLivro() + "',"
                     + "ano_livro= '" + pLivroModel.getAnoLivro() + "',"
                     + "data_livro= '" + pLivroModel.getDataCadastroLivro() + "',"
                     + "quantidade_livro = '" + pLivroModel.getQtdeLivro() + "',"
                     + "estado_livro='" + pLivroModel.getEstadoLivro() + "',"
-                    + "descricao_livro='" + pLivroModel.getDescricaoLivro() + "'"
+                    + "descricao_livro='" + pLivroModel.getDescricaoLivro() + "',"
+                    + "valor_livro='" + pLivroModel.getValorLivro() + "'"
                     + " WHERE " + "pk_id_livro = '" + pLivroModel.getIdLivro() + "'" + ";");
         } catch (Exception e) {
             e.toString();

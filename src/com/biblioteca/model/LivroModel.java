@@ -7,15 +7,17 @@ package com.biblioteca.model;
 public class LivroModel {
 
     private int idLivro;
+    private String tipoLivro; // venda ou empréstimo
     private String tituloLivro;
     private String autor1Livro;
-    private String autor2Livro;
+    private String editoraLivro;
     private String anoLivro;
     private String generoLivro;
     private String dataCadastroLivro;
     private String descricaoLivro;
     private int qtdeLivro;
     private String estadoLivro; // conservado, usado, novo etc
+    private double valorLivro;
 
     public int getIdLivro() {
         return idLivro;
@@ -23,6 +25,14 @@ public class LivroModel {
 
     public void setIdLivro(int idLivro) {
         this.idLivro = idLivro;
+    }
+
+    public String getTipoLivro() {
+        return tipoLivro;
+    }
+
+    public void setTipoLivro(String tipoLivro) {
+        this.tipoLivro = tipoLivro;
     }
 
     public String getTituloLivro() {
@@ -41,12 +51,12 @@ public class LivroModel {
         this.autor1Livro = autor1Livro;
     }
 
-    public String getAutor2Livro() {
-        return autor2Livro;
+    public String getEditoraLivro() {
+        return editoraLivro;
     }
 
-    public void setAutor2Livro(String autor2Livro) {
-        this.autor2Livro = autor2Livro;
+    public void setEditoraLivro(String editoraLivro) {
+        this.editoraLivro = editoraLivro;
     }
 
     public String getAnoLivro() {
@@ -97,6 +107,12 @@ public class LivroModel {
         this.estadoLivro = estadoLivro;
     }
 
-   
+    public double getValorLivro() {
+        return valorLivro;
+    }
+
+    public void setValorLivro(double valorLivro) {
+        this.valorLivro = valorLivro;
+    }
 
 }

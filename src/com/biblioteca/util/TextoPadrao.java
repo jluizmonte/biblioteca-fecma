@@ -13,4 +13,5 @@ public class TextoPadrao {
     public static String msgTituloCancelar = "Cancelar?";
     public static String msgEncerrar = "Deseja encerrar a aplicação?";
     public static String tituloJanela = "Atenção";
+    public static String msgTipoLivro = "Selecione o tipo do livro!";
 }

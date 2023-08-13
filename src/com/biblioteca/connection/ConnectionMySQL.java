@@ -13,8 +13,8 @@ public class ConnectionMySQL {
     private Statement statement;
     private ResultSet resultSet;
     private boolean status = false;
-    private String servidor = "192.168.1.138";
-//    private String servidor = "localhost";
+    //   private String servidor = "192.168.1.138";
+    private String servidor = "localhost";
     private String banco = "livraria";
     //  private String usuario = "root";
     private String usuario = "luiz";

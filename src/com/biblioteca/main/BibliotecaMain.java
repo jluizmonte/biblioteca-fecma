@@ -24,7 +24,7 @@ public class BibliotecaMain {
         SessaoUsuarioModel.codigoUsuario = 1;
         SessaoUsuarioModel.loginUsuario = "luiz";
         SessaoUsuarioModel.nivelAcesso = "ADMINISTRADOR";
-        SessaoUsuarioModel.nomeUsuario = "José Luiz";
+        SessaoUsuarioModel.nomeUsuario = "José Luiz do Monte Gomes";
         new FrmTelaPrincipal().setVisible(true);
 //        SplashView Splash = new SplashView();
 //        Splash.setVisible(true);

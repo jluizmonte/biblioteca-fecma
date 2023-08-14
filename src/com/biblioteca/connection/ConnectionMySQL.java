@@ -64,7 +64,6 @@ public class ConnectionMySQL {
             while (this.resultSet.next()) {
                 ultimoID = this.resultSet.getInt(1) + 1;
             }
-            JOptionPane.showMessageDialog(null, "OK");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERRO", "ERRO", JOptionPane.ERROR_MESSAGE);
             System.out.println(e.toString());

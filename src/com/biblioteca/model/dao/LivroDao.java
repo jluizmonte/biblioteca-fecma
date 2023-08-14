@@ -239,4 +239,22 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
         }
     }
 
+    @Override
+    public int ultimoIdLivro() {
+        int id = 0;
+        try {
+            this.conectar();
+            id = this.retornarUltimoID("select max(pk_id_livro) from tbl_livro;");
+            return id;
+        } catch (Exception e) {
+            e.toString();
+            JOptionPane.showMessageDialog(null, "Erro ao consultar os dados!",
+                    "Atenção", JOptionPane.ERROR_MESSAGE);
+            e.toString();
+            return 0;
+        } finally {
+            this.fecharConexao();
+        }
+
+    }
 }

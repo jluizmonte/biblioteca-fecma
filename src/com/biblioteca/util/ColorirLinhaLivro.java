@@ -19,21 +19,35 @@ public class ColorirLinhaLivro extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean Selected, boolean hasFocus,
             int row, int col) {
-        Font font = new Font("DejaVu Sans", Font.BOLD, 16);
         switch (table.getValueAt(row, colunaLivro).toString()) {
 
-            case "0":
-                setForeground(Color.WHITE);
-                setBackground(Color.RED);
-                setFont(font);
+            case "0" -> {
+                setForeground(Color.red);
+                //     setBackground(new java.awt.Color(255,0,0));
+                setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
                 setHorizontalAlignment(CENTER);
-                break;
+            }
 
-            default:
-                setForeground(Color.BLACK);
-                setBackground(Color.WHITE);
+            case "NOVO" -> {
+                setForeground(new java.awt.Color(0, 110, 109));
+                //      setBackground(new java.awt.Color(0, 110, 109));
+                setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
                 setHorizontalAlignment(CENTER);
-                break;
+            }
+
+            case "USADO" -> {
+                setForeground(Color.red);
+                //    setBackground(new java.awt.Color(0, 112, 192));       
+                setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+                setHorizontalAlignment(CENTER);
+            }
+
+            default -> {
+                setForeground(Color.blue);
+                //     setBackground(new java.awt.Color(0, 112,192));    
+                setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+                setHorizontalAlignment(CENTER);
+            }
         }
         super.getTableCellRendererComponent(table, value, Selected, hasFocus, row, col);
         return this;

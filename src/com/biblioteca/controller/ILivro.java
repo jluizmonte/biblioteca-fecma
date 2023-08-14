@@ -77,4 +77,11 @@ public interface ILivro {
      * @return
      */
     public LivroModel getQuantidadeLivrosCadastrados();
+
+    /**
+     * retorna o último ID do livro cadastrado
+     *
+     * @return
+     */
+    public int ultimoIdLivro();
 }

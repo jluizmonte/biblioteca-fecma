@@ -47,4 +47,8 @@ public class LivroService {
     public LivroModel getQuantidadeLivrosCadastrados() {
         return livroDao.getQuantidadeLivrosCadastrados();
     }
+
+    public int ultimoIdLivro() {
+        return livroDao.ultimoIdLivro();
+    }
 }

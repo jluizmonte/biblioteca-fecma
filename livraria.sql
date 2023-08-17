@@ -40,7 +40,7 @@ CREATE TABLE `tbl_emprestimo` (
   CONSTRAINT `emprestimo_livro` FOREIGN KEY (`fk_livro`) REFERENCES `tbl_livro` (`pk_id_livro`),
   CONSTRAINT `emprestimo_locador` FOREIGN KEY (`fk_locador`) REFERENCES `tbl_locador` (`pk_id_locador`),
   CONSTRAINT `emprestimo_locatario` FOREIGN KEY (`fk_locatario`) REFERENCES `tbl_locatario` (`pk_id_locatario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `tbl_livro` (
   `descricao_livro` varchar(255) DEFAULT NULL COMMENT 'Observações gerais sobre o livro.',
   `valor_livro` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`pk_id_livro`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +104,7 @@ CREATE TABLE `tbl_locador` (
   `telefone_locador` varchar(20) DEFAULT NULL,
   `email_locador` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`pk_id_locador`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +136,7 @@ CREATE TABLE `tbl_locatario` (
   `email_locatario` varchar(25) DEFAULT NULL,
   `status_locatario` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`pk_id_locatario`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +162,7 @@ CREATE TABLE `tbl_usuario` (
   `login_usuario` varchar(30) DEFAULT NULL,
   `nivel_usuario` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`pk_id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='tabela referente aos usuarios que terão acesso ao sistema.';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='tabela referente aos usuarios que terão acesso ao sistema.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

@@ -3,27 +3,29 @@ package com.biblioteca.view;
 import com.biblioteca.model.SessaoUsuarioModel;
 import com.biblioteca.model.UsuarioModel;
 import com.biblioteca.service.UsuarioService;
+import com.biblioteca.util.CaminhosIcones;
+import com.biblioteca.util.TextoPadrao;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.util.ArrayList;
+import static java.awt.image.ImageObserver.HEIGHT;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Instrutores
  */
-public class FrmLogin extends javax.swing.JFrame {
+public class FrmLogin extends javax.swing.JDialog {
 
     UsuarioService usuarioService = new UsuarioService();
     UsuarioModel usuarioModel = new UsuarioModel();
-    SessaoUsuarioModel sessaoUSuarioModel = new SessaoUsuarioModel();
+    CaminhosIcones c = new CaminhosIcones();
     int x, y;
 
     /**
      * Creates new form frmLogin
      */
-    public FrmLogin() {
+    public FrmLogin(java.awt.Frame parent, boolean modal) {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
@@ -49,7 +51,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jbCancelar = new javax.swing.JButton();
         jbAcessar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 55, 110));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -237,7 +239,14 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jlSairMouseEntered
 
     private void jlSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSairMouseClicked
-        System.exit(0);
+        int x = JOptionPane.showConfirmDialog(this, TextoPadrao.msgEncerrar, TextoPadrao.tituloJanela,
+                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, c.perguntaGif);
+        if (x == 0) {
+            System.exit(0);
+        } else {
+            JOptionPane.showMessageDialog(null, TextoPadrao.msgCancelamento,
+                    TextoPadrao.tituloJanela, HEIGHT, c.excluirGif);
+        }
     }//GEN-LAST:event_jlSairMouseClicked
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
@@ -266,19 +275,19 @@ public class FrmLogin extends javax.swing.JFrame {
             if (usuarioService.getValidarUsuarioDAO(usuarioModel)) {
                 usuarioModel = usuarioService.getUsuarioDAO(jtfLogin.getText());
                 setSessionUser();
-                JOptionPane.showMessageDialog(this, "Bem-vindo de volta "
-                        + usuarioModel.getNomeUsuario() + "!", "Sucesso!", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Bem-vindo de volta\n"
+                        + usuarioModel.getNomeUsuario() + "!", "Sucesso!", JOptionPane.PLAIN_MESSAGE, c.sucessoGif);
                 new FrmTelaPrincipal().setVisible(true);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this,
                         "Usuário ou senha inválidos!\nRevise as credenciais e tente novamente",
-                        "Erro ao fazer login", JOptionPane.ERROR_MESSAGE);
+                        "Erro ao fazer login", JOptionPane.PLAIN_MESSAGE, c.excluirGif);
                 limparCampos();
             }
         } else {
             JOptionPane.showMessageDialog(this, "Nenhum dos campos podem ficar em branco", "Revise os dados",
-                    JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.PLAIN_MESSAGE, c.atencaoGif);
         }
     }
 

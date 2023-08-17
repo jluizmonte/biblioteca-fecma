@@ -7,9 +7,6 @@ import javax.swing.ImageIcon;
  * @author joseluiz
  */
 public class CaminhosIcones {
-//    public ImageIcon sucesso = new ImageIcon("src/com/controlecci/image/v2/sucesso.png");
-//    public ImageIcon erro = new ImageIcon("src/com/controlecci/image/v2/cancelar.png");
-//    public ImageIcon atencao = new ImageIcon("src/com/controlecci/image/v2/atencao.png");
 
     public ImageIcon sucessoGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/sucesso.gif"));
     public ImageIcon atencaoGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/atencao.gif"));
@@ -19,6 +16,5 @@ public class CaminhosIcones {
     public ImageIcon atualizarGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/update.gif"));
     public ImageIcon configGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/config.gif"));
     public ImageIcon salvarGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/salvar.gif"));
-    public ImageIcon infoGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/info.gif"));
 
 }

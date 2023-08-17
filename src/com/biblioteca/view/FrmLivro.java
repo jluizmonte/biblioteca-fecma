@@ -26,6 +26,8 @@ public class FrmLivro extends javax.swing.JInternalFrame {
     double valorLivro = 0;
     GetDateUtil getDateUtil = new GetDateUtil();
     CaminhosIcones c = new CaminhosIcones();
+    TelaCarregamento telaCarregamento = new TelaCarregamento(null, true);
+    MensagemConfirmação mensagemConfirmação = new MensagemConfirmação(null, true);
 
     /**
      * Creates new form FrmLivro
@@ -590,6 +592,11 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         pegarDadosGenero();
     }//GEN-LAST:event_jcbGeneroPopupMenuWillBecomeInvisible
 
+    public void chamarJDialog() {
+        telaCarregamento.fechar();
+        telaCarregamento.setVisible(true);
+    }
+
     private void carregarLivrosPesquisa() {
         listaModelLivro = livroService.getListaLivroDAO();
         DefaultTableModel modelo = (DefaultTableModel) jtLivroPesquisa.getModel();
@@ -664,8 +671,12 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         if (jcEmprestimo.isSelected() || jcVenda.isSelected()) {
             try {
                 if (livroService.salvarLivroDAO(livroModel)) {
-                    JOptionPane.showMessageDialog(this, "O livro foi cadastrado com sucesso!",
-                            "Atenção", JOptionPane.WARNING_MESSAGE);
+                    chamarMsg("O LIVRO " + livroModel.getTituloLivro(), 
+                            "FOI SALVO COM SUCESSO!");
+
+//                    JOptionPane.showMessageDialog(this, "O livro foi cadastrado com sucesso!",
+//                            "Atenção", JOptionPane.WARNING_MESSAGE);
+
                     limparCampos();
                 }
             } catch (HeadlessException e) {
@@ -682,6 +693,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
      *
      */
     private void alterarLivro() {
+        chamarJDialog();
         livroModel.setAnoLivro(jtfAno.getText());
         livroModel.setAutor1Livro(jtfAutor1.getText().toUpperCase());
         livroModel.setEditoraLivro(jtfEditora.getText().toUpperCase());
@@ -696,8 +708,11 @@ public class FrmLivro extends javax.swing.JInternalFrame {
 
         try {
             if (livroService.atualizarLivroDAO(livroModel)) {
-                JOptionPane.showMessageDialog(this, "Livro alterado com sucesso!", "Atenção", JOptionPane.WARNING_MESSAGE);
-                jbSalvar.setText("Salvar");
+              //  JOptionPane.showMessageDialog(this, "Livro alterado com sucesso!", "Atenção", JOptionPane.WARNING_MESSAGE);
+               chamarMsg("O LIVRO: " + livroModel.getTituloLivro(), 
+                            "FOI ALTERADO COM SUCESSO!");
+
+              jbSalvar.setText("Salvar");
                 carregarLivrosPesquisa();
                 carregarLivros();
                 limparCampos();
@@ -717,7 +732,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
 
     private void pegarDadosGenero() {
         if (jcbGenero.getSelectedItem().equals("Outro")) {
-            String x = JOptionPane.showInputDialog(null, "INSIRA AQUI O GêNERO");
+            String x = JOptionPane.showInputDialog(null, "INSIRA AQUI O GÊNERO");
             JOptionPane.showMessageDialog(null, x);
         }
     }
@@ -731,6 +746,13 @@ public class FrmLivro extends javax.swing.JInternalFrame {
 
         ColorirLinhaLivro colorirLinhaLivro3 = new ColorirLinhaLivro(2);
         jtLivroPesquisa.getColumnModel().getColumn(2).setCellRenderer(colorirLinhaLivro3);
+    }
+
+    private void chamarMsg(String mensagem, String info) {
+        mensagemConfirmação.jlInfo.setText(info);
+        mensagemConfirmação.jlMensagem.setText(mensagem);
+        mensagemConfirmação.fechar();
+        mensagemConfirmação.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel10;

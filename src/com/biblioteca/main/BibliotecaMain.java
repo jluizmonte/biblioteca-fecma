@@ -1,11 +1,8 @@
 package com.biblioteca.main;
 
 import com.biblioteca.model.SessaoUsuarioModel;
-import com.biblioteca.view.FrmLogin;
 import com.biblioteca.view.FrmTelaPrincipal;
-import com.biblioteca.view.SplashView;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,12 +16,12 @@ public class BibliotecaMain {
      */
     public static void main(String[] args) throws SQLException {
 
-//        new FrmLogin().setVisible(true);
-//        new FrmLocador().setVisible(true);
+
         SessaoUsuarioModel.codigoUsuario = 1;
         SessaoUsuarioModel.loginUsuario = "luiz";
         SessaoUsuarioModel.nivelAcesso = "ADMINISTRADOR";
         SessaoUsuarioModel.nomeUsuario = "José Luiz do Monte Gomes";
+        SessaoUsuarioModel.instituicao="FECMA";
         new FrmTelaPrincipal().setVisible(true);
 //        SplashView Splash = new SplashView();
 //        Splash.setVisible(true);

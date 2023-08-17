@@ -12,7 +12,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmiEncerrarSistema">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Ctrl+F2"/>
+                  <KeyStroke key="F2"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/biblioteca/images/actions/exit.png"/>
@@ -33,7 +33,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmiNovoLivro">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="F2"/>
+                  <KeyStroke key="F3"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/biblioteca/images/actions/book.png"/>
@@ -47,7 +47,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmiNovoLocador">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="F3"/>
+                  <KeyStroke key="F4"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/biblioteca/images/actions/locador.png"/>
@@ -61,7 +61,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmiNovoLocatario">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="F4"/>
+                  <KeyStroke key="F5"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/biblioteca/images/actions/locatario.png"/>
@@ -77,10 +77,15 @@
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consultar"/>
+            <Property name="toolTipText" type="java.lang.String" value="EM DESENVOLVIMENTO!"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jmiConsultaLocador">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F6"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/biblioteca/images/actions/locador.png"/>
                 </Property>
@@ -92,6 +97,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiConsultaLocatario">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="F7"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/biblioteca/images/actions/locatario.png"/>
                 </Property>
@@ -114,7 +122,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="jmiEmprestimo">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="F5"/>
+                  <KeyStroke key="F8"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/biblioteca/images/actions/emprestar.png"/>
@@ -130,6 +138,8 @@
         <Menu class="javax.swing.JMenu" name="jMenu5">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ferramentas"/>
+            <Property name="toolTipText" type="java.lang.String" value="EM DESENVOLVIMENTO!"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Menu>
       </SubComponents>
@@ -350,7 +360,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="LIVROS"/>
+            <Property name="text" type="java.lang.String" value="LIVROS CADASTRADOS"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlLivro">

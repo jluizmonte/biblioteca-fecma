@@ -118,7 +118,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("LIVROS");
+        jLabel1.setText("LIVROS CADASTRADOS");
 
         jlLivro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlLivro.setForeground(new java.awt.Color(255, 255, 255));
@@ -195,7 +195,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Arquivo");
 
-        jmiEncerrarSistema.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jmiEncerrarSistema.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jmiEncerrarSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/exit.png"))); // NOI18N
         jmiEncerrarSistema.setText("Sair");
         jmiEncerrarSistema.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +209,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Novo");
 
-        jmiNovoLivro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        jmiNovoLivro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         jmiNovoLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/book.png"))); // NOI18N
         jmiNovoLivro.setText("Livro");
         jmiNovoLivro.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +219,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jmiNovoLivro);
 
-        jmiNovoLocador.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        jmiNovoLocador.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         jmiNovoLocador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/locador.png"))); // NOI18N
         jmiNovoLocador.setText("Locador");
         jmiNovoLocador.addActionListener(new java.awt.event.ActionListener() {
@@ -229,7 +229,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jmiNovoLocador);
 
-        jmiNovoLocatario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        jmiNovoLocatario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         jmiNovoLocatario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/locatario.png"))); // NOI18N
         jmiNovoLocatario.setText("Locatário");
         jmiNovoLocatario.addActionListener(new java.awt.event.ActionListener() {
@@ -242,7 +242,10 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Consultar");
+        jMenu3.setToolTipText("EM DESENVOLVIMENTO!");
+        jMenu3.setEnabled(false);
 
+        jmiConsultaLocador.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
         jmiConsultaLocador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/locador.png"))); // NOI18N
         jmiConsultaLocador.setText("Locadores Disponíveis");
         jmiConsultaLocador.addActionListener(new java.awt.event.ActionListener() {
@@ -252,6 +255,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jmiConsultaLocador);
 
+        jmiConsultaLocatario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
         jmiConsultaLocatario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/locatario.png"))); // NOI18N
         jmiConsultaLocatario.setText("Locatários Disponíveis");
         jmiConsultaLocatario.addActionListener(new java.awt.event.ActionListener() {
@@ -270,7 +274,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jmiEmprestimo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        jmiEmprestimo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
         jmiEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/biblioteca/images/actions/emprestar.png"))); // NOI18N
         jmiEmprestimo.setText("Empréstimo");
         jmiEmprestimo.addActionListener(new java.awt.event.ActionListener() {
@@ -283,6 +287,8 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Ferramentas");
+        jMenu5.setToolTipText("EM DESENVOLVIMENTO!");
+        jMenu5.setEnabled(false);
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -336,7 +342,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
             System.exit(0);
         } else {
             JOptionPane.showMessageDialog(null, TextoPadrao.msgCancelamento,
-                    TextoPadrao.tituloJanela, HEIGHT, c.atencaoGif);
+                    TextoPadrao.tituloJanela, HEIGHT, c.excluirGif);
         }
     }//GEN-LAST:event_jmiEncerrarSistemaActionPerformed
 

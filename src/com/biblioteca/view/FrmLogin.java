@@ -17,7 +17,6 @@ public class FrmLogin extends javax.swing.JFrame {
 
     UsuarioService usuarioService = new UsuarioService();
     UsuarioModel usuarioModel = new UsuarioModel();
-    ArrayList<UsuarioModel> listaUsuarioModel = new ArrayList<>();
     SessaoUsuarioModel sessaoUSuarioModel = new SessaoUsuarioModel();
     int x, y;
 

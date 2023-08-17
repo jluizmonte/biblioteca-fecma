@@ -1,5 +1,7 @@
 package com.biblioteca.view;
 
+import com.biblioteca.view.util.TelaCarregamento;
+import com.biblioteca.view.util.MensagemConfirmação;
 import com.biblioteca.model.LivroModel;
 import com.biblioteca.model.SessaoUsuarioModel;
 import com.biblioteca.service.LivroService;
@@ -671,17 +673,18 @@ public class FrmLivro extends javax.swing.JInternalFrame {
         if (jcEmprestimo.isSelected() || jcVenda.isSelected()) {
             try {
                 if (livroService.salvarLivroDAO(livroModel)) {
-                    chamarMsg("O LIVRO " + livroModel.getTituloLivro(), 
-                            "FOI SALVO COM SUCESSO!");
+//                    chamarMsg("O LIVRO " + livroModel.getTituloLivro(), 
+//                            "FOI SALVO COM SUCESSO!");
 
-//                    JOptionPane.showMessageDialog(this, "O livro foi cadastrado com sucesso!",
-//                            "Atenção", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this,
+                            "O livro foi cadastrado com sucesso!",
+                            "Atenção", JOptionPane.PLAIN_MESSAGE, c.salvarGif);
 
                     limparCampos();
                 }
             } catch (HeadlessException e) {
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar o livro\n" + e.toString(), "Erro",
-                        JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.PLAIN_MESSAGE, c.excluirGif);
             }
         } else {
             JOptionPane.showMessageDialog(null, TextoPadrao.msgTipoLivro,
@@ -693,7 +696,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
      *
      */
     private void alterarLivro() {
-        chamarJDialog();
+//        chamarJDialog();
         livroModel.setAnoLivro(jtfAno.getText());
         livroModel.setAutor1Livro(jtfAutor1.getText().toUpperCase());
         livroModel.setEditoraLivro(jtfEditora.getText().toUpperCase());
@@ -708,9 +711,11 @@ public class FrmLivro extends javax.swing.JInternalFrame {
 
         try {
             if (livroService.atualizarLivroDAO(livroModel)) {
-              //  JOptionPane.showMessageDialog(this, "Livro alterado com sucesso!", "Atenção", JOptionPane.WARNING_MESSAGE);
-               chamarMsg("O LIVRO: " + livroModel.getTituloLivro(), 
-                            "FOI ALTERADO COM SUCESSO!");
+                JOptionPane.showMessageDialog(this,
+                        "Livro alterado com sucesso!",
+                        "Atenção", JOptionPane.PLAIN_MESSAGE, c.atualizarGif);
+//               chamarMsg("O LIVRO: " + livroModel.getTituloLivro(), 
+//                            "FOI ALTERADO COM SUCESSO!");
 
               jbSalvar.setText("Salvar");
                 carregarLivrosPesquisa();
@@ -719,7 +724,9 @@ public class FrmLivro extends javax.swing.JInternalFrame {
                 this.jbSalvar.setText("Salvar");
             }
         } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao alterar o livro!", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Erro ao alterar o livro!", "Erro",
+                    JOptionPane.PLAIN_MESSAGE, c.excluirGif);
         }
     }
 

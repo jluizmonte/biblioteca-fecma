@@ -11,10 +11,14 @@ public class CaminhosIcones {
 //    public ImageIcon erro = new ImageIcon("src/com/controlecci/image/v2/cancelar.png");
 //    public ImageIcon atencao = new ImageIcon("src/com/controlecci/image/v2/atencao.png");
 
-    public ImageIcon sucessoGif = new ImageIcon("src/com/biblioteca/images/gifs/sucesso.gif");
-    public ImageIcon atencaoGif = new ImageIcon("src/com/biblioteca/images/gifs/atencao.gif");
-    public ImageIcon excluirGif = new ImageIcon("src/com/biblioteca/images/gifs/excluir.gif");
-    public ImageIcon perguntaGif =new ImageIcon("src/com/biblioteca/images/gifs/pergunta.gif");
-    public ImageIcon loadingGif = new ImageIcon("src/com/biblioteca/images/gifs/loading.gif");
+    public ImageIcon sucessoGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/sucesso.gif"));
+    public ImageIcon atencaoGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/atencao.gif"));
+    public ImageIcon excluirGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/excluir.gif"));
+    public ImageIcon perguntaGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/pergunta.gif"));
+    public ImageIcon loadingGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/loading.gif"));
+    public ImageIcon atualizarGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/update.gif"));
+    public ImageIcon configGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/config.gif"));
+    public ImageIcon salvarGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/salvar.gif"));
+    public ImageIcon infoGif = new ImageIcon(getClass().getResource("/com/biblioteca/images/gifs/info.gif"));
 
 }

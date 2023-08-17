@@ -1,5 +1,6 @@
 package com.biblioteca.connection;
 
+import com.biblioteca.util.CaminhosIcones;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
@@ -8,6 +9,7 @@ import javax.swing.JOptionPane;
  * @author Aluno
  */
 public class ConnectionMySQL {
+    CaminhosIcones c = new CaminhosIcones();
 
     private Connection con = null;
     private Statement statement;
@@ -31,8 +33,8 @@ public class ConnectionMySQL {
             this.setCon(DriverManager.getConnection(url, usuario, senha));
             this.status = true;
         } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao conectar ao banco de dados",
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Não foi possível conectar ao MySQL\nBanco de dados indisponível!",
+                    "Erro",JOptionPane.PLAIN_MESSAGE, c.excluirGif);
             System.out.print(e.toString());
         }
         return this.getCon();
@@ -49,7 +51,7 @@ public class ConnectionMySQL {
             // ResultSet rs = getStatement().executeQuery(pSQL);
             setResultSet(getStatement().executeQuery(pSQL));
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERRO AO EXECUTAR A INSTRUÇÃO SQL\n ERRO AO CONECTAR AO BANCO DE DADOS", "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERRO AO EXECUTAR A INSTRUÇÃO SQL\n ERRO AO CONECTAR AO BANCO DE DADOS", "ERRO", JOptionPane.PLAIN_MESSAGE, c.excluirGif);
             System.out.println(e.toString());
             return false;
         }

@@ -3,7 +3,6 @@ package com.biblioteca.view;
 import com.biblioteca.model.LocadorModel;
 import com.biblioteca.service.LocadorService;
 import com.biblioteca.util.CaminhosIcones;
-import com.biblioteca.util.MetodosPadrao;
 import com.biblioteca.util.TextoPadrao;
 import java.awt.HeadlessException;
 import java.util.ArrayList;

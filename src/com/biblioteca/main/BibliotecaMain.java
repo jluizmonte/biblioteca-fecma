@@ -1,8 +1,11 @@
 package com.biblioteca.main;
 
 import com.biblioteca.model.SessaoUsuarioModel;
+import com.biblioteca.util.CaminhosIcones;
 import com.biblioteca.view.FrmTelaPrincipal;
+import com.biblioteca.view.SplashView;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +18,7 @@ public class BibliotecaMain {
      * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws SQLException {
-
+        CaminhosIcones c = new CaminhosIcones();
 
         SessaoUsuarioModel.codigoUsuario = 1;
         SessaoUsuarioModel.loginUsuario = "luiz";
@@ -23,7 +26,11 @@ public class BibliotecaMain {
         SessaoUsuarioModel.nomeUsuario = "José Luiz do Monte Gomes";
         SessaoUsuarioModel.instituicao="FECMA";
         new FrmTelaPrincipal().setVisible(true);
-//        SplashView Splash = new SplashView();
+//        JOptionPane.showMessageDialog(null,
+//                "TESTE","TESTE",
+//                JOptionPane.PLAIN_MESSAGE,c.configGif);
+        
+//        SplashView Splash     = new SplashView();
 //        Splash.setVisible(true);
 //        for (int i = 0; i <= 50; i++) {
 //            try {

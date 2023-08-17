@@ -41,6 +41,13 @@ public interface ILivro {
     public ArrayList<LivroModel> getListaLivroDAO();
 
     /**
+     * retorna os livros disponíveis para empréstimo
+     *
+     * @return
+     */
+    public ArrayList<LivroModel> getListaLivroEmprestimoDAO();
+
+    /**
      * atualiza um livro cadastrado
      *
      * @param pLivroModel

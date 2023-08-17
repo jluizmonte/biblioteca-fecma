@@ -257,4 +257,38 @@ public class LivroDao extends ConnectionMySQL implements ILivro {
         }
 
     }
+
+    @Override
+    public ArrayList<LivroModel> getListaLivroEmprestimoDAO() {
+        ArrayList<LivroModel> listaLivroModel = new ArrayList<>();
+        LivroModel livroModel = new LivroModel();
+        try {
+            this.conectar();
+            this.executarSQL("SELECT * FROM tbl_livro WHERE tipo_livro='EMPRÉSTIMO' ORDER BY titulo_livro ASC;");
+            while (this.getResultSet().next()) {
+                livroModel = new LivroModel();
+                livroModel.setIdLivro(this.getResultSet().getInt(1));
+                livroModel.setTipoLivro(this.getResultSet().getString(2));
+                livroModel.setTituloLivro(this.getResultSet().getString(3));
+                livroModel.setAutor1Livro(this.getResultSet().getString(4));
+                livroModel.setEditoraLivro(this.getResultSet().getString(5));
+                livroModel.setGeneroLivro(this.getResultSet().getString(6));
+                livroModel.setAnoLivro(this.getResultSet().getString(7));
+                livroModel.setDataCadastroLivro(this.getResultSet().getString(8));
+                livroModel.setQtdeLivro(this.getResultSet().getInt(9));
+                livroModel.setEstadoLivro(this.getResultSet().getString(10));
+                livroModel.setDescricaoLivro(this.getResultSet().getString(11));
+                livroModel.setValorLivro(this.getResultSet().getDouble(12));
+
+                listaLivroModel.add(livroModel);
+            }
+        } catch (SQLException e) {
+            e.toString();
+            JOptionPane.showMessageDialog(null, "Erro ao buscar os dados!",
+                    "Atenção", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            this.fecharConexao();
+        }
+        return listaLivroModel;
+    }
 }

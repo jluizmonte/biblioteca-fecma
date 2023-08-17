@@ -654,7 +654,7 @@ public class FrmEmprestimo extends javax.swing.JInternalFrame {
 
     private void listarLivros() {
         try {
-            listaLivroModel = livroService.getListaLivroDAO();
+            listaLivroModel = livroService.getListaLivroEmprestimoDAO();
             jcbTitulo.removeAllItems();
             int cont = listaLivroModel.size();
             for (int i = 0; i < cont; i++) {

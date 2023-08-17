@@ -547,33 +547,36 @@ public class FrmLivro extends javax.swing.JInternalFrame {
                     jcEmprestimo.setSelected(true);
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Código invalido ou nenhum livro selecionado", "Erro",
+                JOptionPane.showMessageDialog(null, "Código invalido ou nenhum livro selecionado", "Erro",
                         JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "O livro selecionado não foi alterado!", "Atenção", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O livro selecionado não foi alterado!", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jtLivroPesquisaMouseClicked
 
     private void jtLivroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLivroMouseClicked
         int linha = jtLivro.getSelectedRow();
         String tituloLivro = (String) jtLivro.getValueAt(linha, 0);
-
-        Object[] opcoes = {"Sim", "Não"};
-        Object resposta;
-        resposta = JOptionPane.showInputDialog(null, "Deseja excluir o livro?", "Excluir?",
-                JOptionPane.OK_CANCEL_OPTION, null, opcoes, "Sim");
-        if (resposta.equals("Sim")) {
+        Object[] options = {"Sim", "Não"};
+        int n = JOptionPane.showOptionDialog(null,
+                "Deseja excluir este livro:\n" + tituloLivro + " ?",
+                "Atenção", JOptionPane.YES_NO_OPTION,
+                JOptionPane.PLAIN_MESSAGE, c.perguntaGif, options, options[0]);
+        if (n == 0) {
             livroModel = livroService.getLivroDAO(tituloLivro);
             int codigoLivro = livroModel.getIdLivro();
             if (livroService.excluirLivroDAO(codigoLivro)) {
-                JOptionPane.showMessageDialog(this, "Livro excluido com sucesso!", "Atenção",
-                        JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Livro excluido com sucesso!", "Atenção",
+                        JOptionPane.PLAIN_MESSAGE, c.sucessoGif);
                 carregarLivros();
                 carregarLivrosPesquisa();
             } else {
-                JOptionPane.showMessageDialog(this, "Erro ao excluir o livro!", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Erro ao excluir o livro!", "Erro",
+                        JOptionPane.PLAIN_MESSAGE, c.excluirGif);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "A ação foi cancelada pelo usuário!", "Atenção", JOptionPane.PLAIN_MESSAGE, c.excluirGif);
         }
     }//GEN-LAST:event_jtLivroMouseClicked
 
@@ -614,7 +617,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
                     listaModelLivro.get(i).getQtdeLivro()});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao buscar livros para preencher a tabela\n" + e.toString());
+            JOptionPane.showMessageDialog(null, "Erro ao buscar livros para preencher a tabela\n" + e.toString(), "Atenção", JOptionPane.PLAIN_MESSAGE, c.atencaoGif);
         }
     }
 
@@ -637,7 +640,7 @@ public class FrmLivro extends javax.swing.JInternalFrame {
                     listaModelLivro.get(i).getDescricaoLivro()});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao buscar livros para preencher a tabela\n" + e.toString());
+            JOptionPane.showMessageDialog(this, "Erro ao buscar livros para preencher a tabela\n" + e.toString(), "Atenção", JOptionPane.PLAIN_MESSAGE, c.atencaoGif);
         }
     }
 
@@ -722,9 +725,6 @@ public class FrmLivro extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this,
                         "Livro alterado com sucesso!",
                         "Atenção", JOptionPane.PLAIN_MESSAGE, c.atualizarGif);
-//               chamarMsg("O LIVRO: " + livroModel.getTituloLivro(), 
-//                            "FOI ALTERADO COM SUCESSO!");
-
                 jbSalvar.setText("Salvar");
                 carregarLivrosPesquisa();
                 carregarLivros();

@@ -28,6 +28,10 @@ public class LivroService {
         return livroDao.getListaLivroDAO();
     }
 
+    public ArrayList<LivroModel> getListaLivroEmprestimoDAO() {
+        return livroDao.getListaLivroEmprestimoDAO();
+    }
+
     public boolean atualizarLivroDAO(LivroModel pLivroModel) {
         return livroDao.atualizarLivroDAO(pLivroModel);
     }

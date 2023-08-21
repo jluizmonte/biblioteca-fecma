@@ -362,12 +362,14 @@ public class FrmLocador extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-
-        int x = JOptionPane.showConfirmDialog(null, TextoPadrao.msgCancelar, TextoPadrao.msgTituloCancelar,
-                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, c.perguntaGif);
-        if (x == 0) {
+        Object[] options = {"Sim", "Não"};
+        int n = JOptionPane.showOptionDialog(null, TextoPadrao.msgCancelar, TextoPadrao.msgTituloCancelar,
+                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, c.excluirGif, options, options[0]);
+        if (n == 0) {
             jbSalvar.setText("Salvar");
             limparCampos();
+            JOptionPane.showMessageDialog(null, TextoPadrao.msgCancelamento,
+                    TextoPadrao.tituloJanela, JOptionPane.PLAIN_MESSAGE, c.sucessoGif);
         }
     }//GEN-LAST:event_jbCancelarActionPerformed
 
@@ -387,12 +389,20 @@ public class FrmLocador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalvarActionPerformed
 
     private void jtLocPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLocPesquisaMouseClicked
-        int x = JOptionPane.showConfirmDialog(this, "Deseja alterar este Locador?\n" + jtfNome.getText(),
-                "Alterar?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, c.perguntaGif);
-        if (x == 0) {
+        int linha = jtLocPesquisa.getSelectedRow();
+        String locador = (String) jtLocPesquisa.getValueAt(linha, 0);
+        locadorModel = locadorService.getLocadorDAO(locador);
+
+        Object[] options = {"Sim", "Não"};
+        int n = JOptionPane.showOptionDialog(null,
+                "Deseja alterar este livro:\n" + locador + " ?",
+                "Atenção", JOptionPane.YES_NO_OPTION,
+                JOptionPane.PLAIN_MESSAGE, c.perguntaGif, options, options[0]);
+
+        if (n == 0) {
             alterarSalvar = "alterar";
             jtfNome.requestFocusInWindow();
-            int linha = jtLocPesquisa.getSelectedRow();
+            //  int linha = jtLocPesquisa.getSelectedRow();
             try {
                 String nomeLocador = (String) jtLocPesquisa.getValueAt(linha, 0);
                 locadorModel = locadorService.getLocadorDAO(nomeLocador);
@@ -406,12 +416,12 @@ public class FrmLocador extends javax.swing.JInternalFrame {
                 jtfTelefone.setText(locadorModel.getTelefoneLocador());
                 jtfUf.setText(locadorModel.getEstadoLocador());
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Código inválido ou nenhum locador selecionado", "Erro",
+                JOptionPane.showMessageDialog(null, "Código inválido ou nenhum locador selecionado", "Erro",
                         JOptionPane.ERROR_MESSAGE);
             }
 
         } else {
-            JOptionPane.showMessageDialog(this, TextoPadrao.msgCancelamento, "Atenção",
+            JOptionPane.showMessageDialog(null, TextoPadrao.msgCancelamento, "Atenção",
                     JOptionPane.PLAIN_MESSAGE, c.excluirGif);
 
         }
@@ -433,12 +443,12 @@ public class FrmLocador extends javax.swing.JInternalFrame {
             int codigoLocador = locadorModel.getIdLocador();
             try {
                 locadorService.excluirLocadorDAO(codigoLocador);
-                JOptionPane.showMessageDialog(this, "Locador excluido com sucesso!", "Atenção",
+                JOptionPane.showMessageDialog(null, "Locador excluido com sucesso!", "Atenção",
                         JOptionPane.WARNING_MESSAGE);
                 carregarLocador();
                 carregarLocadorPesquisa();
             } catch (HeadlessException e) {
-                JOptionPane.showMessageDialog(this, "Erro ao excluir o locador!", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Erro ao excluir o locador!", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jtLocadorMouseClicked

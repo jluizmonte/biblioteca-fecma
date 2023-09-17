@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
  * @author Aluno
  */
 public class ConnectionMySQL {
+
     CaminhosIcones c = new CaminhosIcones();
 
     private Connection con = null;
@@ -18,9 +19,9 @@ public class ConnectionMySQL {
     //   private String servidor = "192.168.1.138";
     private String servidor = "localhost";
     private String banco = "livraria";
-    //  private String usuario = "root";
-    private String usuario = "luiz";
-    private String senha = "Jos3@Luiz";
+ //   private String usuario = "root";
+   private String usuario = "fecma";
+    private String senha = "Fecma@1946";
 
     /**
      *
@@ -34,7 +35,7 @@ public class ConnectionMySQL {
             this.status = true;
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Não foi possível conectar ao MySQL\nBanco de dados indisponível!",
-                    "Erro",JOptionPane.PLAIN_MESSAGE, c.excluirGif);
+                    "Erro", JOptionPane.PLAIN_MESSAGE, c.excluirGif);
             System.out.print(e.toString());
         }
         return this.getCon();

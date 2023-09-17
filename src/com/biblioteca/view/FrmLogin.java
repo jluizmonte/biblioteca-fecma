@@ -239,10 +239,14 @@ public class FrmLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_jlSairMouseEntered
 
     private void jlSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSairMouseClicked
-        int x = JOptionPane.showConfirmDialog(this, TextoPadrao.msgEncerrar, TextoPadrao.tituloJanela,
-                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, c.perguntaGif);
+        Object[] options = {"Sim", "Não"};
+        int x = JOptionPane.showOptionDialog(this,
+                TextoPadrao.msgEncerrar,
+                TextoPadrao.tituloJanela, JOptionPane.YES_NO_OPTION,
+                JOptionPane.PLAIN_MESSAGE, c.perguntaGif, options, options[0]);
         if (x == 0) {
             System.exit(0);
+
         } else {
             JOptionPane.showMessageDialog(null, TextoPadrao.msgCancelamento,
                     TextoPadrao.tituloJanela, HEIGHT, c.excluirGif);

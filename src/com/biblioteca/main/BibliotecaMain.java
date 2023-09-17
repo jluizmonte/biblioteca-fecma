@@ -20,28 +20,28 @@ public class BibliotecaMain {
      */
     public static void main(String[] args) throws SQLException {
 
-//        SessaoUsuarioModel.codigoUsuario = 1;
-//        SessaoUsuarioModel.loginUsuario = "luiz";
-//        SessaoUsuarioModel.nivelAcesso = "ADMINISTRADOR";
-//        SessaoUsuarioModel.nomeUsuario = "José Luiz do Monte Gomes";
-//        SessaoUsuarioModel.instituicao = "FECMA";
-//        new FrmTelaPrincipal().setVisible(true);
-//        new FrmLogin(null, true).setVisible(true);
-        SplashView splashView = new SplashView();
+        SessaoUsuarioModel.codigoUsuario = 1;
+        SessaoUsuarioModel.loginUsuario = "luiz";
+        SessaoUsuarioModel.nivelAcesso = "ADMINISTRADOR";
+        SessaoUsuarioModel.nomeUsuario = "José Luiz do Monte Gomes";
+        SessaoUsuarioModel.instituicao = "FECMA";
+        new FrmTelaPrincipal().setVisible(true);
 
-        splashView.setVisible(true);
-        for (int i = 0; i <= 50; i++) {
-            try {
-                Thread.sleep(30);
-            } catch (InterruptedException ex) {
-            }
-            if (i == 50) {
-
-                FrmLogin frmLogin = new FrmLogin(null, true);
-                splashView.setVisible(false);
-                frmLogin.setVisible(true);
-            }
-        }
+//SplashView splashView = new SplashView();
+//
+//        splashView.setVisible(true);
+//        for (int i = 0; i <= 50; i++) {
+//            try {
+//                Thread.sleep(30);
+//            } catch (InterruptedException ex) {
+//            }
+//            if (i == 50) {
+//
+//                FrmLogin frmLogin = new FrmLogin(null, true);
+//                splashView.setVisible(false);
+//                frmLogin.setVisible(true);
+//            }
+//        }
     }
 
 }
